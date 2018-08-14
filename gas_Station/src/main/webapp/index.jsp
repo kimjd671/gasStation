@@ -19,7 +19,7 @@
 <body>
 <input type="hidden" name="x">
 <input type="hidden" name="y">
-<button onclick="gotest()">메인페이지</button>
+<button onclick="gotest()">메인페이지1</button>
 <script type="text/javascript">
 	$(function(){
 		$.ajax({

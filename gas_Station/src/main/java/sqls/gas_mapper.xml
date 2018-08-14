@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.hk.gas">
+	<resultMap type="com.hk.gas.dtos.GasUserDto" id="GasUserDtoMap">
+ 		<result property="seq" column="seq"/>
+ 		<result property="id" column="id"/>
+ 		<result property="password" column="password"/>
+ 		<result property="name" column="name"/>
+ 		<result property="email" column="eamil"/>
+ 		<result property="phone" column="phone"/>
+ 		<result property="role" column="role"/>
+ 		<result property="regdate" column="regdate"/>
+	</resultMap>
+
+
+
+
+<!-- 	<select id="boardlist" resultType="AnsDto" parameterType="Map"> -->
+<!-- 		SELECT SEQ, ID, TITLE, CONTENT, REGDATE, -->
+<!-- 				REFER, STEP, DEPTH, READCOUNT, DELFLAG -->
+<!-- 				FROM HKANSWERBOARD -->
+<!-- 				<if test="seq!=null"> -->
+<!-- 					<where> -->
+<!-- 						<include refid="paramseq"/> -->
+<!-- 					</where> -->
+<!-- 				</if> -->
+<!-- 				ORDER BY REFER, STEP -->
+<!-- 	</select>	   -->
+
+ <insert id="insertuser" parameterType="GasUserDto"> 
+ 	INSERT INTO GASMEMBER VALUES(GASMEMBER_SEQ.NEXTVAL,#{id},#{password},#{name},#{phone},#{email},'USER',SYSDATE)
+ </insert>
+
+<select id="chkid" parameterType="GasUserDto" resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*),0) FROM GASMEMBER WHERE UPPER(ID)=UPPER(#{id})
+</select>
+
+<select id="findid" parameterType="Map" resultType="GasUserDto">
+	SELECT ID FROM GASMEMBER WHERE NAME=#{name} AND PHONE=#{phone}
+</select>
+
+<select id="findpwd" parameterType="GasUserDto" resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*),0) FROM GASMEMBER WHERE UPPER(ID)=UPPER(#{id}) AND UPPER(EMAIL)=UPPER(#{email})
+</select>
+
+<update id="pwdreset" parameterType="GasUserDto">
+	UPDATE GASMEMBER SET PASSWORD=#{password} WHERE UPPER(ID)=UPPER(#{id})
+</update>
+
+<select id="login"  parameterType="GasUserDto" resultType="GasUserDto">
+	SELECT SEQ,ID,PASSWORD,NAME,PHONE,EMAIL,ROLE,REGDATE FROM GASMEMBER WHERE UPPER(ID)=UPPER(#{id}) AND PASSWORD=#{password}
+</select>
+
+<update id="updateinfo" parameterType="GasUserDto">
+	UPDATE GASMEMBER SET EMAIL=#{email}, PHONE=#{phone} WHERE UPPER(ID)=UPPER(#{id})
+</update>
+<!-- <update id="readcount" parameterType="int"> -->
+<!-- 	UPDATE HKANSWERBOARD SET READCOUNT=READCOUNT+1 WHERE SEQ=#{seq} -->
+<!-- </update>	 -->
+	
+	
+<!-- <update id="updateboard" parameterType="AnsDto">	 -->
+<!-- 	UPDATE HKANSWERBOARD SET TITLE=#{title}, CONTENT=#{content}, REGDATE=SYSDATE WHERE SEQ=#{seq} -->
+<!-- </update> -->
+
+<!--  다이나믹쿼리를 사용할 때는 반드시 파라미터를 Map으로 전달해야 한다 -->
+<!-- <update id="muldel" parameterType="Map"> -->
+<!-- 	UPDATE HKANSWERBOARD SET DELFLAG='Y' WHERE SEQ IN  -->
+<!-- 	<foreach collection="seqs" item="seq" open="(" close=")" separator=","> -->
+<!-- 	#{seq} -->
+<!-- 	</foreach> -->
+<!-- </update> -->
+
+<!-- <update id="ansupdate" parameterType="AnsDto"> -->
+<!-- 	UPDATE HKANSWERBOARD SET STEP=STEP+1 -->
+<!-- 				WHERE REFER=(SELECT REFER FROM HKANSWERBOARD WHERE SEQ=#{seq}) -->
+<!-- 				AND STEP>(SELECT STEP FROM HKANSWERBOARD WHERE SEQ=#{seq}) -->
+<!-- </update> -->
+
+<!-- <insert id="ansinsert" parameterType="AnsDto"> -->
+<!-- 	INSERT INTO HKANSWERBOARD VALUES( -->
+<!-- 	HKANSWERBOARD_SEQ.NEXTVAL, #{id}, #{title}, #{content}, SYSDATE, -->
+<!-- 	(SELECT REFER FROM HKANSWERBOARD WHERE SEQ=#{seq}), -->
+<!-- 	(SELECT STEP FROM HKANSWERBOARD WHERE SEQ=#{seq})+1, -->
+<!-- 	(SELECT DEPTH FROM HKANSWERBOARD WHERE SEQ=#{seq})+1,0,'N') -->
+<!-- </insert> -->
+
+<!-- <select id="detailAjax" parameterType="int" resultType="AnsDto"> -->
+<!-- 	select seq, id, title, content, regdate, -->
+<!-- 				refer, step, depth, readcount, delflag -->
+<!-- 				from hkanswerboard WHERE SEQ=#{seq} -->
+<!-- </select> -->
+
+	
+<!-- 	<sql id="paramseq"> -->
+<!-- 		SEQ=#{seq} -->
+<!-- 	</sql> -->
+
+
+
+</mapper>

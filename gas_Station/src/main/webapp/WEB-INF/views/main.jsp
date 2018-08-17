@@ -1523,7 +1523,6 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 </div>
 <!-- 로그인 창 -->
 <div id="login_container">
-
 	<img class="back_btn" src="image/back.png" alt="돌아가기" onclick="call_main_container()">
 	<div id="logo" style="margin: 0 auto; width: 66%; text-align: center; ">
 		<span class='login_logo'>주유를 어디서 하주유???</span>

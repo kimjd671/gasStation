@@ -68,6 +68,7 @@ public class HomeController {
 	@RequestMapping(value = "/bookmark.do", method = RequestMethod.GET)
 	public String bookmark(Locale locale, Model model,String x,String y) {
 
+		
 		return "bookmark";
 	}
 	

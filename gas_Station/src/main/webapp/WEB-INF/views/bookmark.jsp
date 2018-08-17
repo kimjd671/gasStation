@@ -65,8 +65,7 @@ $(function(){
 		</div>
 		<table id="bookmark_list" border="1">
 			<tr id="bktr">			
-				<th style="width: 142.85px;">아이디</th>
-				<th style="width: 142.85px;">상호명</th>
+				<th style="width: 285.7px;">상호명</th>
 				<th style="width: 142.85px;">지역</th>
 				<th style="width: 142.85px;">휘발유</th>
 				<th style="width: 142.85px;">경유</th>
@@ -84,13 +83,12 @@ $(function(){
 					for(BookMarkDto dto:list){
 						%>
 						<tr>
-							<td<%=dto.getId()%>></td>
-							<td<%=dto.getB_name()%>></td>
-							<td<%=dto.getLocation()%>></td>
-							<td<%=dto.getGasoline()%>></td>
-							<td<%=dto.getDiesel()%>></td>
-							<td<%=dto.getLpg()%>></td>
-							<td<%=dto.getRegdate()%>></td>
+							<td><%=dto.getB_name()%></td>
+							<td><%=dto.getLocation()%></td>
+							<td><%=dto.getGasoline()%></td>
+							<td><%=dto.getDiesel()%></td>
+							<td><%=dto.getLpg()%></td>
+							<td><%=dto.getRegdate()%></td>
 						</tr>		
 						<% 
 					}

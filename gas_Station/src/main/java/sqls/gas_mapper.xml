@@ -15,6 +15,15 @@
  		<result property="regdate" column="regdate"/>
 	</resultMap>
 
+	<resultMap type="com.hk.gas.dtos.BookMarkDto" id="GasBookMarkMap">
+		<result property="id" column="id"/>
+ 		<result property="b_name" column="b_name"/>
+ 		<result property="location" column="location"/>
+ 		<result property="gasoline" column="gasoline"/>
+ 		<result property="diesel" column="diesel"/>
+ 		<result property="lpg" column="lpg"/>
+ 		<result property="regdate" column="regdate"/>
+	</resultMap>
 
 
 

@@ -1309,6 +1309,27 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	  }
 		
 	}
+	
+// 	function go_bookmark(){
+// 		var id='${ldto.id}'
+// 		if(id==null || id==""){
+// 			alert("로그인을 해주세요.");
+// 		}else{
+// 			location.href='bookmark.do';	
+// 		}
+// 	}
+	
+// 	function go_board(){
+// 		var id='${ldto.id}'
+// 		if(id==null||id==""){
+// 			var 
+// 		}
+// 		if(id==null || id==""){
+// 			alert("로그인을 해주세요.");
+// 		}else{
+// 			location.href='boardlist.do';	
+// 		}
+// 	}
 </script>
 </head>
 
@@ -1460,7 +1481,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	<img  alt="즐겨찾기" src="image/star.png" style="display:block; position: absolute ; top:10px; left:0; right:0; margin: 0 auto;" >
 	</div>
 </div>
-<div class="img_btn" id="right_view3">
+<div class="img_btn" id="right_view3"  onclick="location.href='boardlist.do'">
 	<div class="right_div">
 	<h3>커뮤니티</h3>
 	<img alt="커뮤니티" src="image/board.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >

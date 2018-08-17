@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.hk.gas.utils.Util"%>
 <%@page import="java.util.List"%>
 <%@page import="com.hk.gas.dtos.BookMarkDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
@@ -36,6 +38,7 @@ ul{list-style: none;}
 <body>
 <%
 	List<BookMarkDto> list=(List<BookMarkDto>)request.getAttribute("lists");
+	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
 // 	BookMarkDto bkdto=(BookMarkDto)session.getAttribute("ldto");
 %>
 <script type="text/javascript">
@@ -88,7 +91,7 @@ $(function(){
 							<td><%=dto.getGasoline()%></td>
 							<td><%=dto.getDiesel()%></td>
 							<td><%=dto.getLpg()%></td>
-							<td><%=dto.getRegdate()%></td>
+							<td><%=yyyymmdd.format(dto.getRegdate())%></td>
 						</tr>		
 						<% 
 					}

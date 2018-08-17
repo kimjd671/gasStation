@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hk.gas.dtos.BookMarkDto;
 import com.hk.gas.dtos.GasUserDto;
+import com.hk.gas.service.GasClientService;
 import com.hk.gas.service.GasUserService;
 import com.hk.gas.utils.Util;
 
@@ -34,6 +36,8 @@ public class HomeController {
 	private Util utils;
 	@Autowired
 	private GasUserService gasuser;
+	@Autowired
+	private GasClientService client;
 	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -66,10 +70,20 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/bookmark.do", method = RequestMethod.GET)
-	public String bookmark(Locale locale, Model model,String x,String y) {
-
-		
+	public String bookmark(Locale locale, Model model,HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		GasUserDto ldto= (GasUserDto)session.getAttribute("ldto");
+		String id=ldto.getId();
+		List<BookMarkDto> booklist= client.bookmark_List(id);
+		System.out.println("booklist="+booklist);
+		model.addAttribute("lists",booklist);
 		return "bookmark";
+	}
+	
+	@RequestMapping(value = "/boardlist.do", method = RequestMethod.GET)
+	public String boardlist(Locale locale, Model model,HttpServletRequest request) {
+
+		return "boardlist";
 	}
 	
 	@ResponseBody

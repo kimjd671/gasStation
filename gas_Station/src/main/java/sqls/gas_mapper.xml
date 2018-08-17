@@ -15,7 +15,7 @@
  		<result property="regdate" column="regdate"/>
 	</resultMap>
 
-	<resultMap type="com.hk.gas.dtos.BookMarkDto" id="GasBookMarkMap">
+<resultMap type="com.hk.gas.dtos.BookMarkDto" id="GasBookMarkMap">
 		<result property="id" column="id"/>
  		<result property="b_name" column="b_name"/>
  		<result property="location" column="location"/>
@@ -24,20 +24,8 @@
  		<result property="lpg" column="lpg"/>
  		<result property="regdate" column="regdate"/>
 	</resultMap>
+	
 
-
-
-<!-- 	<select id="boardlist" resultType="AnsDto" parameterType="Map"> -->
-<!-- 		SELECT SEQ, ID, TITLE, CONTENT, REGDATE, -->
-<!-- 				REFER, STEP, DEPTH, READCOUNT, DELFLAG -->
-<!-- 				FROM HKANSWERBOARD -->
-<!-- 				<if test="seq!=null"> -->
-<!-- 					<where> -->
-<!-- 						<include refid="paramseq"/> -->
-<!-- 					</where> -->
-<!-- 				</if> -->
-<!-- 				ORDER BY REFER, STEP -->
-<!-- 	</select>	   -->
 
  <insert id="insertuser" parameterType="GasUserDto"> 
  	INSERT INTO GASMEMBER VALUES(GASMEMBER_SEQ.NEXTVAL,#{id},#{password},#{name},#{phone},#{email},'USER',SYSDATE)
@@ -66,6 +54,24 @@
 <update id="updateinfo" parameterType="GasUserDto">
 	UPDATE GASMEMBER SET EMAIL=#{email}, PHONE=#{phone} WHERE UPPER(ID)=UPPER(#{id})
 </update>
+
+
+<select id="bookmarklist" resultType="BookMarkDto" parameterType="String">
+	SELECT ID,B_NAME,LOCATION,GASOLINE,DIESEL,LPG,REGDATE FROM GASBOOKMARK WHERE ID=#{id}
+</select>
+
+<!-- 	<select id="boardlist" resultType="AnsDto" parameterType="Map"> -->
+<!-- 		SELECT SEQ, ID, TITLE, CONTENT, REGDATE, -->
+<!-- 				REFER, STEP, DEPTH, READCOUNT, DELFLAG -->
+<!-- 				FROM HKANSWERBOARD -->
+<!-- 				<if test="seq!=null"> -->
+<!-- 					<where> -->
+<!-- 						<include refid="paramseq"/> -->
+<!-- 					</where> -->
+<!-- 				</if> -->
+<!-- 				ORDER BY REFER, STEP -->
+<!-- 	</select>	   -->
+
 <!-- <update id="readcount" parameterType="int"> -->
 <!-- 	UPDATE HKANSWERBOARD SET READCOUNT=READCOUNT+1 WHERE SEQ=#{seq} -->
 <!-- </update>	 -->

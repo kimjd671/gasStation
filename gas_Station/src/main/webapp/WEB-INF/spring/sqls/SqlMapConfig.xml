@@ -11,6 +11,7 @@
 <!-- typeAlias에 sql_mapper.xml에서 사용하게 될 결과나 파라미터를 담을 객체를 정의 -->
   	<typeAliases>
   		<typeAlias type="com.hk.gas.dtos.GasUserDto" alias="GasUserDto"/>
+  		<typeAlias type="com.hk.gas.dtos.BookMarkDto" alias="BookMarkDto"/>
   	</typeAliases>
   
 <!--   쿼리를 작성할 xml파일 위치를 설정 -->

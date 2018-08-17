@@ -1313,6 +1313,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 </head>
 
 <body>
+
 <div id="map" style="display: none;" ></div>
 <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=acb3de07cd7e06ff26709e0cda4c89c2"></script>
 <div id="container">

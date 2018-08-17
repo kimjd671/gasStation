@@ -1,5 +1,3 @@
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="com.hk.gas.utils.Util"%>
 <%@page import="java.util.List"%>
 <%@page import="com.hk.gas.dtos.BookMarkDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
@@ -20,8 +18,6 @@
 a{color: white;  text-decoration:none;}
 ul{list-style: none;}
 .back_btn{cursor: pointer;}
-#bookmark_list{background-color: #f4f6fc; color: #000000; margin: 0 auto; position: relative; top: 150px; width: 1200px;}
-.title{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; top:100px; font-family: 'Jeju Hallasan', serif; text-align: center; }
 
 
 </style>
@@ -37,11 +33,7 @@ ul{list-style: none;}
 </script>
 </head>
 <body>
-<%
-	List<BookMarkDto> list=(List<BookMarkDto>)request.getAttribute("lists");
-	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
-// 	BookMarkDto bkdto=(BookMarkDto)session.getAttribute("ldto");
-%>
+
 <script type="text/javascript">
 $(function(){
 	$.ajax({
@@ -64,42 +56,13 @@ $(function(){
 <div id="container">	
 	<div id="main_container">
 		<img class="back_btn" src="image/back.png" alt="돌아가기" onclick="main_page()">
-					<div>
-			<span class='title'>즐겨찾기</span>
-		</div>
-		<table id="bookmark_list" border="1">
-			<tr id="bktr">			
-				<th style="width: 285.7px;">상호명</th>
-				<th style="width: 142.85px;">지역</th>
-				<th style="width: 142.85px;">휘발유</th>
-				<th style="width: 142.85px;">경유</th>
-				<th style="width: 142.85px;">LPG</th>
-				<th style="width: 142.85px;">업데이트날짜</th>
-			</tr>	
-			<%
-				if(list==null || list.size()==0){
-					%>
-					<tr>
-						<td colspan="7" style="text-align: center;">---등록된 주유소가 없습니다---</td>
-					</tr>
-					<%
-				}else{
-					for(BookMarkDto dto:list){
-						%>
-						<tr>
-							<td><%=dto.getB_name()%></td>
-							<td><%=dto.getLocation()%></td>
-							<td><%=dto.getGasoline()%></td>
-							<td><%=dto.getDiesel()%></td>
-							<td><%=dto.getLpg()%></td>
-							<td><%=yyyymmdd.format(dto.getRegdate())%></td>
-						</tr>		
-						<% 
-					}
-				}
-			%>					
-		</table>		
-	</div>
+
+
+
+
+
+
+
 </div>
 </body>
 </html>

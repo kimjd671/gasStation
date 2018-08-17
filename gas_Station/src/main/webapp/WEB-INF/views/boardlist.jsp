@@ -63,10 +63,8 @@ $(function(){
 					<col width="70px"/>
 					<col width="90px"/>
 					<col width="300px"/>
-					<col width="100px"/>
-					<col width="50px"/>
-					<col width="50px"/>
-					<col width="50px"/>
+					<col width="80px"/>
+					<col width="70px"/>
 					<col width="70px"/>
 					<col width="70px"/>
 					<col width="70px"/>
@@ -74,13 +72,11 @@ $(function(){
 						<th>글번호</th>
 						<th>작성자</th>
 						<th>제목</th>
-						<th>내용</th>
 						<th>작성일</th>
 						<th>refer</th>
 						<th>step</th>
 						<th>depth</th>
 						<th>조회수</th>
-						<th>답글수</th>
 						<th>추천수</th>
 					</tr>
 				</table>

@@ -1452,7 +1452,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		</div>	
 			<%		}	%>
 </div>
-<div class="img_btn" id="right_view2">
+<div class="img_btn" id="right_view2" onclick="location.href='bookmark.do'">
 	<div class="right_div" >
 	<h3>즐겨찾기</h3>
 	<img  alt="즐겨찾기" src="image/star.png" style="display:block; position: absolute ; top:10px; left:0; right:0; margin: 0 auto;" >

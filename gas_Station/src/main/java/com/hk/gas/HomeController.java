@@ -119,7 +119,6 @@ public class HomeController {
 	@ResponseBody
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public Map<String,GasUserDto> login(GasUserDto dto,Locale locale, Model model,HttpServletRequest request) {
-		
 		GasUserDto ldto=gasuser.login(dto);
 		System.out.println(ldto);
 		Map<String,GasUserDto> map=new HashMap<>();

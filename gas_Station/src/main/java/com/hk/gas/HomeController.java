@@ -51,7 +51,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
-	public String test(Locale locale, Model model,String x,String y) {
+	public String main(Locale locale, Model model,String x,String y) {
 		
 		double nx=Double.parseDouble(x);
 		double ny=Double.parseDouble(y);
@@ -63,6 +63,12 @@ public class HomeController {
 		model.addAttribute("y",y);
 		model.addAttribute("xy",xy);
 		return "main";
+	}
+	
+	@RequestMapping(value = "/bookmark.do", method = RequestMethod.GET)
+	public String bookmark(Locale locale, Model model,String x,String y) {
+
+		return "bookmark";
 	}
 	
 	@ResponseBody
@@ -155,5 +161,6 @@ public class HomeController {
 		map.put("isS",isS);
 		return map;
 	}
+	
 	
 }

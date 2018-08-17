@@ -62,7 +62,7 @@ $(function(){
 					<col width="70px"/>
 					<col width="70px"/>
 					<col width="300px"/>
-					<col width="90px"/>
+					<col width="120px"/>
 					<col width="80px"/>
 					<col width="70px"/>
 					<col width="70px"/>

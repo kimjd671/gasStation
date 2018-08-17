@@ -10,7 +10,7 @@
 <meta content="BlendTrans(Duration=0.2)" http-equiv="Page-Enter">
 <meta content="BlendTrans(Duration=0.2)" http-equiv="Page-exit">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>메인페이지1</title>
+<title>메인페이지</title>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
 #shadow{background: black; width: 100%; height: 100%; position:absolute; display: block; opacity: 0.4;  z-index: 4;}
@@ -1523,7 +1523,6 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 </div>
 <!-- 로그인 창 -->
 <div id="login_container">
-
 	<img class="back_btn" src="image/back.png" alt="돌아가기" onclick="call_main_container()">
 	<div id="logo" style="margin: 0 auto; width: 66%; text-align: center; ">
 		<span class='login_logo'>주유를 어디서 하주유???</span>

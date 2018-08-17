@@ -56,13 +56,7 @@ $(function(){
 <div id="container">	
 	<div id="main_container">
 		<img class="back_btn" src="image/back.png" alt="돌아가기" onclick="main_page()">
-
-
-
-
-
-
-
+</div>
 </div>
 </body>
 </html>

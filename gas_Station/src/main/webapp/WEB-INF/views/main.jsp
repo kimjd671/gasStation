@@ -10,7 +10,7 @@
 <meta content="BlendTrans(Duration=0.2)" http-equiv="Page-Enter">
 <meta content="BlendTrans(Duration=0.2)" http-equiv="Page-exit">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>메인페이지</title>
+<title>메인페이지1</title>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
 #shadow{background: black; width: 100%; height: 100%; position:absolute; display: block; opacity: 0.4;  z-index: 4;}

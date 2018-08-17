@@ -1290,6 +1290,25 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 			alert("비밀번호가 일치하지 않습니다.");
 		}
 	}
+	
+	function search_area(){
+	 	if (navigator.geolocation) { // GPS를 지원하면
+	    navigator.geolocation.getCurrentPosition(function(position) {
+// 	    	$("input[name=x]").val(position.coords.latitude); //위도
+// 	    	$("input[name=y]").val(position.coords.longitude); //경도
+			alert("페이지이동");
+	    }, function(error) {
+	      console.error(error);
+	    }, {
+	      enableHighAccuracy: false,
+	      maximumAge: 0,
+	      timeout: Infinity
+	    });
+	  } else {
+	    alert('GPS를 지원하지 않습니다');
+	  }
+		
+	}
 </script>
 </head>
 
@@ -1451,7 +1470,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	<img alt="상호검색" src="image/search.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >
 	</div>
 </div>
-<div class="img_btn" id="bottom_view2">
+<div class="img_btn" id="bottom_view2" onclick="search_area()">
 	<div class="bottom_div">
 	<h3>주변주유소 찾기</h3>
 	<img alt="반경검색" src="image/maker.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >

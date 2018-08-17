@@ -17,6 +17,8 @@ a{color: white;  text-decoration:none;}
 ul{list-style: none;}
 .back_btn{cursor: pointer;}
 
+
+
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
@@ -52,6 +54,17 @@ $(function(){
 <div id="container">
 	<div id="main_container">
 		<img class="back_btn" src="image/back.png" alt="돌아가기" onclick="main_page()">
+		<table id="bookmark_list" border="1">
+			<tr>
+				<th>아이디</th>
+				<th>상호명</th>
+				<th>지역</th>
+				<th>휘발유</th>
+				<th>경유</th>
+				<th>LPG</th>
+				<th>업데이트날짜</th>
+			</tr>					
+		</table>		
 	</div>
 </div>
 </body>

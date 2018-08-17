@@ -4,7 +4,6 @@
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=utf-8"); %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +11,6 @@
 <meta content="BlendTrans(Duration=0.2)" http-equiv="Page-exit">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인페이지</title>
-
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
 #shadow{background: black; width: 100%; height: 100%; position:absolute; display: block; opacity: 0.4;  z-index: 4;}
@@ -71,11 +69,7 @@ ul.tabs {
     background-color: #DCE2F5;
 	margin: 0;
 }
-#regist_form li>span{
-	position: relative;
-	top: 25px;
-}
-
+#regist_form li>span{	position: relative;	top: 25px;}
 ul.tabs li {
     float: left;
     color:gray;
@@ -130,7 +124,6 @@ ul.tabs li.active {
 	position:relative;
 	cursor: pointer;
 }
-
 .btn_mini{
 	background:    #dfbe6a;
 	background:    -webkit-linear-gradient(#dfbe6a, #897952);
@@ -146,6 +139,75 @@ ul.tabs li.active {
 	margin: 0 auto;
 	cursor: pointer;
 }
+#right_view1,#right_view2,#right_view3{width:23%; height:227px; border: 1px solid #dfbe6a; background-color:#3A3A3C;  float:left; overflow: hidden; position: relative;  }
+.right_div *{transition: all 0.35s ease; box-sizing: border-box; }
+.right_div:hover img{  	opacity: 0.5; }
+.right_div h3{
+	position: absolute;
+ 	top: 0%;
+ 	width: 100%;
+  	background-color: #dfbe6a;
+  	z-index: 1;
+  	text-align: right;
+  	padding: 15px 25px 0px;
+ 	margin: 0;
+	transform: translateY(-200%);
+	color:#3A3A3C; 
+	font-size: 30px;
+}
+.right_div h3:before {
+  position: absolute;
+  content: '';
+  top: 100%;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 345px 80px 0;
+  border-color: transparent #dfbe6a transparent transparent;
+}
+.right_div:hover h3{
+	transform: translateY(0%);
+	color:white;
+  	opacity: 1;
+}
+
+
+#bottom_view1,#bottom_view2{width:35%; height:237px; border: 1px solid #dfbe6a; background-color:#3A3A3C; float: left; overflow: hidden; position: relative;}
+.bottom_div *{transition: all 0.35s ease; box-sizing: border-box; }
+.bottom_div:hover img{  	opacity: 0.5; }
+.bottom_div h3{
+	position: absolute;
+ 	top: 0%;
+ 	width: 100%;
+  	background-color: #dfbe6a;
+  	z-index: 1;
+  	text-align: right;
+  	padding: 15px 25px 0px;
+ 	margin: 0;
+	transform: translateY(-200%);
+	color:#3A3A3C; 
+	font-size: 30px;
+}
+.bottom_div h3:before {
+  position: absolute;
+  content: '';
+  top: 100%;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 528px 90px 0;
+  border-color: transparent #dfbe6a transparent transparent;
+}
+.bottom_div:hover h3{
+	transform: translateY(0%);
+	color:white;
+  	opacity: 1;
+}
+
+
+
 .sido_avg_span,.all_avg_span{font-size: 40px;}
 #all_avg_t{	margin: 80px 0 10px 0;}
 #all_oil_avg_o1,#all_oil_avg_o2,#all_oil_avg_o3,.top5_div{width: 90%;}
@@ -162,13 +224,9 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 #r_ok_btn:hover{background: #35D500;}
 #login_container fieldset{color: black;}
 #main_container fieldset{margin-top: 20px; color: white; line-height: 30px;}
-
 #update_info{background-color:#F4F6FC; width: 40%; height: 800px; position: absolute; top:50px; left: 450px; line-height: 45px; display: none;}
-
 /* 아이디비번찾기 */
 #find_form{background-color:#F4F6FC; width: 30%; height: 500px; position: absolute; top:200px; left: 550px; line-height: 45px;  z-index: 5;}
-
-
 #idpwd{margin: 0 auto}
 #find_form table {margin: 50px 0 0 0; border-spacing: 10px; color: gray}
 #find_form th>img{opacity: 0.5;}
@@ -1340,7 +1398,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	<h3 style="float: left;">최근 1주간  평균유가</h3><button class="btn_mini" style="top: 10px; position: relative;" >조회하기</button>
 </div>
 </div>
-<div id="right_view1" style="width:23%; height:227px; border: 1px solid #dfbe6a; float:left;">
+<div id="right_view1">
 	<%   	if(sdto==null){	%>
 		<button id="login_button" class="login_btn" onclick="call_login_container()" >로그인</button>
 		<div id="myInfo" style="display: none;">
@@ -1375,17 +1433,29 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		</div>	
 			<%		}	%>
 </div>
-<div id="right_view2" style="width:23%; height:227px; border: 1px solid #dfbe6a; background-color:#3A3A3C;  float:left; ">
-	<img class="img_btn" alt="즐겨찾기" src="image/star.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >
+<div class="img_btn" id="right_view2">
+	<div class="right_div" >
+	<h3>즐겨찾기</h3>
+	<img  alt="즐겨찾기" src="image/star.png" style="display:block; position: absolute ; top:10px; left:0; right:0; margin: 0 auto;" >
+	</div>
 </div>
-<div id="right_view3" style="width:23%; height:237px; border: 1px solid #dfbe6a; float:left; ">
-	<img class="img_btn" alt="커뮤니티" src="image/board.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >
+<div class="img_btn" id="right_view3">
+	<div class="right_div">
+	<h3>커뮤니티</h3>
+	<img alt="커뮤니티" src="image/board.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >
+	</div>
 </div>
-<div id="bottom_view1" style="width:35%; height:237px; border: 1px solid #dfbe6a; float: left;">
-	<img class="img_btn" alt="상호검색" src="image/search.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >
+<div class="img_btn" id="bottom_view1">
+	<div class="bottom_div">
+	<h3>상호명 검색</h3>
+	<img alt="상호검색" src="image/search.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >
+	</div>
 </div>
-<div id="bottom_view2" style="width:35%; height:237px; border: 1px solid #dfbe6a; background-color:#3A3A3C; float: left;">
-	<img class="img_btn" alt="반경검색" src="image/maker.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >
+<div class="img_btn" id="bottom_view2">
+	<div class="bottom_div">
+	<h3>주변주유소 찾기</h3>
+	<img alt="반경검색" src="image/maker.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >
+	</div>
 </div>
 <div style="clear: left;"></div>
 </div>

@@ -21,6 +21,7 @@ ul{list-style: none;}
 #bookmark_list{background-color: #f4f6fc; color: #000000; margin: 0 auto; position: relative; top: 150px; width: 1200px;}
 .title{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; top:100px; font-family: 'Jeju Hallasan', serif; text-align: center; }
 
+
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 
@@ -60,7 +61,7 @@ $(function(){
 <div id="container">	
 	<div id="main_container">
 		<img class="back_btn" src="image/back.png" alt="돌아가기" onclick="main_page()">
-		<div>
+					<div>
 			<span class='title'>즐겨찾기</span>
 		</div>
 		<table id="bookmark_list" border="1">

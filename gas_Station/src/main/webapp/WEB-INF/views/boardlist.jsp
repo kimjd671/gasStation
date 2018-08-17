@@ -67,9 +67,9 @@ $(function(){
 					<col width="50px"/>
 					<col width="50px"/>
 					<col width="50px"/>
-					<col width="50px"/>
-					<col width="50px"/>
-					<col width="50px"/>
+					<col width="70px"/>
+					<col width="70px"/>
+					<col width="70px"/>
 					<tr>
 						<th>글번호</th>
 						<th>작성자</th>

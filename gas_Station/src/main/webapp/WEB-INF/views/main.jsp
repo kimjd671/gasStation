@@ -14,25 +14,29 @@
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
 *{box-sizing:border-box;}
-body{margin:0; width:100%; height:100%};
+html,body{margin:0; width:100%; height:100%; position: absolute;};
 #shadow{background: black; width: 100%; height: 100%; position:absolute; display: block; opacity: 0.4;  z-index: 4;}
 *>div{color: white; border-color: white; margin: 2px;}
-#container{ width: 1440px; height:956px; overflow: hidden; margin: 0 auto; position: relative;}
+#container{ width: 79%; height:98%; overflow: hidden; margin: 0 auto; position: relative;}
 
-#main_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:955px; position: absolute; }
-#login_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:955px; position: absolute; left: 1510px; }
+#main_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:100%; position: absolute; }
+#login_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:100%; position: absolute; left: 1510px; }
 a{color: white;  text-decoration:none;}
 ul{list-style: none;}
 h3{margin: 10px;}
 .display_none{	display: none;}
 .display_block{	display: block;}
 .img_btn{cursor: pointer;}
+#imgs{width: 100%; height: 100%; padding: 10% 10%;}
+#imgs_gugun{width: 60%; padding: 2% 2%;}
+.r_btn_img{display:block; position: relative; top: 50%;left: 50%;transform: translate(-50%, -50%); width: 50%;height: 100%; object-fit: contain;}
+.b_btn_img{display:block; position: relative; top: 50%;left: 50%;transform: translate(-50%, -50%); width: 35%;height: 100%; object-fit: contain;}
 ul.tabs {
     margin: 0 auto;
     padding: 0;
     float: left;
     list-style: none;
-    height: 40px;
+    height: 11%;
     background-color:#dfbe6a;
     width: 100%;
     font-family:"dotum";
@@ -44,7 +48,7 @@ ul.tabs {
     text-align:center;
     cursor: pointer;
     width:50%;
-    height: 40px;
+    height: 100%;
     line-height: 31px;
     border-left: none;
     font-weight: bold;
@@ -54,15 +58,14 @@ ul.tabs {
     font-size: 20px;
 	
 }
-#regist_form{background-color:#F4F6FC; width: 40%; height: 825px; position: absolute; top:50px; left: 450px; line-height: 45px; display: none; z-index: 5}
+#regist_form{background-color:#F4F6FC; width: 40%; height: 85%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none; z-index: 5}
 #regist_form li{
-	
 	float: left;
     color:gray;
     text-align:center;
     cursor: pointer;
     width:50%;
-    height: 80px;
+    height: 100%;
 	line-height: 31px;
     border-left: none;
     font-weight: bold;
@@ -81,7 +84,7 @@ ul.tabs li {
     text-align:center;
     cursor: pointer;
     width:33%;
-    height: 40px;
+    height: 100%;
     line-height: 31px;
     border-left: none;
     font-weight: bold;
@@ -101,10 +104,10 @@ ul.tabs li.active {
 	background:    linear-gradient(#dfbe6a, #897952);
 	border-radius: 1000px;
 	border-color:#3A3A3C;
-	padding:       10px 80px;
+	padding:       3% 15%;
 	color:         #000000;
 	display:       block;
-	font:          normal 400 28px/1 "Zenhei", sans-serif;
+	font:          normal 400 2vw/1 "Zenhei", sans-serif;
 	text-align:    center;
 	text-shadow:   none;
 	margin: 0 auto;
@@ -118,10 +121,10 @@ ul.tabs li.active {
 	background:    linear-gradient(#dfbe6a, #897952);
 	border-radius: 1000px;
 	border-color:#3A3A3C;
-	padding:       20px 140px;
+	padding:       3% 15%;
 	color:         #000000;
 	display:       block;
-	font:          normal 400 40px/1 "Zenhei", sans-serif;
+	font:          normal 400 3vw/1 "Zenhei", sans-serif;
 	text-align:    center;
 	text-shadow:   none;
 	margin: 20px auto;
@@ -134,16 +137,17 @@ ul.tabs li.active {
 	background:    linear-gradient(#dfbe6a, #897952);
 	border-radius: 500px;
 	border-color:#3A3A3C;
-	padding:       5px 40px;
+	padding:       1% 5%;
 	color:         #000000;
 	display:       block;
-	font:          normal 400 14px/1 "Zenhei", sans-serif;
+	font:          normal 400 1vw/1 "Zenhei", sans-serif;
 	text-align:    center;
 	text-shadow:   none;
 	margin: 0 auto;
 	cursor: pointer;
 }
-#right_view1,#right_view2,#right_view3{width:23%; height:227px; border: 1px solid #dfbe6a; background-color:#3A3A3C;  float:left; overflow: hidden; position: relative;  }
+#right_view1,#right_view2,#right_view3{width:23%; height:24%; border: 1px solid #dfbe6a; background-color:#3A3A3C;  float:left; overflow: hidden; position: relative;  }
+.right_div,.bottom_div{width: 100%;height: 100%;}
 .right_div *{transition: all 0.35s ease; box-sizing: border-box; }
 .right_div:hover img{  	opacity: 0.5; }
 .right_div h3{
@@ -177,9 +181,9 @@ ul.tabs li.active {
 }
 
 
-#bottom_view1,#bottom_view2{width:35%; height:237px; border: 1px solid #dfbe6a; background-color:#3A3A3C; float: left; overflow: hidden; position: relative;}
+#bottom_view1,#bottom_view2{width:35%; height:24%; border: 1px solid #dfbe6a; background-color:#3A3A3C; float: left; overflow: hidden; position: relative;}
 .bottom_div *{transition: all 0.35s ease; box-sizing: border-box; }
-.bottom_div:hover img{  	opacity: 0.5; }
+.bottom_div:hover img{opacity: 0.5; }
 .bottom_div h3{
 	position: absolute;
  	top: 0%;
@@ -217,20 +221,20 @@ ul.tabs li.active {
 #all_oil_avg_o1,#all_oil_avg_o2,#all_oil_avg_o3,.top5_div{width: 90%;}
 .all_diff,.sido_diff{position:relative;left:100px; top:0; display:inline-block; font-size:25px;}
 .back_btn{cursor: pointer;margin: 15px;display: inline-block;}
-.l_input{width: 80%; height: 45px; font-size: 35px; margin: 0 auto; display: block;}
+.l_input{width: 80%; height: 100%; font-size: 35px; margin: 0 auto; display: block;}
 .input_title{font-size: 40px; display: block; width: 80%; margin: 0 auto; color:#dfbe6a; }
 .login_logo{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; font-family: 'Jeju Hallasan', serif; }
 .regist_category{font-size: 30px; color: gray; display: block;}
-.r_input{width: 90%; height: 43px; font-size: 33px; border: 1px dashed gray; background-color: #F4F6FC; }
+.r_input{width: 90%; height: 100%; font-size: 33px; border: 1px dashed gray; background-color: #F4F6FC; }
 input::placeholder{color:#CBCBCD; font-size: 20px;}
 .r_div{padding-left: 40px;}
 #r_cancel_btn:hover {background: #FC0543;}
 #r_ok_btn:hover{background: #35D500;}
 #login_container fieldset{color: black;}
 #main_container fieldset{margin-top: 20px; color: white; line-height: 30px;}
-#update_info{background-color:#F4F6FC; width: 40%; height: 800px; position: absolute; top:50px; left: 450px; line-height: 45px; display: none;}
+#update_info{background-color:#F4F6FC; width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
 /* 아이디비번찾기 */
-#find_form{background-color:#F4F6FC; width: 30%; height: 500px; position: absolute; top:200px; left: 550px; line-height: 45px;  z-index: 5;}
+#find_form{background-color:#F4F6FC; width: 30%; height: 50%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px;  z-index: 5;}
 #idpwd{margin: 0 auto}
 #find_form table {margin: 50px 0 0 0; border-spacing: 10px; color: gray}
 #find_form th>img{opacity: 0.5;}
@@ -241,7 +245,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=acb3de07cd7e06ff26709e0cda4c89c2&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=d5a3febeb4d52aaf0a2bcdd28926d84a&libraries=services,clusterer,drawing"></script>
 <%
 	GasUserDto sdto=(GasUserDto)session.getAttribute("ldto");
 	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
@@ -291,16 +295,16 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 // 			                infoDiv.innerHTML = result[i].address_name;
 			                myaddrs=result[i].address_name;
 			                mapping2();
-// 			              	load_allPrice();  //전국평균 로드
-// 			              	load_sidoPrice(); //시도평균 로드
-// 			              	load_allTop10();//전국 Top10 휘발유 주유소로드
-// 			              	load_sidoTop5(sel_prodcd); //로드된 시도기준 탑5 리스트
+			              	load_allPrice();  //전국평균 로드
+			              	load_sidoPrice(); //시도평균 로드
+			              	load_allTop10();//전국 Top10 휘발유 주유소로드
+			              	load_sidoTop5(sel_prodcd); //로드된 시도기준 탑5 리스트
 			              	
-// 							insert_all_oil_avg();
+							insert_all_oil_avg();
 							
-// 			              	chk_sido_avg();
+			              	chk_sido_avg();
 			              	
-// 			              	auto();
+			              	auto();
 			              	$(".all_avg_content").hide();
 			    		 	$(".all_avg_content:first").show();
 			    		 	
@@ -462,9 +466,9 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				"code":code
 			},
 			async:false,
-			datatype:"json",
+			dataType:"json",
 			success:function(jsonData){
-				var rows=JSON.parse(jsonData)["RESULT"]["OIL"];
+				var rows=jsonData["RESULT"]["OIL"];
 				for(var i=0; i<rows.length; i++){
 					all_Price[i]={  //0:고급유 1:휘발유 2:자동차용경유 3:실내등유 4:자동차용부탄
 							prodcd:rows[i].PRODCD,
@@ -489,9 +493,9 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				"code":code
 			},
 			async:false,
-			datatype:"json",
+			dataType:"json",
 			success:function(jsonData){
-				var rows=JSON.parse(jsonData)["RESULT"]["OIL"];
+				var rows=jsonData["RESULT"]["OIL"];
 				for(var i=0; i<rows.length; i++){
 					sido_Price[i]={
 							sidocd:rows[i].SIDOCD,
@@ -529,9 +533,9 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					"area":area_cd
 				},
 				async:true,
-				datatype:"json",
+				dataType:"json",
 				success:function(jsonData){
-					var rows=JSON.parse(jsonData)["RESULT"]["OIL"];
+					var rows=jsonData["RESULT"]["OIL"];
 					$("#gugun_oil_top5").empty();
 					$("#gugun_oil_top5").append("<h5>"+sel_gugun+"의 최저가 "+o_name+" 주유소</h5>");
 					for(var i=0; i<5; i++){
@@ -569,9 +573,9 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					"prodcd":prd[j]
 				},
 				async:false,
-				datatype:"json",
+				dataType:"json",
 				success:function(jsonData){
-					var rows=JSON.parse(jsonData)["RESULT"]["OIL"];
+					var rows=jsonData["RESULT"]["OIL"];
 					all_top10[j]=new Array();
 					for(var i=0; i<10; i++){
 							all_top10[j][i]={
@@ -613,9 +617,9 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					"area":area
 				},
 				async:false,
-				datatype:"json",
+				dataType:"json",
 				success:function(Data){
-					var rows=JSON.parse(Data)["RESULT"]["OIL"];
+					var rows=Data["RESULT"]["OIL"];
 					for(var i=0;i<rows.length;i++){
 						area_cd=rows[i].AREA_CD;
 	 					$("#gugun_selbar").append("<option value='"+rows[i].AREA_CD+"' selected>"+rows[i].AREA_NM+"</option>");
@@ -750,9 +754,9 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				"area":area
 			},
 			async:false,
-			datatype:"json",
+			dataType:"json",
 			success:function(Data){
-				var rows=JSON.parse(Data)["RESULT"]["OIL"];
+				var rows=Data["RESULT"]["OIL"];
 				for(var i=0;i<rows.length;i++){
  					if(myaddrs.indexOf(rows[i].AREA_NM)>0){
  						area_cd=rows[i].AREA_CD;
@@ -856,7 +860,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					"phone":phone
 				},
 				async:false,
-				datatype:"json",
+				dataType:"json",
 				success:function(obj){
 					var str=obj["isS"];
 					if(str){
@@ -911,7 +915,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				data:{"id":id
 				},
 				async:false,
-				datatype:"json",
+				dataType:"json",
 				success:function(obj){
 					var str=obj["isS"];
 					if(str){
@@ -1005,7 +1009,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				"phone":phone
 			},
 			async:false,
-			datatype:"json",
+			dataType:"json",
 			success:function(obj){
 				var str=obj["dto"];
 				if(str.length==0){
@@ -1036,7 +1040,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				"email":email
 			},
 			async:false,
-			datatype:"json",
+			dataType:"json",
 			success:function(obj){
 				var str=obj["isS"];
 				if(str){
@@ -1075,7 +1079,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					"password":npwd
 				},
 				async:false,
-				datatype:"json",
+				dataType:"json",
 				success:function(obj){
 					var str=obj["isS"];
 					if(str){
@@ -1122,7 +1126,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					"password":pwd
 				},
 				async:false,
-				datatype:"json",
+				dataType:"json",
 				success:function(obj){
 					var str=obj["dto"];
 					if(str==null){
@@ -1208,7 +1212,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				"password":inpwd
 			},
 			async:false,
-			datatype:"json",
+			dataType:"json",
 			success:function(obj){
 				var str=obj["chkdto"];
 				if(str==null){
@@ -1246,7 +1250,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					"phone":phone
 				},
 				async:false,
-				datatype:"json",
+				dataType:"json",
 				success:function(obj){
 					var str=obj["isS"];
 					if(str){
@@ -1276,7 +1280,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					"password":npwd
 				},
 				async:false,
-				datatype:"json",
+				dataType:"json",
 				success:function(obj){
 					var str=obj["isS"];
 					if(str){
@@ -1341,16 +1345,16 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 <body>
 
 <div id="map" style="display: none;" ></div>
-<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=acb3de07cd7e06ff26709e0cda4c89c2"></script>
+<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=d5a3febeb4d52aaf0a2bcdd28926d84a"></script>
 <div id="container">
 <div id="shadow">
 </div>
 <div id="main_container">
 <div id = "Progress_Loading" style="position: absolute; z-index: 6; width: 100%;"><!-- 로딩바 -->
-	<img src="image/gugun/loading.gif" style="display: block; top:270px; left:840px;  position: fixed;"/>
+	<img src="image/gugun/loading.gif" style="display: block; top:50%;left:50%;  transform: translate(-50%, -50%);  position: fixed;"/>
 </div>
-<div id="main_view" style="width:75%; height:700px;  float: left;">
-<div id="map_div" style="width:32%; height:698px;   float: left; border: 1px solid #dfbe6a; overflow: hidden;" >
+<div id="main_view" style="width:75%; height:71%;  float: left;">
+<div id="map_div" style="width:31%; height:100%;   float: left; border: 1px solid #dfbe6a; overflow: hidden;" >
 <div style="background-color: #3A3A3C; width: 90%; margin: 10px auto 10px auto;">
 <img id="imgs" src="image/map.png" usemap="#sido" style="margin: 0 auto; display: block;">
 <map name="sido">
@@ -1395,7 +1399,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 </div>
 </div>
 </div>
-<div id="sido_oil_avg_div" style="width:33%; height:347px; border: 1px solid #dfbe6a; float: left;">
+<div id="sido_oil_avg_div" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left;">
 	<ul class="tabs">
         <li class="active" id="avg_o1">휘발유</li>
         <li id="avg_o2">경유</li>
@@ -1412,7 +1416,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		<div class="sido_avg_content" id="sido_oil_avg_o3"></div>
 	</div>	
 </div>
-<div id="top10_slide" style="width:33%; height:347px; border: 1px solid #dfbe6a; float: left; ">
+<div id="top10_slide" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left; ">
 	<h3>전국 최저가 주유소 TOP10</h3>
 	&nbsp;&nbsp;휘발유<br>
 	<div id="top10_o1" style="height: 41px; width:80%;  overflow: hidden;">
@@ -1434,13 +1438,13 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	</div>
 	
 </div>
-<div id="oil_top5" style="width:33%; height:347px; border: 1px solid #dfbe6a; float: left;">
+<div id="oil_top5" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left;">
 	<h3>최저가 Top5 주유소</h3>
 	<div id="gugun_oil_top5">
 <!-- 	<img id="loading_img" src="image/gugun/loading.gif" alt="로딩" style=" margin: auto auto;"/> -->
 	</div>
 </div>
-<div id="week_day_avg" style="width:33%; height:347px; border: 1px solid #dfbe6a; float: left;">
+<div id="week_day_avg" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left;">
 	<h3 style="float: left;">최근 1주간  평균유가</h3><button class="btn_mini" style="top: 10px; position: relative;" >조회하기</button>
 </div>
 </div>
@@ -1482,25 +1486,25 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 <div class="img_btn" id="right_view2" onclick="location.href='bookmark.do'">
 	<div class="right_div" >
 	<h3>즐겨찾기</h3>
-	<img  alt="즐겨찾기" src="image/star.png" style="display:block; position: absolute ; top:10px; left:0; right:0; margin: 0 auto;" >
+	<img class="r_btn_img" alt="즐겨찾기" src="image/star.png">
 	</div>
 </div>
 <div class="img_btn" id="right_view3"  onclick="location.href='boardlist.do'">
 	<div class="right_div">
 	<h3>커뮤니티</h3>
-	<img alt="커뮤니티" src="image/board.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >
+	<img class="r_btn_img" alt="커뮤니티" src="image/board.png" >
 	</div>
 </div>
 <div class="img_btn" id="bottom_view1">
 	<div class="bottom_div">
 	<h3>상호명 검색</h3>
-	<img alt="상호검색" src="image/search.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >
+	<img class="b_btn_img" alt="상호검색" src="image/search.png">
 	</div>
 </div>
 <div class="img_btn" id="bottom_view2" onclick="search_area()">
 	<div class="bottom_div">
 	<h3>주변주유소 찾기</h3>
-	<img alt="반경검색" src="image/maker.png" style="display:block; position: relative; top:20px; margin: 0 auto;" >
+	<img class="b_btn_img" alt="반경검색" src="image/maker.png" >
 	</div>
 </div>
 <div style="clear: left;"></div>
@@ -1510,7 +1514,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 <!-- 내정보수정 -->
 <div id="update_info" style="position: absolute; z-index: 6;">
 	<img alt="창닫기" src="image/close.png" onclick="close_update_info()" style="float: right; position: relative; top: 10px; left: -10px; cursor: pointer;">
-	<div id="info_pwd_chk" style="color: black; width: 100%; height: 790px; text-align: center;">
+	<div id="info_pwd_chk" style="color: black; width: 100%; height: 100%; text-align: center;">
 		<fieldset style="width: 90%; margin: 0 auto; position: relative; top: 250px;">
 			<legend>비밀번호 재확인</legend>
 			비밀번호 입력 : <input type="password" name="info_chk_pwd">
@@ -1518,7 +1522,9 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 			<button class="btn_mini" onclick="info_chk_pwd()">확인</button>
 		</fieldset>
 	</div>
-	<div id="info_change" style="color: black; width: 100%; height: 790px; text-align: center; display: none;">
+	<br>
+	<div id="info_change" style="color: black; width: 100%; height: 100%; text-align: center; display: none;">
+		<span class="login_logo" style="font-size: 40px; text-align: center;">정보수정</span>
 		<fieldset style="width: 90%; margin: 0 auto;">
 			<legend>내정보 수정</legend>
 			<table>
@@ -1554,7 +1560,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	<div id="logo" style="margin: 0 auto; width: 66%; text-align: center; ">
 		<span class='login_logo'>주유를 어디서 하주유???</span>
 	</div>
-	<div id="login_main" style=" margin: 0 auto; width: 66%; height: 600px;">
+	<div id="login_main" style=" margin: 0 auto; width: 66%; height: 61%;">
 		<div id="login_input" style="width: 60%; margin: 0 auto; position: relative; top: 120px;">
 			<div id="id_input_div">
 			<span class="input_title">아이디</span>
@@ -1605,8 +1611,8 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		</div>
 		<br>
 		<hr>
-		<div style="width: 100%; padding: 0; margin: 0;" >
-		<ul style="width: 100%; padding: 0; margin: 0;">
+		<div style="width: 100%; height:10%; padding: 0; margin: 0;" >
+		<ul style="width: 100%; height:100%; padding: 0; margin: 0;">
 			<li style="border: none;" id="r_cancel_btn" onclick="close_regi()"><span>취소</span></li>
 			<li id="r_ok_btn" onclick="insert_user()"><span>확인</span></li>
 		</ul>

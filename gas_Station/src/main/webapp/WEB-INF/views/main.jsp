@@ -1318,26 +1318,31 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		
 	}
 	
-// 	function go_bookmark(){
-// 		var id='${ldto.id}'
-// 		if(id==null || id==""){
-// 			alert("로그인을 해주세요.");
-// 		}else{
-// 			location.href='bookmark.do';	
-// 		}
-// 	}
 	
-// 	function go_board(){
-// 		var id='${ldto.id}'
-// 		if(id==null||id==""){
-// 			var 
-// 		}
-// 		if(id==null || id==""){
-// 			alert("로그인을 해주세요.");
-// 		}else{
-// 			location.href='boardlist.do';	
-// 		}
-// 	}
+	
+	function load_bookmark(){
+		var id='${ldto.id}'
+		if(id==null||id==""){
+			id=lid;
+		}
+		if(id==null || id==""){
+			alert("로그인을 해주세요.");
+		}else{
+			location.href='bookmark.do';	
+		}
+	}
+	
+	function go_board(){
+		var id='${ldto.id}'
+		if(id==null||id==""){
+			id=lid;
+		}
+		if(id==null || id==""){
+			alert("로그인을 해주세요.");
+		}else{
+			location.href='boardlist.do';	
+		}
+	}
 </script>
 </head>
 
@@ -1483,7 +1488,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		</div>	
 			<%		}	%>
 </div>
-<div class="img_btn" id="right_view2" onclick="location.href='bookmark.do'">
+<div class="img_btn" id="right_view2" onclick="load_bookmark()">
 	<div class="right_div" >
 	<h3>즐겨찾기</h3>
 	<img class="r_btn_img" alt="즐겨찾기" src="image/star.png">

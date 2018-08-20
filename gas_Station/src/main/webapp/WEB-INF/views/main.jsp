@@ -13,11 +13,14 @@
 <title>메인페이지</title>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+*{box-sizing:border-box;}
+body{margin:0; width:100%; height:100%};
 #shadow{background: black; width: 100%; height: 100%; position:absolute; display: block; opacity: 0.4;  z-index: 4;}
 *>div{color: white; border-color: white; margin: 2px;}
-#container{ width: 1511px; height:956px; overflow: hidden; margin: 0 auto; position: relative;}
-#main_container{background-color: #3A3A3C; overflow: hidden; width: 1510px; height:955px; position: absolute; }
-#login_container{background-color: #3A3A3C; overflow: hidden; width: 1510px; height:955px; position: absolute; left: 1510px; }
+#container{ width: 1440px; height:956px; overflow: hidden; margin: 0 auto; position: relative;}
+
+#main_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:955px; position: absolute; }
+#login_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:955px; position: absolute; left: 1510px; }
 a{color: white;  text-decoration:none;}
 ul{list-style: none;}
 h3{margin: 10px;}
@@ -40,7 +43,7 @@ ul.tabs {
     color:#dfbe6a;
     text-align:center;
     cursor: pointer;
-    width:45%;
+    width:50%;
     height: 40px;
     line-height: 31px;
     border-left: none;
@@ -53,11 +56,12 @@ ul.tabs {
 }
 #regist_form{background-color:#F4F6FC; width: 40%; height: 825px; position: absolute; top:50px; left: 450px; line-height: 45px; display: none; z-index: 5}
 #regist_form li{
+	
 	float: left;
     color:gray;
     text-align:center;
     cursor: pointer;
-    width:300px;
+    width:50%;
     height: 80px;
 	line-height: 31px;
     border-left: none;
@@ -76,7 +80,7 @@ ul.tabs li {
     border-radius:15px 15px 0 0;
     text-align:center;
     cursor: pointer;
-    width:122px;
+    width:33%;
     height: 40px;
     line-height: 31px;
     border-left: none;
@@ -1411,19 +1415,19 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 <div id="top10_slide" style="width:33%; height:347px; border: 1px solid #dfbe6a; float: left; ">
 	<h3>전국 최저가 주유소 TOP10</h3>
 	&nbsp;&nbsp;휘발유<br>
-	<div id="top10_o1" style="height: 41px; width:340px;  overflow: hidden;">
+	<div id="top10_o1" style="height: 41px; width:80%;  overflow: hidden;">
 		<ul>
 		
 		</ul>
 	</div>
 	&nbsp;&nbsp;경유<br>
-	<div id="top10_o2" style="height: 41px; width:340px;   overflow: hidden;">
+	<div id="top10_o2" style="height: 41px; width:80%;   overflow: hidden;">
 		<ul>
 		
 		</ul>
 	</div>
 	&nbsp;&nbsp;LPG<br>
-	<div id="top10_o3" style="height: 41px; width:340px;  overflow: hidden;">
+	<div id="top10_o3" style="height: 41px; width:80%;  overflow: hidden;">
 		<ul>
 		
 		</ul>

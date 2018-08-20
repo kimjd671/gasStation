@@ -287,16 +287,16 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 // 			                infoDiv.innerHTML = result[i].address_name;
 			                myaddrs=result[i].address_name;
 			                mapping2();
-			              	load_allPrice();  //전국평균 로드
-			              	load_sidoPrice(); //시도평균 로드
-			              	load_allTop10();//전국 Top10 휘발유 주유소로드
-			              	load_sidoTop5(sel_prodcd); //로드된 시도기준 탑5 리스트
+// 			              	load_allPrice();  //전국평균 로드
+// 			              	load_sidoPrice(); //시도평균 로드
+// 			              	load_allTop10();//전국 Top10 휘발유 주유소로드
+// 			              	load_sidoTop5(sel_prodcd); //로드된 시도기준 탑5 리스트
 			              	
-							insert_all_oil_avg();
+// 							insert_all_oil_avg();
 							
-			              	chk_sido_avg();
+// 			              	chk_sido_avg();
 			              	
-			              	auto();
+// 			              	auto();
 			              	$(".all_avg_content").hide();
 			    		 	$(".all_avg_content:first").show();
 			    		 	

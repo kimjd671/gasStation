@@ -18,7 +18,7 @@
 a{color: white;  text-decoration:none;}
 ul{list-style: none;}
 .back_btn{cursor: pointer;}
-
+.table{ margin: 0 auto; background-color:#3A3A3C; }
 
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -56,13 +56,31 @@ $(function(){
 <div id="container">	
 	<div id="main_container">
 		<img class="back_btn" src="image/back.png" alt="돌아가기" onclick="main_page()">
-
-
-
-
-
-
-
+		<h1 style="text-align: center;"><small style="cursor: pointer;">자유게시판</small></h1>
+			<input type="hidden" name="command" value="muldel">
+				<table class="table" border="1">
+					<col width="70px"/>
+					<col width="70px"/>
+					<col width="300px"/>
+					<col width="200px"/>
+					<col width="80px"/>
+					<col width="70px"/>
+					<col width="70px"/>
+					<col width="70px"/>
+					<col width="70px"/>
+					<tr>
+						<th>글번호</th>
+						<th>작성자</th>
+						<th>제목</th>
+						<th>작성일</th>
+						<th>refer</th>
+						<th>step</th>
+						<th>depth</th>
+						<th>조회수</th>
+						<th>추천수</th>
+					</tr>
+				</table>
+</div>
 </div>
 </body>
 </html>

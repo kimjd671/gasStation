@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hk.gas.daos.GasClientDao;
 import com.hk.gas.dtos.BookMarkDto;
+import com.hk.gas.dtos.FreeBoardDto;
 
 @Service
 public class GasClientService implements IGasClientService {
@@ -17,5 +18,11 @@ public class GasClientService implements IGasClientService {
 	@Override
 	public List<BookMarkDto> bookmark_List(String id) {
 		return clientDao.bookmark_List(id);
+	}
+	
+	@Override
+	public List<FreeBoardDto> freeboard_List() {
+		
+		return clientDao.freeboard_List();
 	}
 }

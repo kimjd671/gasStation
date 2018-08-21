@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hk.gas.dtos.BookMarkDto;
+import com.hk.gas.dtos.FreeBoardDto;
 import com.hk.gas.dtos.GasUserDto;
 import com.hk.gas.service.GasClientService;
 import com.hk.gas.service.GasUserService;
@@ -82,7 +83,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "/boardlist.do", method = RequestMethod.GET)
 	public String boardlist(Locale locale, Model model,HttpServletRequest request) {
-
+		List<FreeBoardDto> freelist=client.freeboard_List();
+		model.addAttribute("freelist",freelist);
 		return "boardlist";
 	}
 	

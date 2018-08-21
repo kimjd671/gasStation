@@ -25,7 +25,18 @@
  		<result property="regdate" column="regdate"/>
 	</resultMap>
 	
-
+<resultMap type="com.hk.gas.dtos.FreeBoardDto" id="GasFreeBorardMap">
+	<result property="seq" column="seq"/>
+	<result property="id" column="id"/>
+	<result property="title" column="title"/>
+	<result property="content" column="content"/>
+	<result property="regdate" column="regdate"/>
+	<result property="refer" column="refer"/>
+	<result property="step" column="step"/>
+	<result property="depth" column="depth"/>
+	<result property="readcount" column="readcount"/>
+	<result property="likecount" column="likecount"/>
+</resultMap>
 
  <insert id="insertuser" parameterType="GasUserDto"> 
  	INSERT INTO GASMEMBER VALUES(GASMEMBER_SEQ.NEXTVAL,#{id},#{password},#{name},#{phone},#{email},'USER',SYSDATE)
@@ -58,6 +69,10 @@
 
 <select id="bookmarklist" resultType="BookMarkDto" parameterType="String">
 	SELECT ID,B_NAME,LOCATION,GASOLINE,DIESEL,LPG,REGDATE FROM GASBOOKMARK WHERE ID=#{id}
+</select>
+
+<select id="freeboardlist" resultType="FreeBoardDto">
+	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC
 </select>
 
 <!-- 	<select id="boardlist" resultType="AnsDto" parameterType="Map"> -->

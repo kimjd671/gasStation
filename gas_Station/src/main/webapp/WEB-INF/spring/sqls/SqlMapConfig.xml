@@ -12,6 +12,7 @@
   	<typeAliases>
   		<typeAlias type="com.hk.gas.dtos.GasUserDto" alias="GasUserDto"/>
   		<typeAlias type="com.hk.gas.dtos.BookMarkDto" alias="BookMarkDto"/>
+  		<typeAlias type="com.hk.gas.dtos.FreeBoardDto" alias="FreeBoardDto"/>
   	</typeAliases>
   
 <!--   쿼리를 작성할 xml파일 위치를 설정 -->

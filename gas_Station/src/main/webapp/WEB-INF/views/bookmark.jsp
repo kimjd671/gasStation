@@ -26,19 +26,7 @@ ul{list-style: none;}
 .back_btn{cursor: pointer;}
 #bookmark_list{background-color: #f4f6fc; color: #000000; margin: 0 auto; position: relative; top: 150px; width: 1200px;}
 .title{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; top:100px; font-family: 'Jeju Hallasan', serif; text-align: center; }
-
-
 </style>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-
-<script type="text/javascript">
-	function main_page(){
-		var x=$("input[name=x]").val();
-		var y=$("input[name=y]").val();
-		
-		location.href="main.do?x="+x+"&y="+y;
-	}
-</script>
 </head>
 <body>
 <%
@@ -46,28 +34,9 @@ ul{list-style: none;}
 	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
 // 	BookMarkDto bkdto=(BookMarkDto)session.getAttribute("ldto");
 %>
-<script type="text/javascript">
-$(function(){
-	$.ajax({
-		url:"http://ip-api.com/json",
-		method:"get",
-		async:false,
-		datatype:"json",
-		success:function(jsonData){
-			$("input[name=x]").val(jsonData.lat);
-			$("input[name=y]").val(jsonData.lon);
-		},
-		error:function(){
-			alert("서버통신실패");
-		}
-	});
-});
-</script>
-<input type="hidden" name="x">
-<input type="hidden" name="y">
 <div id="container">	
 	<div id="main_container">
-		<img class="back_btn" src="image/back.png" alt="돌아가기" onclick="main_page()">
+<!-- 		<img class="back_btn" src="image/back.png" alt="돌아가기" onclick="main_page()"> -->
 					<div>
 			<span class='title'>즐겨찾기</span>
 		</div>

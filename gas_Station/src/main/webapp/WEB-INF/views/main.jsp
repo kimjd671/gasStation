@@ -20,7 +20,8 @@ html,body{margin:0; width:100%; height:100%; position: absolute;};
 #container{ width: 79%; height:98%; overflow: hidden; margin: 0 auto; position: relative;}
 
 #main_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:100%; position: absolute; }
-#login_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:100%; position: absolute; left: 1510px; }
+#sub_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:100%; position: absolute; left: 1510px; }
+#bookmark_list{background-color: #f4f6fc; color: #000000; margin: 0 auto; position: relative; top: 150px; width: 1200px;}
 a{color: white;  text-decoration:none;}
 ul{list-style: none;}
 h3{margin: 10px;}
@@ -230,7 +231,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 .r_div{padding-left: 40px;}
 #r_cancel_btn:hover {background: #FC0543;}
 #r_ok_btn:hover{background: #35D500;}
-#login_container fieldset{color: black;}
+#sub_container fieldset{color: black;}
 #main_container fieldset{margin-top: 20px; color: white; line-height: 30px;}
 #update_info{background-color:#F4F6FC; width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
 /* 아이디비번찾기 */
@@ -295,16 +296,16 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 // 			                infoDiv.innerHTML = result[i].address_name;
 			                myaddrs=result[i].address_name;
 			                mapping2();
-			              	load_allPrice();  //전국평균 로드
-			              	load_sidoPrice(); //시도평균 로드
-			              	load_allTop10();//전국 Top10 휘발유 주유소로드
-			              	load_sidoTop5(sel_prodcd); //로드된 시도기준 탑5 리스트
+// 			              	load_allPrice();  //전국평균 로드
+// 			              	load_sidoPrice(); //시도평균 로드
+// 			              	load_allTop10();//전국 Top10 휘발유 주유소로드
+// 			              	load_sidoTop5(sel_prodcd); //로드된 시도기준 탑5 리스트
 			              	
-							insert_all_oil_avg();
+// 							insert_all_oil_avg();
 							
-			              	chk_sido_avg();
-			              	
-			              	auto();
+// 			              	chk_sido_avg();
+			              	chk_login();
+// 			              	auto();
 			              	$(".all_avg_content").hide();
 			    		 	$(".all_avg_content:first").show();
 			    		 	
@@ -355,6 +356,17 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				$(this).prev("span").css("color","gray");
 			})
 			
+			function chk_login(){
+				var id='${ldto.id}'
+				if(id==null||id==""){
+						id=lid;
+				}
+				if(id!=null){
+					$("#sub_container").empty();
+					$("#sub_container").append("<img class='back_btn' src='image/back.png' alt='돌아가기' onclick='call_main_container()' style='z-index: 1000;'>")
+					$("#sub_container").append("<iframe scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>")
+				}
+			}
 			
 			function searchAddrFromCoords(coords, callback) {
 			    // 좌표로 행정동 주소 정보를 요청합니다
@@ -781,19 +793,19 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	
 	//시도코드기반 구군코드로드  주소매칭하여 시도구군코드가져오기
 	var call_login =0;
-	function call_login_container(){
+	function call_sub_container(){
 		call_login= setInterval(function() {
 			slide();
 		}, 5)
 	}
 	function slide(){
 		var main_x=$("#main_container").position().left;
-		var login_x=$("#login_container").position().left;
+		var login_x=$("#sub_container").position().left;
 		if(main_x!=-1510){
 			$("#main_container").css("left",main_x-10);
 		}
 		if(login_x!=0){
-			$("#login_container").css("left",login_x-10);
+			$("#sub_container").css("left",login_x-10);
 		}
 		
 		if(main_x==-1510 && login_x==0){
@@ -813,12 +825,12 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	
 	function return_slide(){
 			var main_x=$("#main_container").position().left;
-			var login_x=$("#login_container").position().left;
+			var login_x=$("#sub_container").position().left;
 			if(main_x!=0){
 				$("#main_container").css("left",main_x+10);
 			}
 			if(login_x!=1510){
-				$("#login_container").css("left",login_x+10);
+				$("#sub_container").css("left",login_x+10);
 			}
 			
 			if(main_x==0 && login_x==1510){
@@ -829,7 +841,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	function registForm(){
 		$("#shadow").css("display","block");
 		$("#regist_form").fadeIn();
-		$("#login_container").children().css("pointer-events","none");
+		$("#sub_container").children().css("pointer-events","none");
 		$("#regist_form").css("pointer-events","auto");
 	}
 	
@@ -840,7 +852,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		$("#regist_form input[name=id]").css("background-color", "#F4F6FC");
 		$("#regist_form input[name=password]").css("background-color", "#F4F6FC");
 		$("#regist_form input[name=repassword]").css("background-color", "#F4F6FC");
-		$("#login_container").children().css("pointer-events","auto");
+		$("#sub_container").children().css("pointer-events","auto");
 	}
 	function insert_user(){
 		if(idchk&&pwdchk&&phonechk){
@@ -980,7 +992,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	function findForm(){
 		$("#shadow").css("display","block");
 		$("#find_form").fadeIn();
-		$("#login_container").children().css("pointer-events","none");
+		$("#sub_container").children().css("pointer-events","none");
 		$("#find_form").css("pointer-events","auto");
 	}
 	
@@ -990,7 +1002,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		$("#idpwd").children().css("display","none");
 		$("#sel").css("display","block");
 		$("#find_form input").val("");
-		$("#login_container").children().css("pointer-events","auto");
+		$("#sub_container").children().css("pointer-events","auto");
 	}
 	
 	function find_id(){
@@ -1133,7 +1145,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 						alert("로그인 정보가 잘못되었습니다.");
 					}else{
 						lid=str.id;
-						$("#login_container input").val("");
+						$("#sub_container input").val("");
 						$("#login_button").css("display","none");
 						$("#myInfo").fadeIn();
 						$("#myinfo_id").text(str.id);
@@ -1147,6 +1159,9 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 							$("#superuser").css("display","block");
 							$("#information").css("display","none");
 						}
+						$("#sub_container").empty();
+						$("#sub_container").append("<img class='back_btn' src='image/back.png' alt='돌아가기' onclick='call_main_container()' style='z-index: 1000;'>")
+						$("#sub_container").append("<iframe scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>")
 						call_main_container();
 
 						
@@ -1328,8 +1343,10 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		if(id==null || id==""){
 			alert("로그인을 해주세요.");
 		}else{
-			location.href='bookmark.do';	
+			$("iframe").attr("src", "bookmark.do");
+			call_sub_container();
 		}
+		
 	}
 	
 	function go_board(){
@@ -1340,9 +1357,11 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		if(id==null || id==""){
 			alert("로그인을 해주세요.");
 		}else{
-			location.href='boardlist.do';	
+			$("iframe").attr("src", "boardlist.do");
+			call_sub_container();
 		}
 	}
+
 </script>
 </head>
 
@@ -1450,12 +1469,13 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	</div>
 </div>
 <div id="week_day_avg" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left;">
-	<h3 style="float: left;">최근 1주간  평균유가</h3><button class="btn_mini" style="top: 10px; position: relative;" >조회하기</button>
+	<h3 style="float: left;">최근 1주간  평균유가</h3><button class="btn_mini" style="top: 10px; position: relative;" onclick="test()" >조회하기</button>
+	
 </div>
 </div>
 <div id="right_view1">
 	<%   	if(sdto==null){	%>
-		<button id="login_button" class="login_btn" onclick="call_login_container()" >로그인</button>
+		<button id="login_button" class="login_btn" onclick="call_sub_container()" >로그인</button>
 		<div id="myInfo" style="display: none;">
 			<fieldset style="color: white;">
 				<legend>내 정보</legend>
@@ -1471,7 +1491,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>
 			<%	}else{	%>
-		<button id="login_button" class="login_btn" onclick="call_login_container()" style="display: none;" >로그인</button>
+		<button id="login_button" class="login_btn" onclick="call_sub_container()" style="display: none;" >로그인</button>
 		<div id="myInfo">
 			<fieldset>
 				<legend>내 정보</legend>
@@ -1494,7 +1514,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	<img class="r_btn_img" alt="즐겨찾기" src="image/star.png">
 	</div>
 </div>
-<div class="img_btn" id="right_view3"  onclick="location.href='boardlist.do'">
+<div class="img_btn" id="right_view3"  onclick="go_board()">
 	<div class="right_div">
 	<h3>커뮤니티</h3>
 	<img class="r_btn_img" alt="커뮤니티" src="image/board.png" >
@@ -1559,159 +1579,9 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		
 	</div>
 </div>
-<!-- 로그인 창 -->
-<div id="login_container">
-	<img class="back_btn" src="image/back.png" alt="돌아가기" onclick="call_main_container()">
-	<div id="logo" style="margin: 0 auto; width: 66%; text-align: center; ">
-		<span class='login_logo'>주유를 어디서 하주유???</span>
-	</div>
-	<div id="login_main" style=" margin: 0 auto; width: 66%; height: 61%;">
-		<div id="login_input" style="width: 60%; margin: 0 auto; position: relative; top: 120px;">
-			<div id="id_input_div">
-			<span class="input_title">아이디</span>
-				<input class="l_input" type="text" name="login_id">
-			</div>
-			<div id="pwd_input_div">
-			<span class="input_title">비밀번호</span>
-				<input class="l_input" type="password" name="login_pwd">
-			</div>
-			<button class="login_btn_big" onclick="gas_login()">로그인</button>
-			<hr>
-			<div id="login_sub">
-				<ul>
-					<li style="border: none;" onclick="findForm()">아이디/비밀번호 찾기</li>
-					<li onclick="registForm()">회원가입</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div id="regist_form">
-		<br>
-		<div style="text-align: center;">
-			<span class="login_logo" style="font-size: 60px;">회원가입</span>
-		</div>
-		<div class="r_div">
-			<span class="regist_category">ID</span>
-			<input type="text" class='r_input' name="id"  placeholder="아이디  입력(6~20자,영문,숫자)" oninput="chk_id()">
-		</div>
-		<div class="r_div">
-			<span class="regist_category">PASSWORD</span>
-			<input type="password" class='r_input' name="password"  placeholder="비밀번호 입력(8~20자,영문,숫자)" oninput="pwd_chk()">
-		</div>
-		<div class="r_div">
-			<span class="regist_category">PASSWORD</span>
-			<input type="password" class='r_input' name="repassword" placeholder="비밀번호  재입력" oninput="repwd_chk()">
-		</div>
-		<div class="r_div">
-			<span class="regist_category">NAME</span>
-			<input type="text" class='r_input' name="name" placeholder="이름 입력">
-		</div>
-		<div class="r_div">
-			<span class="regist_category">E-MAIL</span>
-			<input type="text" class='r_input' name="email" placeholder="이메일 입력">
-		</div>
-		<div class="r_div">
-			<span class="regist_category">PHONE</span>
-			<input type="text" class='r_input' name="phone" placeholder="숫자만 입력" oninput="chk_phone()">
-		</div>
-		<br>
-		<hr>
-		<div style="width: 100%; height:10%; padding: 0; margin: 0;" >
-		<ul style="width: 100%; height:100%; padding: 0; margin: 0;">
-			<li style="border: none;" id="r_cancel_btn" onclick="close_regi()"><span>취소</span></li>
-			<li id="r_ok_btn" onclick="insert_user()"><span>확인</span></li>
-		</ul>
-		</div>
-	</div>
+<!-- 로그인창 -->
 
-	<div id="find_form" style="color: gray; display: none;">
-		<span class="login_logo" style="font-size: 32px; margin: 10px; padding: 10px; text-align: center;">아이디 비밀번호 찾기</span>
-		<img alt="나가기" src="image/close.png" onclick="close_find()" style="float: right; position: relative; top: -65px; left: -10px; cursor: pointer;">
-		<hr style="clear: both;"/>
-		<div id="idpwd">
-			<table id="sel">
-				<col width="200px">
-				<col width="200px"> 
-				<tr>
-					<th>
-						<img src="image/id.png" alt="아이디찾기" onclick="find_id();"/>
-						<p>아이디 찾기</p>
-					</th>
-					<th style="border-left: 1px solid gray;">
-						<img src="image/pwd.png" alt="비밀번호찾기" onclick="find_pwd();"/>
-						<p>비밀번호 찾기</p>
-					</th>
-				</tr>
-			</table>
-			<div id="findid">
-				<table>
-					<col width="100px">
-					<col width="200px">	
-					<tr>
-						<th>이름</th>
-						<td><input type="text" name="f_name" required="required"></td>
-					</tr>
-					<tr>
-						<th>연락처<br>(-제외 입력)</th>
-						<td><input type="text" name="f_phone" required="required"></td>
-					</tr>
-					<tr>
-						<th colspan="2">
-							<button onclick="find_id_ajax()" class="btn_mini">확인</button>
-						</th>
-					</tr>
-				</table>
-			</div>
-			<div id="findpwd">
-				<table>
-					<col width="100px">
-					<col width="200px">	
-					<tr>
-						<th>아이디</th>
-						<td><input type="text" name="f_id" required="required"></td>
-					</tr>
-					<tr>
-						<th>이메일</th>
-						<td><input type="text" name="f_email" required="required">
-					</tr>
-					<tr>
-						<th colspan="2">
-							<button onclick="find_pwd_ajax()" class="btn_mini">확인</button>
-						</th>
-					</tr>
-				</table>
-			</div>
-			<div id="id_list">
-				<fieldset style="text-align: left;" >
-					<legend>ID</legend>
-					조회된 회원님의 아이디수는<span id="id_index"></span>개 입니다.
-					<br>
-					<ul id="find_id_list">
-					
-					</ul>
-					<br>
-				</fieldset>
-			</div>
-			<div id="pwd_reset">
-				<table>
-					<tr>
-						<th>새비밀번호 	:</th>
-						<td><input type="password" name="reset_pwd" required="required"></td>
-					</tr>
-					<tr>
-						<th>새비밀번호 확인 :</th>
-						<td><input type="password" name="reset_pwd" required="required"></td>
-					</tr>
-					<tr>
-						<th colspan="2">
-							<button class="btn_mini" onclick="pwd_reset()">변경</button>
-						</th>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
-</div>
+<%@include file="login.jsp"%>
 </div>
 
 </body>

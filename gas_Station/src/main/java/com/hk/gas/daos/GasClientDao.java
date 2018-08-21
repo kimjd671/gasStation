@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hk.gas.dtos.BookMarkDto;
+import com.hk.gas.dtos.FreeBoardDto;
 import com.hk.gas.dtos.GasUserDto;
 
 @Repository
@@ -24,5 +25,11 @@ public class GasClientDao implements IGasClientDao {
 //		Map<String, String> map=new HashMap<>();
 //		map.put("id",id);
 		return sqlSession.selectList(namespace+"bookmarklist",id);
+	}
+	
+	@Override
+	public List<FreeBoardDto> freeboard_List() {
+		
+		return sqlSession.selectList(namespace+"freeboardlist");
 	}
 }

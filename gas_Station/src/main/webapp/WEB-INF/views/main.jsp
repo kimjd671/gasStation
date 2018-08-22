@@ -1,7 +1,8 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.hk.gas.dtos.GasUserDto"%>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%request.setCharacterEncoding("utf-8"); %>
+<%request.setCharacterEncoding("UTF-8"); %>
 <%response.setContentType("text/html; charset=utf-8"); %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -28,8 +29,7 @@ h3{margin: 10px;}
 .display_none{	display: none;}
 .display_block{	display: block;}
 .img_btn{cursor: pointer;}
-#imgs{width: 100%; height: 100%; padding: 10% 10%;}
-#imgs_gugun{width: 60%; padding: 2% 2%;}
+#imgs_gugun{width: 50%; padding: 2% 2%;}
 .r_btn_img{display:block; position: relative; top: 50%;left: 50%;transform: translate(-50%, -50%); width: 50%;height: 100%; object-fit: contain;}
 .b_btn_img{display:block; position: relative; top: 50%;left: 50%;transform: translate(-50%, -50%); width: 35%;height: 100%; object-fit: contain;}
 ul.tabs {
@@ -254,10 +254,10 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 
 <script type="text/javascript">
 	var code="F330180731";
+	var out="json";
 	var myaddrs;
 	var a = '${xy}';
 	var myXY=a.split("/",2);
-	var out="json";
 	var area=null;
 	var area_cd=null;
 	var all_Price= new Array(); //0:고급유 1:휘발유 2:자동차용경유 3:실내등유 4:자동차용부탄
@@ -364,7 +364,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				if(id!=null){
 					$("#sub_container").empty();
 					$("#sub_container").append("<img class='back_btn' src='image/back.png' alt='돌아가기' onclick='call_main_container()' style='z-index: 1000;'>")
-					$("#sub_container").append("<iframe scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>")
+					$("#sub_container").append("<iframe id='frame_sub' scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>")
 				}
 			}
 			
@@ -377,11 +377,15 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 
 	$(document).ajaxStart(function(){
 		$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
+		$("#frame_sub").contents().find("#Progress_Loading").show();
 		$("#shadow").css("display","block");
 	});
 	
 	$(document).ajaxStop(function(){
 		$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
+		setTimeout(function() {
+			 $("#frame_sub").contents().find("#Progress_Loading").hide();
+		}, 500);
 		$("#shadow").css("display","none");
 	});
 	
@@ -1161,7 +1165,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 						}
 						$("#sub_container").empty();
 						$("#sub_container").append("<img class='back_btn' src='image/back.png' alt='돌아가기' onclick='call_main_container()' style='z-index: 1000;'>")
-						$("#sub_container").append("<iframe scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>")
+						$("#sub_container").append("<iframe id='frame_sub' scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>")
 						call_main_container();
 
 						
@@ -1317,8 +1321,6 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	function search_area(){
 	 	if (navigator.geolocation) { // GPS를 지원하면
 	    navigator.geolocation.getCurrentPosition(function(position) {
-// 	    	$("input[name=x]").val(position.coords.latitude); //위도
-// 	    	$("input[name=y]").val(position.coords.longitude); //경도
 			alert("페이지이동");
 	    }, function(error) {
 	      console.error(error);
@@ -1362,10 +1364,76 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		}
 	}
 
+	function reload_price(id,target){
+		var tar=target.className;
+		var tds=$("#frame_sub").contents().find("."+tar).parent("td").siblings("td");
+		$.ajax({
+			url:"http://www.opinet.co.kr/api/detailById.do",
+			method:"get",
+			data:{"out":"xml",
+				"code":code,
+				"id":id
+			},
+			async:false,
+			success:function(jsonData){
+				var len=$(jsonData).find("OIL_PRICE").size();
+				for(var i=0; i<len;i++){
+					if($(jsonData).find("OIL_PRICE").eq(i).children().eq(0).text()=="B027"){
+						var gas=$(jsonData).find("OIL_PRICE").eq(i).children("PRICE").text();
+						tds.eq(2).text(gas);
+					}else if($(jsonData).find("OIL_PRICE").eq(i).children().eq(0).text()=="D047"){
+						 var sel=$(jsonData).find("OIL_PRICE").eq(i).children("PRICE").text();
+						tds.eq(3).text(sel);
+					}else if($(jsonData).find("OIL_PRICE").eq(i).children().eq(0).text()=="C004"){
+						var lpg=$(jsonData).find("OIL_PRICE").eq(i).children("PRICE").text();
+						tds.eq(4).text(lpg);
+					}
+				}
+				var date = new Date();
+		        var year  = date.getFullYear();
+		        var month = date.getMonth() + 1; // 0부터 시작하므로 1더함 더함
+		        var day   = date.getDate();
+		        if (("" + month).length == 1) { month = "0" + month; }
+		        if (("" + day).length   == 1) { day   = "0" + day;   }
+// 			        alert(tds.eq(5).html());
+		        tds.eq(5).text(""+year+"-"+month+"-"+day);        
+		        save_bookmark(gas,sel,lpg,id);
+			},
+			error:function(){
+				alert("서버통신실패");
+			}
+		});
+		 
+		 
+	}
+	
+	function save_bookmark(gas,sel,lpg,uid){
+		var myid='${ldto.id}';
+			if(myid==null||myid==""){
+				myid=lid;
+		}
+		$.ajax({
+			url:"reload_price.do",
+			method:"get",
+			data:{"id":myid,
+				"gasoline":gas,
+				"diesel":sel,
+				"lpg":lpg,
+				"uni_id":uid
+			},
+			async:false,
+			dataType:"json",
+			success:function(obj){
+			},
+			error:function(){
+				alert("서버통신 실패");
+			}
+		});
+	}
+	
+
 </script>
 </head>
-
-
 <body>
 
 <div id="map" style="display: none;" ></div>
@@ -1469,7 +1537,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	</div>
 </div>
 <div id="week_day_avg" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left;">
-	<h3 style="float: left;">최근 1주간  평균유가</h3><button class="btn_mini" style="top: 10px; position: relative;" onclick="test()" >조회하기</button>
+	<h3 style="float: left;">최근 1주간  평균유가</h3><button class="btn_mini" style="top: 10px; position: relative;" onclick="reload_price('A0028706',this)" >조회하기</button>
 	
 </div>
 </div>

@@ -21,6 +21,12 @@ public class GasClientService implements IGasClientService {
 	}
 	
 	@Override
+	public boolean reload_price(BookMarkDto dto) {
+		return clientDao.reload_price(dto);
+	}
+	
+	
+	@Override
 	public List<FreeBoardDto> freeboard_List() {
 		
 		return clientDao.freeboard_List();

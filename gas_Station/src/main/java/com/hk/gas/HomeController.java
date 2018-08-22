@@ -179,5 +179,13 @@ public class HomeController {
 		return map;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/reload_price.do", method = RequestMethod.GET)
+	public Map<String,Boolean> reload_price(BookMarkDto dto,Locale locale, Model model) {
+		System.out.println(dto);
+		boolean isS=client.reload_price(dto);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
 }

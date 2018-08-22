@@ -10,12 +10,14 @@ public class BookMarkDto {
 	private int gasoline;
 	private int diesel;
 	private int lpg;
+	private String uni_id;
 	private Date regdate;
 	public BookMarkDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public BookMarkDto(String id, String b_name, String location, int gasoline, int diesel, int lpg, Date regdate) {
+	public BookMarkDto(String id, String b_name, String location, int gasoline, int diesel, int lpg, String uni_id,
+			Date regdate) {
 		super();
 		this.id = id;
 		this.b_name = b_name;
@@ -23,12 +25,13 @@ public class BookMarkDto {
 		this.gasoline = gasoline;
 		this.diesel = diesel;
 		this.lpg = lpg;
+		this.uni_id = uni_id;
 		this.regdate = regdate;
 	}
 	@Override
 	public String toString() {
 		return "BookMarkDto [id=" + id + ", b_name=" + b_name + ", location=" + location + ", gasoline=" + gasoline
-				+ ", diesel=" + diesel + ", lpg=" + lpg + ", regdate=" + regdate + "]";
+				+ ", diesel=" + diesel + ", lpg=" + lpg + ", uni_id=" + uni_id + ", regdate=" + regdate + "]";
 	}
 	public String getId() {
 		return id;
@@ -66,12 +69,19 @@ public class BookMarkDto {
 	public void setLpg(int lpg) {
 		this.lpg = lpg;
 	}
+	public String getUni_id() {
+		return uni_id;
+	}
+	public void setUni_id(String uni_id) {
+		this.uni_id = uni_id;
+	}
 	public Date getRegdate() {
 		return regdate;
 	}
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+	
 	
 	
 }

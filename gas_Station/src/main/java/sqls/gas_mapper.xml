@@ -22,6 +22,7 @@
  		<result property="gasoline" column="gasoline"/>
  		<result property="diesel" column="diesel"/>
  		<result property="lpg" column="lpg"/>
+ 		<result property="uni_id" column="uni_id"/>
  		<result property="regdate" column="regdate"/>
 	</resultMap>
 	
@@ -68,12 +69,18 @@
 
 
 <select id="bookmarklist" resultType="BookMarkDto" parameterType="String">
-	SELECT ID,B_NAME,LOCATION,GASOLINE,DIESEL,LPG,REGDATE FROM GASBOOKMARK WHERE ID=#{id}
+	SELECT ID,B_NAME,LOCATION,GASOLINE,DIESEL,LPG,UNI_ID,REGDATE FROM GASBOOKMARK WHERE ID=#{id} ORDER BY REGDATE DESC
 </select>
+
+<update id="reloadprice" parameterType="BookMarkDto">
+	UPDATE GASBOOKMARK SET GASOLINE=#{gasoline}, DIESEL=#{diesel}, LPG=#{lpg},REGDATE=SYSDATE WHERE ID=#{id} AND UNI_ID=#{uni_id}
+</update>
 
 <select id="freeboardlist" resultType="FreeBoardDto">
 	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC
 </select>
+
+
 
 <!-- 	<select id="boardlist" resultType="AnsDto" parameterType="Map"> -->
 <!-- 		SELECT SEQ, ID, TITLE, CONTENT, REGDATE, -->

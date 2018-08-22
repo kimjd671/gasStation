@@ -13,20 +13,36 @@
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
 *{box-sizing:border-box;}
-body{margin:0; width:100%; height:100%};
+html,body{margin:0; width:100%; height:100%; position: absolute;};
 #shadow{background: black; width: 100%; height: 100%; position:absolute; display: block; opacity: 0.4;  z-index: 4;}
 *>div{color: white; border-color: white; margin: 2px;}
 
-#container{ width: 1440px; height:956px; overflow: hidden; margin: 0 auto; position: relative;}
-
+#container{ width: 100%; height:100%; overflow: hidden; margin: 0 auto; position: relative;}
 #main_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:955px; position: absolute; }
-#login_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:955px; position: absolute; left: 1510px; }
 a{color: white;  text-decoration:none;}
 ul{list-style: none;}
 .back_btn{cursor: pointer;}
-#bookmark_list{background-color: #f4f6fc; color: #000000; margin: 0 auto; position: relative; top: 150px; width: 1200px;}
-.title{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; top:100px; font-family: 'Jeju Hallasan', serif; text-align: center; }
+.login_logo{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; font-family: 'Jeju Hallasan', serif; }
+#bookmark_list{ color: white; margin: 0 auto; position: relative; top: 30px; width: 80%; border-collapse: collapse; border: 1px solid #dfbe6a;}
+td{border: 1px solid #dfbe6a;}
+th{background-color:  white; color: black; border: 1px dashed black;}
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#Progress_Loading").hide();
+	});
+// $(window.frames).ajaxStart(function(){
+// 	$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
+// 	$('#shadow', parent.document).css("display","block");
+// });
+
+// $(window.frames).ajaxStop(function(){
+// 	$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
+// 	$('#shadow', parent.document).css("display","none");
+// });
+
+</script>
 </head>
 <body>
 <%
@@ -34,20 +50,23 @@ ul{list-style: none;}
 	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
 // 	BookMarkDto bkdto=(BookMarkDto)session.getAttribute("ldto");
 %>
+<div id ="Progress_Loading" style="position: absolute; z-index: 6; width: 100%;"><!-- 로딩바 -->
+	<img src="image/gugun/loading.gif" style="display: block; top:30%;left:50%;  transform: translate(-50%, -50%);  position: fixed;"/>
+</div>
 <div id="container">	
 	<div id="main_container">
-<!-- 		<img class="back_btn" src="image/back.png" alt="돌아가기" onclick="main_page()"> -->
-					<div>
-			<span class='title'>즐겨찾기</span>
-		</div>
-		<table id="bookmark_list" border="1">
+		<div id="logo" style="margin: 0 auto; width: 66%; text-align: center; ">
+		<span class='login_logo'>즐겨찾기</span>
+	</div>
+		<table id="bookmark_list">
 			<tr id="bktr">			
-				<th style="width: 285.7px;">상호명</th>
-				<th style="width: 142.85px;">지역</th>
-				<th style="width: 142.85px;">휘발유</th>
-				<th style="width: 142.85px;">경유</th>
-				<th style="width: 142.85px;">LPG</th>
-				<th style="width: 142.85px;">업데이트날짜</th>
+				<th style="width: 327.7px;">상호명</th>
+				<th style="width: 184.85px;">지역</th>
+				<th style="width: 110.85px;">휘발유</th>
+				<th style="width: 110.85px;">경유</th>
+				<th style="width: 110.85px;">LPG</th>
+				<th style="width: 124.85px;">업데이트날짜</th>
+				<th style="width: 90px;">-</th>
 			</tr>	
 			<%
 				if(list==null || list.size()==0){
@@ -57,15 +76,17 @@ ul{list-style: none;}
 					</tr>
 					<%
 				}else{
-					for(BookMarkDto dto:list){
+					for(int i=0;i<list.size();i++){
+						BookMarkDto dto=list.get(i);
 						%>
 						<tr>
 							<td><%=dto.getB_name()%></td>
 							<td><%=dto.getLocation()%></td>
 							<td><%=dto.getGasoline()%></td>
 							<td><%=dto.getDiesel()%></td>
-							<td><%=dto.getLpg()%></td>
-							<td><%=yyyymmdd.format(dto.getRegdate())%></td>
+							<td><%=dto.getLpg()==0?"-":dto.getLpg()%></td>
+							<td style="text-align: center;"><%=yyyymmdd.format(dto.getRegdate())%></td>
+							<td ><button style="width: 100%;" class="bookmark<%=i%>_btn" onclick="parent.reload_price('<%=dto.getUni_id()%>',this)">최신화</button></td>
 						</tr>		
 						<% 
 					}

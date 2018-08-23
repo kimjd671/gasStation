@@ -24,24 +24,24 @@ ul{list-style: none;}
 .back_btn{cursor: pointer;}
 .login_logo{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; font-family: 'Jeju Hallasan', serif; }
 #bookmark_list{ color: white; margin: 0 auto; position: relative; top: 30px; width: 80%; border-collapse: collapse; border: 1px solid #dfbe6a;}
-td{border: 1px solid #dfbe6a;}
+td{border: 1px solid #dfbe6a; height: 50px;}
 th{background-color:  white; color: black; border: 1px dashed black;}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$("#Progress_Loading").hide();
+		document.onkeydown = doNotReload;
+		function doNotReload(){
+			if( (event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) //ctrl+N , ctrl+R 
+			|| (event.keyCode == 116)){
+			event.keyCode = 0;
+			event.cancelBubble = true;
+			event.returnValue = false;
+			document.location.reload();
+			}
+		}
 	});
-// $(window.frames).ajaxStart(function(){
-// 	$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
-// 	$('#shadow', parent.document).css("display","block");
-// });
-
-// $(window.frames).ajaxStop(function(){
-// 	$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
-// 	$('#shadow', parent.document).css("display","none");
-// });
-
 </script>
 </head>
 <body>
@@ -56,8 +56,8 @@ th{background-color:  white; color: black; border: 1px dashed black;}
 <div id="container">	
 	<div id="main_container">
 		<div id="logo" style="margin: 0 auto; width: 66%; text-align: center; ">
-		<span class='login_logo'>즐겨찾기</span>
-	</div>
+			<span class='login_logo'>즐겨찾기</span>
+		</div>
 		<table id="bookmark_list">
 			<tr id="bktr">			
 				<th style="width: 327.7px;">상호명</th>
@@ -86,7 +86,11 @@ th{background-color:  white; color: black; border: 1px dashed black;}
 							<td><%=dto.getDiesel()%></td>
 							<td><%=dto.getLpg()==0?"-":dto.getLpg()%></td>
 							<td style="text-align: center;"><%=yyyymmdd.format(dto.getRegdate())%></td>
-							<td ><button style="width: 100%;" class="bookmark<%=i%>_btn" onclick="parent.reload_price('<%=dto.getUni_id()%>',this)">최신화</button></td>
+							<td>
+								<button style="width: 100%;" class="bookmark<%=i%>_btn" onclick="parent.reload_price('<%=dto.getUni_id()%>',this)">새로고침</button>
+								<br>
+								<button style="width: 100%;">삭제</button>
+							</td>
 						</tr>		
 						<% 
 					}

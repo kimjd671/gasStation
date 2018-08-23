@@ -83,8 +83,11 @@ public class HomeController {
 	
 	@RequestMapping(value = "/boardlist.do", method = RequestMethod.GET)
 	public String boardlist(Locale locale, Model model,HttpServletRequest request) {
+		int page=Integer.parseInt(request.getParameter("page"));
 		List<FreeBoardDto> freelist=client.freeboard_List();
+		List<FreeBoardDto> pagelist=client.freepage_List(page);
 		model.addAttribute("freelist",freelist);
+		model.addAttribute("pagelist",pagelist);
 		return "boardlist";
 	}
 	
@@ -188,4 +191,15 @@ public class HomeController {
 		map.put("isS",isS);
 		return map;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/freeboard_insert.do", method = RequestMethod.GET)
+	public Map<String,Boolean> freeboard_insert(FreeBoardDto dto,Locale locale, Model model) {
+		System.out.println(dto);
+		boolean isS=client.freeborad_insert(dto);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
+	
 }

@@ -268,11 +268,26 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	var sel_gugun=null;
 	var roll_id;
 	var sel_prodcd="B027";
+	var my_focus="main";
 	//휘발유 : B027  ,경유 :D047  , LPG : K015
 	
 	$(function(){
 // 		$('#Progress_Loading').hide();
-		
+		function doNotReload(){
+			if( (event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) //ctrl+N , ctrl+R 
+			|| (event.keyCode == 116)){
+			event.keyCode = 0;
+			event.cancelBubble = true;
+			event.returnValue = false;
+				if(my_focus=="bookmark"){
+					reload_book();
+				}else if(my_focus=="board"){
+					reload_free();
+				}
+			}
+		}
+		document.onkeydown = doNotReload;
+
 			var container = document.getElementById('map');
 			var options = {
 				center: new daum.maps.LatLng(${x},${y}),
@@ -825,6 +840,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		call_main= setInterval(function() {
 			return_slide();
 		}, 5)
+		my_focus="main";
 	}
 	
 	function return_slide(){
@@ -1346,9 +1362,18 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 			alert("로그인을 해주세요.");
 		}else{
 			$("iframe").attr("src", "bookmark.do");
+			my_focus="bookmark";
 			call_sub_container();
 		}
 		
+	}
+	
+	function reload_book(){
+		$("iframe").attr("src", "bookmark.do");
+	}
+	
+	function reload_free(){
+		$("iframe").attr("src", "boardlist.do?page=1");
 	}
 	
 	function go_board(){
@@ -1359,7 +1384,8 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		if(id==null || id==""){
 			alert("로그인을 해주세요.");
 		}else{
-			$("iframe").attr("src", "boardlist.do");
+			$("iframe").attr("src", "boardlist.do?page=1");
+			my_focus="board";
 			call_sub_container();
 		}
 	}
@@ -1430,6 +1456,8 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 			}
 		});
 	}
+	
+	
 	
 
 </script>

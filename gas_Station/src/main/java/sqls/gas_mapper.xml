@@ -72,6 +72,8 @@
 	SELECT ID,B_NAME,LOCATION,GASOLINE,DIESEL,LPG,UNI_ID,REGDATE FROM GASBOOKMARK WHERE ID=#{id} ORDER BY REGDATE DESC
 </select>
 
+
+
 <update id="reloadprice" parameterType="BookMarkDto">
 	UPDATE GASBOOKMARK SET GASOLINE=#{gasoline}, DIESEL=#{diesel}, LPG=#{lpg},REGDATE=SYSDATE WHERE ID=#{id} AND UNI_ID=#{uni_id}
 </update>
@@ -80,7 +82,33 @@
 	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC
 </select>
 
+<select id="freeboardpage" resultType="FreeBoardDto" parameterType="Map">
+	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM (SELECT ROWNUM AS RN , SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM (SELECT * FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC) ) WHERE RN BETWEEN #{min} AND #{max}
+</select>
 
+<insert id="insertfreeboard" parameterType="FreeBoardDto">
+	INSERT INTO GASFREEBOARD VALUES(GASFREEBOARD_SEQ.NEXTVAL,#{id},#{title},#{content},SYSDATE,(SELECT NVL(MAX(REFER)+1,0) FROM GASFREEBOARD),0,0,0,null)  
+</insert>
+
+<update id="readcount" parameterType="int">
+	UPDATE GASFREEBOARD SET READCOUNT=READCOUNT+1 WHERE SEQ=#{seq}
+</update>
+
+<update id="updatefreeboard" parameterType="FreeBoardDto">	
+	UPDATE GASFREEBOARD SET TITLE=#{title}, CONTENT=#{content},REGDATE=SYSDATE WHERE SEQ=#{seq}
+</update>
+
+<select id="freegetboard" parameterType="int" resultType="FreeBoardDto">
+	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM GASFREEBOARD WHERE SEQ=#{seq}
+</select>
+
+<select id="freegetreply" parameterType="int" resultType="FreeBoardDto">
+	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM GASFREEBOARD WHERE REFER=(SELECT REFER FROM GASFREEBOARD WHERE SEQ=#{seq}) ORDER BY REGDATE
+</select>
+
+<insert id="freeinsertreply" parameterType="FreeBoardDto">
+	INSERT INTO GASFREEBOARD VALUES(GASFREEBOARD_SEQ.NEXTVAL,#{id},#{title},#{content},SYSDATE,(SELECT REFER FROM GASFREEBOARD WHERE SEQ=#{seq}),(SELECT STEP FROM GASFREEBOARD WHERE SEQ=#{seq})+1,(SELECT DEPTH FROM GASFREEBOARD WHERE SEQ=#{seq})+1,0,null)
+</insert>
 
 <!-- 	<select id="boardlist" resultType="AnsDto" parameterType="Map"> -->
 <!-- 		SELECT SEQ, ID, TITLE, CONTENT, REGDATE, -->
@@ -94,14 +122,10 @@
 <!-- 				ORDER BY REFER, STEP -->
 <!-- 	</select>	   -->
 
-<!-- <update id="readcount" parameterType="int"> -->
-<!-- 	UPDATE HKANSWERBOARD SET READCOUNT=READCOUNT+1 WHERE SEQ=#{seq} -->
-<!-- </update>	 -->
+
 	
 	
-<!-- <update id="updateboard" parameterType="AnsDto">	 -->
-<!-- 	UPDATE HKANSWERBOARD SET TITLE=#{title}, CONTENT=#{content}, REGDATE=SYSDATE WHERE SEQ=#{seq} -->
-<!-- </update> -->
+
 
 <!--  다이나믹쿼리를 사용할 때는 반드시 파라미터를 Map으로 전달해야 한다 -->
 <!-- <update id="muldel" parameterType="Map"> -->

@@ -31,4 +31,15 @@ public class GasClientService implements IGasClientService {
 		
 		return clientDao.freeboard_List();
 	}
+	
+	@Override
+	public List<FreeBoardDto> freepage_List(int page) {
+		return clientDao.freepage_List(page);
+	}
+	
+	@Override
+	public boolean freeborad_insert(FreeBoardDto dto) {
+		
+		return clientDao.freeborad_insert(dto);
+	}
 }

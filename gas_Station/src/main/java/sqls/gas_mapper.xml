@@ -72,11 +72,16 @@
 	SELECT ID,B_NAME,LOCATION,GASOLINE,DIESEL,LPG,UNI_ID,REGDATE FROM GASBOOKMARK WHERE ID=#{id} ORDER BY REGDATE DESC
 </select>
 
-
-
 <update id="reloadprice" parameterType="BookMarkDto">
 	UPDATE GASBOOKMARK SET GASOLINE=#{gasoline}, DIESEL=#{diesel}, LPG=#{lpg},REGDATE=SYSDATE WHERE ID=#{id} AND UNI_ID=#{uni_id}
 </update>
+
+<delete id="delbookmark" parameterType="BookMarkDto">
+	DELETE FROM GASBOOKMARK WHERE ID=#{id} AND UNI_ID=#{uni_id}
+</delete>
+
+
+
 
 <select id="freeboardlist" resultType="FreeBoardDto">
 	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC

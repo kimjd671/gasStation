@@ -42,4 +42,19 @@ public class GasClientService implements IGasClientService {
 		
 		return clientDao.freeborad_insert(dto);
 	}
+	
+	@Override
+	public boolean delete_bookmark(BookMarkDto dto) {
+		return clientDao.delete_bookmark(dto);
+	}
+	
+	@Override
+	public FreeBoardDto free_getboard(int seq) {
+		return clientDao.free_getboard(seq);
+	}
+	
+	@Override
+	public List<FreeBoardDto> free_getreply(int seq) {
+		return clientDao.free_getreply(seq);
+	}
 }

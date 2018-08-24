@@ -159,7 +159,7 @@
 			</div>
 		</div>
 	</div>
-	<iframe id="frame_sub"></iframe>
+	<iframe id="frame_sub" style="display: none;"></iframe>
 </div>
 </body>
 </html>

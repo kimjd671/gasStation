@@ -1390,6 +1390,30 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		}
 	}
 
+	function del_bookmark(uid,target){
+		var trs=$("#frame_sub").contents().find("."+target.className).parent("td").parent("tr");
+		var myid='${ldto.id}';
+		if(myid==null||myid==""){
+			myid=lid;
+	}
+		$.ajax({
+			url:"delete_bookmark.do",
+			method:"get",
+			data:{"id":myid,
+				"uni_id":uid
+			},
+			async:false,
+			dataType:"json",
+			success:function(obj){
+				trs.remove();
+				alert("삭제되었습니다.");
+			},
+			error:function(){
+				alert("서버통신 실패");
+			}
+		});
+	}
+	
 	function reload_price(id,target){
 		var tar=target.className;
 		var tds=$("#frame_sub").contents().find("."+tar).parent("td").siblings("td");

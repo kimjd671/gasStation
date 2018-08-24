@@ -141,7 +141,7 @@ th{background-color:  white; color: black; border: 1px dashed black;}
 						<tr>
 							<td><%=dto.getSeq()%></td>
 							<td><%=dto.getId()%></td>
-							<td><%=dto.getTitle()%>[<%=arr[dto.getRefer()]-1%>]</td>
+							<td><a href="boardDetatil.do?seq=<%=dto.getSeq()%>"><%=dto.getTitle()%></a>[<%=arr[dto.getRefer()]-1%>]</td>
 							<td style="text-align: center;"><%=yyyymmdd.format(dto.getRegdate())%></td>
 							<td style="text-align: center;"><%=dto.getReadcount()%></td>
 							<td style="text-align: center;"><%=count%></td>

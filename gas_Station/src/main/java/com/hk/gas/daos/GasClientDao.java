@@ -55,4 +55,20 @@ public class GasClientDao implements IGasClientDao {
 		return count>0?true:false;
 	}
 	
+	@Override
+	public boolean delete_bookmark(BookMarkDto dto) {
+		int count =sqlSession.delete(namespace+"delbookmark",dto);
+		return count>0?true:false;
+	}
+	
+	@Override
+	public FreeBoardDto free_getboard(int seq) {
+		return sqlSession.selectOne(namespace+"freegetboard",seq);
+	}
+	
+	@Override
+	public List<FreeBoardDto> free_getreply(int seq) {
+		return sqlSession.selectList(namespace+"freegetreply",seq);
+	}
+	
 }

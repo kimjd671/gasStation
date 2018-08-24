@@ -89,7 +89,7 @@ th{background-color:  white; color: black; border: 1px dashed black;}
 							<td>
 								<button style="width: 100%;" class="bookmark<%=i%>_btn" onclick="parent.reload_price('<%=dto.getUni_id()%>',this)">새로고침</button>
 								<br>
-								<button style="width: 100%;">삭제</button>
+								<button style="width: 100%;" class="bookmark<%=i%>_btn" onclick="parent.del_bookmark('<%=dto.getUni_id()%>',this)">삭제</button>
 							</td>
 						</tr>		
 						<% 

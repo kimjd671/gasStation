@@ -91,6 +91,17 @@ public class HomeController {
 		return "boardlist";
 	}
 	
+	@RequestMapping(value = "/boardDetatil.do", method = RequestMethod.GET)
+	public String free_boardDetail(Locale locale, Model model,HttpServletRequest request) {
+		int seq=Integer.parseInt(request.getParameter("seq"));
+		List<FreeBoardDto> reply=client.free_getreply(seq);
+		FreeBoardDto detail=client.free_getboard(seq);
+		model.addAttribute("dto",detail);
+		model.addAttribute("reply",reply);
+		return "freeboard_Detail";
+	}
+	
+	
 	@ResponseBody
 	@RequestMapping(value = "/insertuser.do", method = RequestMethod.GET)
 	public Map<String,Boolean> inseruser(GasUserDto dto,Locale locale, Model model) {
@@ -193,6 +204,17 @@ public class HomeController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/delete_bookmark.do", method = RequestMethod.GET)
+	public Map<String,Boolean> delete_bookmark(BookMarkDto dto,Locale locale, Model model) {
+		System.out.println(dto);
+		boolean isS=client.delete_bookmark(dto);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
+	
+	
+	@ResponseBody
 	@RequestMapping(value = "/freeboard_insert.do", method = RequestMethod.GET)
 	public Map<String,Boolean> freeboard_insert(FreeBoardDto dto,Locale locale, Model model) {
 		System.out.println(dto);
@@ -201,5 +223,7 @@ public class HomeController {
 		map.put("isS",isS);
 		return map;
 	}
+	
+
 	
 }

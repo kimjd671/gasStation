@@ -99,54 +99,90 @@ ul.tabs li.active {
     background: #3A3A3C;
     border-bottom: 1px solid #3A3A3C;
 }
-.login_btn{
-	background:    #dfbe6a;
-	background:    -webkit-linear-gradient(#dfbe6a, #897952);
-	background:    linear-gradient(#dfbe6a, #897952);
-	border-radius: 1000px;
-	border-color:#3A3A3C;
-	padding:       3% 15%;
-	color:         #000000;
-	display:       block;
-	font:          normal 400 2vw/1 "Zenhei", sans-serif;
-	text-align:    center;
-	text-shadow:   none;
-	margin: 0 auto;
-	position:relative;
-	top:80px;
-	cursor: pointer;
+.btn {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase; 
+  font-weight: 500; 
+  font-style: normal; 
+  font-size: 2rem; 
+  letter-spacing: 0.3em; 
+  color: rgba(223,190,106,0.7);
+  border-radius: 0;
+  padding: 20px 80px 20px;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 70px 30px;
+  border: none;
+  border: 1px solid rgba(223,190,106,0.3);
 }
-.login_btn_big{
-	background:    #dfbe6a;
-	background:    -webkit-linear-gradient(#dfbe6a, #897952);
-	background:    linear-gradient(#dfbe6a, #897952);
-	border-radius: 1000px;
-	border-color:#3A3A3C;
-	padding:       3% 15%;
-	color:         #000000;
-	display:       block;
-	font:          normal 400 3vw/1 "Zenhei", sans-serif;
-	text-align:    center;
-	text-shadow:   none;
-	margin: 20px auto;
-	position:relative;
-	cursor: pointer;
+.btn:hover {
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: $white;
+  background-position: 99% 50%;
 }
-.btn_mini{
-	background:    #dfbe6a;
-	background:    -webkit-linear-gradient(#dfbe6a, #897952);
-	background:    linear-gradient(#dfbe6a, #897952);
-	border-radius: 500px;
-	border-color:#3A3A3C;
-	padding:       1% 5%;
-	color:         #000000;
-	display:       block;
-	font:          normal 400 1vw/1 "Zenhei", sans-serif;
-	text-align:    center;
-	text-shadow:   none;
-	margin: 0 auto;
-	cursor: pointer;
+
+.btn_mini {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase; 
+  font-weight: 500; 
+  font-style: normal; 
+  font-size: 1rem; 
+  letter-spacing: 0.3em; 
+  color: rgba(223,190,106,0.7);
+  border-radius: 0;
+  padding: 5px 10px 5px;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 10px 30px 0px 30px;
+  border: none;
+  border: 1px solid rgba(223,190,106,0.3);
 }
+.btn_mini:hover {
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: $white;
+  background-position: 99% 50%;
+}
+/* .btn{ */
+/* 	background:    #dfbe6a; */
+/* 	background:    -webkit-linear-gradient(#dfbe6a, #897952); */
+/* 	background:    linear-gradient(#dfbe6a, #897952); */
+/* 	border-radius: 1000px; */
+/* 	border-color:#3A3A3C; */
+/* 	padding:       3% 15%; */
+/* 	color:         #000000; */
+/* 	display:       block; */
+/* 	font:          normal 400 3vw/1 "Zenhei", sans-serif; */
+/* 	text-align:    center; */
+/* 	text-shadow:   none; */
+/* 	margin: 20px auto; */
+/* 	position:relative; */
+/* 	cursor: pointer; */
+/* } */
+/* .btn_mini{ */
+/* 	background:    #dfbe6a; */
+/* 	background:    -webkit-linear-gradient(#dfbe6a, #897952); */
+/* 	background:    linear-gradient(#dfbe6a, #897952); */
+/* 	border-radius: 500px; */
+/* 	border-color:#3A3A3C; */
+/* 	padding:       1% 5%; */
+/* 	color:         #000000; */
+/* 	display:       block; */
+/* 	font:          normal 400 1vw/1 "Zenhei", sans-serif; */
+/* 	text-align:    center; */
+/* 	text-shadow:   none; */
+/* 	margin: 0 auto; */
+/* 	cursor: pointer; */
+/* } */
 #right_view1,#right_view2,#right_view3{width:23%; height:24%; border: 1px solid #dfbe6a; background-color:#3A3A3C;  float:left; overflow: hidden; position: relative;  }
 .right_div,.bottom_div{width: 100%;height: 100%;}
 .right_div *{transition: all 0.35s ease; box-sizing: border-box; }
@@ -1589,13 +1625,13 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	</div>
 </div>
 <div id="week_day_avg" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left;">
-	<h3 style="float: left;">최근 1주간  평균유가</h3><button class="btn_mini" style="top: 10px; position: relative;" onclick="reload_price('A0028706',this)" >조회하기</button>
+	<h3 style="float: left;">최근 1주간  평균유가</h3><button class="btn_mini" style="position: relative;" onclick="reload_price('A0028706',this)" >조회하기</button>
 	
 </div>
 </div>
 <div id="right_view1">
 	<%   	if(sdto==null){	%>
-		<button id="login_button" class="login_btn" onclick="call_sub_container()" >로그인</button>
+		<button id="login_button" class="btn" onclick="call_sub_container()" >로그인</button>
 		<div id="myInfo" style="display: none;">
 			<fieldset style="color: white;">
 				<legend>내 정보</legend>
@@ -1605,13 +1641,12 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					<tr><td>가입일:</td><td><span id="myinfo_regdate"></span></td></tr>
 				</table>
 			</fieldset>
-			<br>
-			<button id="information" class="btn_mini info_btn" onclick="call_update_info()">정보수정</button>
-			<button id="superuser" class="btn_mini info_btn" onclick='amdin_page()'>관리자페이지</button>
+			<button id="information" class="btn_mini" onclick="call_update_info()">정보수정</button>
+			<button id="superuser" class="btn_mini" onclick='amdin_page()'>관리자페이지</button>
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>
 			<%	}else{	%>
-		<button id="login_button" class="login_btn" onclick="call_sub_container()" style="display: none;" >로그인</button>
+		<button id="login_button" class="btn" onclick="call_sub_container()" style="display: none;" >로그인</button>
 		<div id="myInfo">
 			<fieldset>
 				<legend>내 정보</legend>
@@ -1621,9 +1656,8 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					<tr><td>가입일:</td><td><span id="myinfo_regdate"><%=yyyymmdd.format(sdto.getRegdate()) %></span></td></tr>
 				</table>
 			</fieldset>
-			<br>
-			<button class="btn_mini info_btn" onclick="call_update_info()" ${ldto.role=='USER'?"":"style='display:none;'"}>정보수정</button>
-			<button class="btn_mini info_btn" onclick='amdin_page()' ${ldto.role!='USER'?"":"style='display:none;'"}>관리자페이지</button>
+			<button class="btn_mini" onclick="call_update_info()" ${ldto.role=='USER'?"":"style='display:none;'"}>정보수정</button>
+			<button class="btn_mini" onclick='amdin_page()' ${ldto.role!='USER'?"":"style='display:none;'"}>관리자페이지</button>
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>	
 			<%		}	%>

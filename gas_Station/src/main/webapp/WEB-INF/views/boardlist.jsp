@@ -40,7 +40,7 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
   letter-spacing: 0.3em; 
   color: rgba(223,190,106,0.7);
   border-radius: 0;
-  padding: 18px 80px 20px;
+  padding: 8px 30px 10px;
   transition: all 0.7s ease-out;
   background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
   background-position: 1% 50%;
@@ -249,12 +249,12 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 				%>		
 				</div>
 				<div>
-					<select name="category" style="float: left; margin: 2px;">
+					<select name="category" style="float: left; margin: 2px; width: 70px; height: 33px;">
 						<option value="find_id">아이디</option>
 						<option value="find_title">글 제목</option>
 						<option value="find_content">내용</option>
 					</select>
-					<input type="text" name="findvalue"   style="float: left; margin: 2px; width:180px;">
+					<input type="text" name="findvalue"   style="float: left; margin: 2px; width:180px; height:33px; ">
 					<button class="btn" style="float: left; margin: 2px; " onclick="search_board()">검색</button>
 				 <button class="btn" onclick="call_insertform()" >글쓰기</button>
 				 </div>

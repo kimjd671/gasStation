@@ -36,6 +36,12 @@ public class GasClientService implements IGasClientService {
 	public List<FreeBoardDto> freepage_List(int page) {
 		return clientDao.freepage_List(page);
 	}
+	
+	@Override
+	public List<FreeBoardDto> freeall_List() {
+		return clientDao.freeall_List();
+	}
+	
 	@Override
 	public List<FreeBoardDto> search_List(String category, String value) {
 		
@@ -45,6 +51,11 @@ public class GasClientService implements IGasClientService {
 	public List<FreeBoardDto> search_page(int page, String category, String value) {
 	
 		return clientDao.search_page(page, category, value);
+	}
+	
+	@Override
+	public List<FreeBoardDto> searchall_List(String category, String value) {
+		return clientDao.searchall_List(category, value);
 	}
 	
 	@Override

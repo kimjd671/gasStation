@@ -131,6 +131,7 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 <body>
 <%
 	List<FreeBoardDto> list=(List<FreeBoardDto>)request.getAttribute("pagelist");
+	List<FreeBoardDto> alllist=(List<FreeBoardDto>)request.getAttribute("alllist");
 	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
 	SimpleDateFormat hhmm = new SimpleDateFormat("HH:mm");
 	Calendar cal=Calendar.getInstance();
@@ -148,10 +149,10 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 	
 	int arr[]=new int[1000];
 	int j=0;
-	for(int i=0;i<list.size();i++){
-		FreeBoardDto dto=list.get(i);
+	for(int i=0;i<alllist.size();i++){
+		FreeBoardDto dto=alllist.get(i);
 		arr[dto.getRefer()]= arr[dto.getRefer()]+1;
-		
+		System.out.println(arr[dto.getRefer()]);
 	}
 	
 %>
@@ -188,7 +189,6 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 						<%
 					}
 				}else{
-					System.out.println(list.size());
 					for(int i=0;i<list.size();i++){
 						FreeBoardDto dto=list.get(i);
 						int count=0;

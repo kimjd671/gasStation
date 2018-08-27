@@ -92,15 +92,19 @@ public class HomeController {
 			System.out.println("search:"+category +"/"+value);
 			List<FreeBoardDto> list=client.search_List(category, value);
 			List<FreeBoardDto> pagelist=client.search_page(page, category, value);
+			List<FreeBoardDto> alllist=client.searchall_List(category, value);
 			System.out.println("게시물 검색");
 			model.addAttribute("freelist",list);
 			model.addAttribute("pagelist",pagelist);
+			model.addAttribute("alllist",alllist);
 			return "boardlist";
 		}else {
 			List<FreeBoardDto> list=client.freeboard_List();
 			List<FreeBoardDto> pagelist=client.freepage_List(page);
+			List<FreeBoardDto> alllist=client.freeall_List();
 			model.addAttribute("freelist",list);
 			model.addAttribute("pagelist",pagelist);
+			model.addAttribute("alllist",alllist);
 			return "boardlist";
 		}
 		

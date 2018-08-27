@@ -355,8 +355,8 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 // 							insert_all_oil_avg();
 							
 // 			              	chk_sido_avg();
-			              	chk_login();
 // 			              	auto();
+			              	chk_login();
 			              	$(".all_avg_content").hide();
 			    		 	$(".all_avg_content:first").show();
 			    		 	

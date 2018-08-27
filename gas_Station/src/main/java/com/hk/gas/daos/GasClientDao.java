@@ -35,6 +35,11 @@ public class GasClientDao implements IGasClientDao {
 	}
 	
 	@Override
+	public List<FreeBoardDto> freeall_List() {
+		return sqlSession.selectList(namespace+"alllist");
+	}
+	
+	@Override
 	public List<FreeBoardDto> freeboard_List() {
 		return sqlSession.selectList(namespace+"freeboardlist");
 	}
@@ -47,6 +52,14 @@ public class GasClientDao implements IGasClientDao {
 		map.put("min", pageMin+"");
 		map.put("max", pageMax+"");
 		return sqlSession.selectList(namespace+"freeboardpage",map);
+	}
+	
+	@Override
+	public List<FreeBoardDto> searchall_List(String category, String value) {
+		Map<String, String> map=new HashMap<>();
+		map.put("search", category);
+		map.put("index", value);
+		return sqlSession.selectList(namespace+"searchalllist",map);
 	}
 	
 	@Override

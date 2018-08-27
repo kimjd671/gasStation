@@ -11,8 +11,10 @@ public interface IGasClientService {
 	public boolean delete_bookmark(BookMarkDto dto);
 	public List<FreeBoardDto> freeboard_List();
 	public List<FreeBoardDto> freepage_List(int page);
+	public List<FreeBoardDto> freeall_List();
 	public List<FreeBoardDto> search_page(int page,String category,String value);
 	public List<FreeBoardDto> search_List(String category,String value);
+	public List<FreeBoardDto> searchall_List(String category,String value);
 	public boolean like_up(FreeBoardDto dto);
 	public boolean freeborad_insert(FreeBoardDto dto);
 	public FreeBoardDto free_getboard(int seq);

@@ -21,7 +21,7 @@ html,body{margin:0; width:100%; height:100%; position: absolute;};
 .login_logo{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; font-family: 'Jeju Hallasan', serif; }
 #container{ width: 1440px; height:956px; overflow: hidden; margin: 0 auto; position: relative;}
 
-#main_container{background-color: #3A3A3C; overflow-y: scroll; overflow-x:auto; width: 100%; height:86%; position: absolute; }
+#main_container{background-color: #3A3A3C; overflow-y: scroll; overflow-x:auto; width: 100%; height:83%; position: absolute; }
 ::-webkit-scrollbar{display:none;}
 ::-moz-scrollbar{display: none;}
 a{color: white;  text-decoration:none;}

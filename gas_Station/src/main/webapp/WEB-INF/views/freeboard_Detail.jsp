@@ -267,8 +267,8 @@ h3{color: white; text-align: center;}
 			
 			
 			</div>			
-			<div style="margin: 0 auto; width: 70%; ">
-				<table class="table">
+			<div style="margin: 0 auto; width: 70%;">
+				<table class="table" style="top:25px;">
 				<tr>
 					<th>내용</th>
 					<td class="reply_textarea"><textarea  name="reply_content"  class="autosize" style=" width:100%; "></textarea></td>

@@ -21,8 +21,9 @@ html,body{margin:0; width:100%; height:100%; position: absolute;};
 .login_logo{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; font-family: 'Jeju Hallasan', serif; }
 #container{ width: 1440px; height:956px; overflow: hidden; margin: 0 auto; position: relative;}
 
-#main_container{background-color: #3A3A3C; overflow: scroll; width: 100%; height:86%; position: absolute; }
-
+#main_container{background-color: #3A3A3C; overflow-y: scroll; overflow-x:auto; width: 100%; height:86%; position: absolute; }
+::-webkit-scrollbar{display:none;}
+::-moz-scrollbar{display: none;}
 a{color: white;  text-decoration:none;}
 ul{list-style: none;}
 .table{ margin: 0 auto; top: 50px;position: relative; border-collapse: collapse; width:100%;border: 1px solid #dfbe6a; color: white; line-height: 35px;}
@@ -133,7 +134,7 @@ h3{color: white; text-align: center;}
 	}
 	
 	function display_reply(){
-		$("#replyform").toggle('slow');
+		$("#replyform").slideToggle("slow");
 		var a=$("#replyform").offset().top;
 		$("#main_container").animate({
 			"scrollTop":a
@@ -175,10 +176,14 @@ h3{color: white; text-align: center;}
 </script>
 <%
 	FreeBoardDto dtos=(FreeBoardDto)request.getAttribute("dto");
-	GasUserDto ldtos=(GasUserDto)request.getAttribute("ldto");
 	SimpleDateFormat yyyyMMddhhmm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	int pageNum =Integer.parseInt(request.getParameter("page"));
 	List<FreeBoardDto> reply=(List<FreeBoardDto>)request.getAttribute("reply");
+	GasUserDto ldtos=(GasUserDto)session.getAttribute("ldto");
+	if(ldtos==null){
+		out.println("<script type='text/javascript'>alert('로그인정보가 없습니다.');parent.document.location.reload();</script>");
+		return;
+	}
 %>
 </head>
 <body>
@@ -223,7 +228,7 @@ h3{color: white; text-align: center;}
 				</tr>
 			</table>
 		</div>
-		<div style="position: relative; top: 50px;">
+		<div id="replyform" style="position: relative; top: 50px; display: none;">
 			<h3>댓글</h3>
 			<div style="width: 70%; margin: 0 auto;" >
 					<%
@@ -245,14 +250,9 @@ h3{color: white; text-align: center;}
 								</tr>
 								<tr>
 									<td style="text-align: right;">
-										<div>
-										<%if(ldtos.getId()==redto.getId()){
-											%>
-											<button>수정</button>
-											<button>삭제</button>
-											<%
-										}
-										%>
+										<div>	
+											<button <%=ldtos.getId().equals(redto.getId())?"":"disabled" %>>수정</button>
+											<button <%=ldtos.getId().equals(redto.getId())?"":"disabled" %>>삭제</button>
 										</div>
 									</td>
 								</tr>
@@ -267,7 +267,7 @@ h3{color: white; text-align: center;}
 			
 			
 			</div>			
-			<div id="replyform" style="margin: 0 auto; width: 70%; ">
+			<div style="margin: 0 auto; width: 70%; ">
 				<table class="table">
 				<tr>
 					<th>내용</th>

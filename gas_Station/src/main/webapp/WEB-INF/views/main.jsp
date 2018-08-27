@@ -168,21 +168,21 @@ ul.tabs li.active {
 /* 	position:relative; */
 /* 	cursor: pointer; */
 /* } */
-/* .btn_mini{ */
-/* 	background:    #dfbe6a; */
-/* 	background:    -webkit-linear-gradient(#dfbe6a, #897952); */
-/* 	background:    linear-gradient(#dfbe6a, #897952); */
-/* 	border-radius: 500px; */
-/* 	border-color:#3A3A3C; */
-/* 	padding:       1% 5%; */
-/* 	color:         #000000; */
-/* 	display:       block; */
-/* 	font:          normal 400 1vw/1 "Zenhei", sans-serif; */
-/* 	text-align:    center; */
-/* 	text-shadow:   none; */
-/* 	margin: 0 auto; */
-/* 	cursor: pointer; */
-/* } */
+.btn_old{ 
+ 	background:    #dfbe6a; 
+ 	background:    -webkit-linear-gradient(#dfbe6a, #897952); 
+	background:    linear-gradient(#dfbe6a, #897952); 
+ 	border-radius: 500px; 
+ 	border-color:#3A3A3C; 
+ 	padding:       1% 5%; 
+ 	color:         #000000; 
+ 	display:       block; 
+ 	font:          normal 400 1vw/1 "Zenhei", sans-serif; 
+ 	text-align:    center; 
+ 	text-shadow:   none; 
+ 	margin: 0 auto; 
+ 	cursor: pointer; 
+ } 
 #right_view1,#right_view2,#right_view3{width:23%; height:24%; border: 1px solid #dfbe6a; background-color:#3A3A3C;  float:left; overflow: hidden; position: relative;  }
 .right_div,.bottom_div{width: 100%;height: 100%;}
 .right_div *{transition: all 0.35s ease; box-sizing: border-box; }
@@ -1698,7 +1698,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 			<legend>비밀번호 재확인</legend>
 			비밀번호 입력 : <input type="password" name="info_chk_pwd">
 			<br>
-			<button class="btn_mini" onclick="info_chk_pwd()">확인</button>
+			<button class="btn_old" onclick="info_chk_pwd()">확인</button>
 		</fieldset>
 	</div>
 	<br>
@@ -1714,7 +1714,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				<tr><td>가입일 :</td><td id="old_regdate"></td></tr>
 			</table>
 			<hr>
-			<button class="btn_mini" onclick="change_myinfo()">확인</button>
+			<button class="btn_old" onclick="change_myinfo()">확인</button>
 		</fieldset>
 		<hr style="width: 80%; margin: 20px auto;">
 		<fieldset style="width: 90%; margin: 0 auto;">
@@ -1728,7 +1728,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				</tr>
 			</table>
 			<hr>
-			<button class="btn_mini" onclick="change_password()">확인</button>
+			<button class="btn_old" onclick="change_password()">확인</button>
 		</fieldset>
 		
 	</div>

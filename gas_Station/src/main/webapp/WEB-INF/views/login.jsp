@@ -105,7 +105,7 @@
 					</tr>
 					<tr>
 						<th colspan="2">
-							<button onclick="find_id_ajax()" class="btn_mini">확인</button>
+							<button onclick="find_id_ajax()" class="btn_old">확인</button>
 						</th>
 					</tr>
 				</table>
@@ -124,7 +124,7 @@
 					</tr>
 					<tr>
 						<th colspan="2">
-							<button onclick="find_pwd_ajax()" class="btn_mini">확인</button>
+							<button onclick="find_pwd_ajax()" class="btn_old">확인</button>
 						</th>
 					</tr>
 				</table>

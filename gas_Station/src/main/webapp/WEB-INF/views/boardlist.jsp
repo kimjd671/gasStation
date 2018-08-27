@@ -30,6 +30,33 @@ ul{list-style: none;}
 .table{ margin: 0 auto; top: 50px;position: relative; border-collapse: collapse; width:70%; height:65%;border: 1px solid #dfbe6a; color: white; line-height: 30px;}
 td{border: 1px solid #dfbe6a; height: 34px;}
 th{background-color:  white; color: black; border: 1px dashed black;height: 34px;}
+.btn {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase; 
+  font-weight: 500; 
+  font-style: normal; 
+  font-size: 0.525rem; 
+  letter-spacing: 0.3em; 
+  color: rgba(223,190,106,0.7);
+  border-radius: 0;
+  padding: 18px 80px 20px;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 0.625rem;
+  border: none;
+  border: 1px solid rgba(223,190,106,0.3);
+}
+.btn:hover {
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: $white;
+  background-position: 99% 50%;
+}
+
 
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -210,8 +237,8 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 						<option value="find_content">내용</option>
 					</select>
 					<input type="text" name="findvalue"   style="float: left; margin: 2px; width:180px;">
-					<button style="float: left; margin: 2px;" onclick="search_board()">검색</button>
-				 <button onclick="call_insertform()" >글쓰기</button>
+					<button class="btn" style="float: left; margin: 2px; " onclick="search_board()">검색</button>
+				 <button class="btn" onclick="call_insertform()" >글쓰기</button>
 				 </div>
 			 </td>
 			</tr>

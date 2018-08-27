@@ -142,7 +142,7 @@ ul.tabs li.active {
   background-position: 1% 50%;
   background-size: 300% 300%;
   text-decoration: none;
-  margin: 10px 30px 0px 30px;
+  margin: 10px 20px 0px 30px;
   border: none;
   border: 1px solid rgba(223,190,106,0.3);
 }
@@ -1641,8 +1641,8 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					<tr><td>가입일:</td><td><span id="myinfo_regdate"></span></td></tr>
 				</table>
 			</fieldset>
-			<button id="information" class="btn_mini" onclick="call_update_info()">정보수정</button>
-			<button id="superuser" class="btn_mini" onclick='amdin_page()'>관리자페이지</button>
+			<button id="information" class="btn_mini" onclick="call_update_info()" style="float:left;">정보수정</button>
+			<button id="superuser" class="btn_mini" onclick='amdin_page()' style="float:left; margin: 10px 10px 10px 10px;">관리자페이지</button>
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>
 			<%	}else{	%>
@@ -1656,8 +1656,8 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					<tr><td>가입일:</td><td><span id="myinfo_regdate"><%=yyyymmdd.format(sdto.getRegdate()) %></span></td></tr>
 				</table>
 			</fieldset>
-			<button class="btn_mini" onclick="call_update_info()" ${ldto.role=='USER'?"":"style='display:none;'"}>정보수정</button>
-			<button class="btn_mini" onclick='amdin_page()' ${ldto.role!='USER'?"":"style='display:none;'"}>관리자페이지</button>
+			<button class="btn_mini" onclick="call_update_info()" ${ldto.role=='USER'?"":"style='display:none;'"} style="float:left;">정보수정</button>
+			<button class="btn_mini" onclick='amdin_page()' ${ldto.role!='USER'?"":"style='display:none;'"} style="float:left; margin: 10px 10px 10px 10px;">관리자페이지</button>
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>	
 			<%		}	%>

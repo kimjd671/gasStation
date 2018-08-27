@@ -303,7 +303,7 @@ h3{color: white; text-align: center;}
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: right;">
-						<button onclick="insert_reply()">등록</button>
+						<button class="btn" onclick="insert_reply()">등록</button>
 					</td>
 				</tr>
 			</table>

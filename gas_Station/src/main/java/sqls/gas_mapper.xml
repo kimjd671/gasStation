@@ -108,17 +108,19 @@
 
 <select id="searchpage" resultType="FreeBoardDto" parameterType="Map">
 	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT 
-	FROM (SELECT ROWNUM AS RN , SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM (SELECT * FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC) ) 
-	WHERE RN BETWEEN #{min} AND #{max}
+	FROM (SELECT ROWNUM AS RN , SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM (SELECT * FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC) 
 	<if test="search=='id'">
-	 	 AND ID LIKE '%'||#{index}||'%'
+	 	 WHERE ID LIKE '%'||#{index}||'%'
 	 </if>
 	 <if test="search=='title'">
-	 	 AND TITLE LIKE '%'||#{index}||'%'
+	 	 WHERE TITLE LIKE '%'||#{index}||'%'
 	 </if>
 	 <if test="search=='content'">
-	 	 AND CONTENT LIKE '%'||#{index}||'%'
+	 	 WHERE CONTENT LIKE '%'||#{index}||'%'
 	 </if>
+	) 
+	WHERE RN BETWEEN #{min} AND #{max}
+	
 </select>
 
 <insert id="insertfreeboard" parameterType="FreeBoardDto">

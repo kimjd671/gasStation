@@ -92,6 +92,7 @@ public class HomeController {
 			System.out.println("search:"+category +"/"+value);
 			List<FreeBoardDto> list=client.search_List(category, value);
 			List<FreeBoardDto> pagelist=client.search_page(page, category, value);
+			System.out.println("게시물 검색");
 			model.addAttribute("freelist",list);
 			model.addAttribute("pagelist",pagelist);
 			return "boardlist";
@@ -258,6 +259,16 @@ public class HomeController {
 	@RequestMapping(value = "/likeup.do", method = RequestMethod.GET)
 	public Map<String,Boolean> likeup(FreeBoardDto dto,Locale locale, Model model) {
 		boolean isS=client.like_up(dto);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/reply_insert.do", method = RequestMethod.GET)
+	public Map<String,Boolean> reply_insert(FreeBoardDto dto,Locale locale, Model model) {
+		System.out.println(dto);
+		boolean isS=client.reply_insert(dto);
 		Map<String, Boolean> map=new HashMap<>();
 		map.put("isS",isS);
 		return map;

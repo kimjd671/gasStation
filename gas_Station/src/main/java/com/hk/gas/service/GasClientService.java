@@ -77,4 +77,9 @@ public class GasClientService implements IGasClientService {
 	public boolean like_up(FreeBoardDto dto) {
 		return clientDao.like_up(dto);
 	}
+	
+	@Override
+	public boolean reply_insert(FreeBoardDto dto) {
+		return clientDao.reply_insert(dto);
+	}
 }

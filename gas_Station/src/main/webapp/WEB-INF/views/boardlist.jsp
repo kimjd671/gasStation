@@ -155,6 +155,11 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 						<td colspan="7" style="text-align: center;">---등록된 글이 없습니다---</td>
 					</tr>
 					<%
+					for(int i=0;i<14;i++){
+						%>
+							<tr><td colspan="7" style="border: none;"></td></tr>
+						<%
+					}
 				}else{
 					for(int i=0;i<list.size();i++){
 						FreeBoardDto dto=list.get(i);
@@ -199,9 +204,22 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 			<tr>
 				<td colspan="6" style="text-align: right;">
 				<div style="margin: 0 auto; text-align: center; font-size: 25px; width: 80%;  ">
-			  	<c:forEach var="a" items="${freelist}" begin="1" varStatus="stat" end="${(fn:length(freelist)/15)+1}">
-					<a href="boardlist.do?page=${stat.index}" style="font-weight: bold">${stat.index}</a>
-				</c:forEach>
+				<%String category=request.getParameter("category");
+					String value=request.getParameter("value");
+					if(category==null){
+						%>
+						<c:forEach var="a" items="${freelist}" begin="1" varStatus="stat" end="${(fn:length(freelist)/15)+1}">
+						<a href="boardlist.do?page=${stat.index}" style="font-weight: bold">${stat.index}</a>
+						</c:forEach>
+						<%
+					}else{
+						%>
+						<c:forEach var="a" items="${freelist}" begin="1" varStatus="stat" end="${(fn:length(freelist)/15)+1}">
+						<a href="boardlist.do?page=${stat.index}&category=<%=category%>&value=<%=value%>" style="font-weight: bold">${stat.index}</a>
+						</c:forEach>
+						<%
+					}
+				%>		
 				</div>
 				<div>
 					<select name="category" style="float: left; margin: 2px;">

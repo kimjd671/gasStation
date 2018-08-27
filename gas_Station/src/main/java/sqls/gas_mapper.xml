@@ -91,6 +91,36 @@
 	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM (SELECT ROWNUM AS RN , SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM (SELECT * FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC) ) WHERE RN BETWEEN #{min} AND #{max}
 </select>
 
+<select id="searchlist" resultType="FreeBoardDto" parameterType="Map">
+	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT
+	 FROM GASFREEBOARD 
+	 <if test="search=='id'">
+	 	WHERE ID LIKE '%'||#{index}||'%'
+	 </if>
+	 <if test="search=='title'">
+	 	WHERE TITLE LIKE '%'||#{index}||'%'
+	 </if>
+	 <if test="search=='content'">
+	 	WHERE CONTENT LIKE '%'||#{index}||'%'
+	 </if>
+	ORDER BY REFER DESC,STEP ASC
+</select>
+
+<select id="searchpage" resultType="FreeBoardDto" parameterType="Map">
+	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT 
+	FROM (SELECT ROWNUM AS RN , SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM (SELECT * FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC) ) 
+	WHERE RN BETWEEN #{min} AND #{max}
+	<if test="search=='id'">
+	 	 AND ID LIKE '%'||#{index}||'%'
+	 </if>
+	 <if test="search=='title'">
+	 	 AND TITLE LIKE '%'||#{index}||'%'
+	 </if>
+	 <if test="search=='content'">
+	 	 AND CONTENT LIKE '%'||#{index}||'%'
+	 </if>
+</select>
+
 <insert id="insertfreeboard" parameterType="FreeBoardDto">
 	INSERT INTO GASFREEBOARD VALUES(GASFREEBOARD_SEQ.NEXTVAL,#{id},#{title},#{content},SYSDATE,(SELECT NVL(MAX(REFER)+1,0) FROM GASFREEBOARD),0,0,0,null)  
 </insert>
@@ -114,6 +144,10 @@
 <insert id="freeinsertreply" parameterType="FreeBoardDto">
 	INSERT INTO GASFREEBOARD VALUES(GASFREEBOARD_SEQ.NEXTVAL,#{id},#{title},#{content},SYSDATE,(SELECT REFER FROM GASFREEBOARD WHERE SEQ=#{seq}),(SELECT STEP FROM GASFREEBOARD WHERE SEQ=#{seq})+1,(SELECT DEPTH FROM GASFREEBOARD WHERE SEQ=#{seq})+1,0,null)
 </insert>
+
+<update id="likeup" parameterType="FreeBoardDto">
+	UPDATE GASFREEBOARD SET LIKECOUNT=#{likecount} WHERE SEQ=#{seq}
+</update>
 
 <!-- 	<select id="boardlist" resultType="AnsDto" parameterType="Map"> -->
 <!-- 		SELECT SEQ, ID, TITLE, CONTENT, REGDATE, -->
@@ -160,7 +194,7 @@
 <!-- 				from hkanswerboard WHERE SEQ=#{seq} -->
 <!-- </select> -->
 
-	
+
 <!-- 	<sql id="paramseq"> -->
 <!-- 		SEQ=#{seq} -->
 <!-- 	</sql> -->

@@ -36,6 +36,16 @@ public class GasClientService implements IGasClientService {
 	public List<FreeBoardDto> freepage_List(int page) {
 		return clientDao.freepage_List(page);
 	}
+	@Override
+	public List<FreeBoardDto> search_List(String category, String value) {
+		
+		return clientDao.search_List(category, value);
+	}
+	@Override
+	public List<FreeBoardDto> search_page(int page, String category, String value) {
+	
+		return clientDao.search_page(page, category, value);
+	}
 	
 	@Override
 	public boolean freeborad_insert(FreeBoardDto dto) {
@@ -56,5 +66,15 @@ public class GasClientService implements IGasClientService {
 	@Override
 	public List<FreeBoardDto> free_getreply(int seq) {
 		return clientDao.free_getreply(seq);
+	}
+	
+	@Override
+	public boolean free_readcount(int seq) {
+		return clientDao.free_readcount(seq);
+	}
+	
+	@Override
+	public boolean like_up(FreeBoardDto dto) {
+		return clientDao.like_up(dto);
 	}
 }

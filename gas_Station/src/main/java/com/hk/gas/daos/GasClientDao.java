@@ -41,12 +41,32 @@ public class GasClientDao implements IGasClientDao {
 	
 	@Override
 	public List<FreeBoardDto> freepage_List(int page) {
-		int pageMin=((page-1)*20)+1;
-		int pageMax=page*20;
-		Map<String,Integer> map=new HashMap<>();
-		map.put("min", pageMin);
-		map.put("max", pageMax);
+		int pageMin=((page-1)*15)+1;
+		int pageMax=page*15;
+		Map<String,String> map=new HashMap<>();
+		map.put("min", pageMin+"");
+		map.put("max", pageMax+"");
 		return sqlSession.selectList(namespace+"freeboardpage",map);
+	}
+	
+	@Override
+	public List<FreeBoardDto> search_List(String category, String value) {
+		Map<String, String> map=new HashMap<>();
+		map.put("search", category);
+		map.put("index", value);
+		return sqlSession.selectList(namespace+"searchlist",map);
+	}
+	
+	@Override
+	public List<FreeBoardDto> search_page(int page, String category, String value) {
+		int pageMin=((page-1)*15)+1;
+		int pageMax=page*15;
+		Map<String,String> map=new HashMap<>();
+		map.put("min", pageMin+"");
+		map.put("max", pageMax+"");
+		map.put("search", category);
+		map.put("index", value);
+		return sqlSession.selectList(namespace+"searchpage",map);
 	}
 	
 	@Override
@@ -71,4 +91,15 @@ public class GasClientDao implements IGasClientDao {
 		return sqlSession.selectList(namespace+"freegetreply",seq);
 	}
 	
+	@Override
+	public boolean free_readcount(int seq) {
+		int count =sqlSession.update(namespace+"readcount",seq);
+		return count>0?true:false;
+	}
+	
+	@Override
+	public boolean like_up(FreeBoardDto dto) {
+		int count =sqlSession.update(namespace+"likeup",dto);
+		return count>0?true:false;
+	}
 }

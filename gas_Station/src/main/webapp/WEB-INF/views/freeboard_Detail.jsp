@@ -241,7 +241,7 @@ h3{color: white; text-align: center;}
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><textarea style="width: 100%; color: white; background-color:#3A3A3C; " rows="20" readonly="readonly" >${dto.content}</textarea></td>
+					<td><textarea style="width: 100%; border:none; color: white; background-color:#3A3A3C; " rows="20" readonly="readonly" >${dto.content}</textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2">

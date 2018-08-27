@@ -32,6 +32,34 @@ h3{color: white; text-align: center;}
 .reply td{border:none}
 
 #detail_div{width: 70%; margin: 0 auto;}
+
+.btn {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase; 
+  font-weight: 500; 
+  font-style: normal; 
+  font-size: 0.525rem; 
+  letter-spacing: 0.3em; 
+  color: rgba(223,190,106,0.7);
+  border-radius: 0;
+  padding: 8px 30px 10px;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 0.625rem;
+  border: none;
+  border: 1px solid rgba(223,190,106,0.3);
+}
+.btn:hover {
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: $white;
+  background-position: 99% 50%;
+}
+
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
@@ -218,11 +246,11 @@ h3{color: white; text-align: center;}
 				<tr>
 					<td colspan="2">
 						<div style="text-align: right; ">
-							<button onclick="display_reply()">댓글[${fn:length(reply)-1}]</button>
-							<button id="like_btn" onclick="likethis()">추천하기</button>
-							<button ${ldto.id==dto.id ||ldto.role=='ADMIN'?"":"style='display:none;'"}>삭제</button>
-							<button ${ldto.id==dto.id ||ldto.role=='ADMIN'?"":"style='display:none;'"}>수정</button>
-							<button onclick="location.href='boardlist.do?page=<%=pageNum%>'">글목록</button>
+							<button class="btn" onclick="display_reply()">댓글[${fn:length(reply)-1}]</button>
+							<button class="btn" id="like_btn" onclick="likethis()">추천하기</button>
+							<button class="btn" ${ldto.id==dto.id ||ldto.role=='ADMIN'?"":"style='display:none;'"}>삭제</button>
+							<button class="btn" ${ldto.id==dto.id ||ldto.role=='ADMIN'?"":"style='display:none;'"}>수정</button>
+							<button class="btn" onclick="location.href='boardlist.do?page=<%=pageNum%>'">글목록</button>
 						</div>
 					</td>
 				</tr>
@@ -251,8 +279,8 @@ h3{color: white; text-align: center;}
 								<tr>
 									<td style="text-align: right;">
 										<div>	
-											<button <%=ldtos.getId().equals(redto.getId())?"":"disabled" %>>수정</button>
-											<button <%=ldtos.getId().equals(redto.getId())?"":"disabled" %>>삭제</button>
+											<button class="btn" <%=ldtos.getId().equals(redto.getId())?"":"disabled" %>>수정</button>
+											<button class="btn" <%=ldtos.getId().equals(redto.getId())?"":"disabled" %>>삭제</button>
 										</div>
 									</td>
 								</tr>

@@ -19,4 +19,6 @@ public interface IGasClientService {
 	public List<FreeBoardDto> free_getreply(int seq);
 	public boolean free_readcount(int seq);
 	public boolean reply_insert(FreeBoardDto dto);
+	public boolean delete_freeboard(int seq);
+	public boolean update_freeboard(FreeBoardDto dto);
 }

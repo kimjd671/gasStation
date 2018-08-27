@@ -105,6 +105,9 @@ public class HomeController {
 		}
 		
 	}
+
+	
+
 	
 	@RequestMapping(value = "/boardDetatil.do", method = RequestMethod.GET)
 	public String free_boardDetail(Locale locale, Model model,HttpServletRequest request,HttpServletResponse response) {
@@ -239,6 +242,16 @@ public class HomeController {
 	public Map<String,Boolean> delete_bookmark(BookMarkDto dto,Locale locale, Model model) {
 		System.out.println(dto);
 		boolean isS=client.delete_bookmark(dto);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/delete_freeboard.do", method = RequestMethod.GET)
+	public Map<String,Boolean> delete_bookmark(Locale locale, Model model,HttpServletRequest request) {
+		int seq=Integer.parseInt(request.getParameter("seq"));
+		boolean isS=client.delete_freeboard(seq);
 		Map<String, Boolean> map=new HashMap<>();
 		map.put("isS",isS);
 		return map;

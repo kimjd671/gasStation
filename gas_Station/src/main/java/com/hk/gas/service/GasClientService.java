@@ -82,4 +82,14 @@ public class GasClientService implements IGasClientService {
 	public boolean reply_insert(FreeBoardDto dto) {
 		return clientDao.reply_insert(dto);
 	}
+	
+	@Override
+	public boolean delete_freeboard(int seq) {
+		return clientDao.delete_freeboard(seq);
+	}
+	
+	@Override
+	public boolean update_freeboard(FreeBoardDto dto) {
+		return clientDao.update_freeboard(dto);
+	}
 }

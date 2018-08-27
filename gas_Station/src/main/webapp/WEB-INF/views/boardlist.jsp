@@ -188,6 +188,7 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 						<%
 					}
 				}else{
+					System.out.println(list.size());
 					for(int i=0;i<list.size();i++){
 						FreeBoardDto dto=list.get(i);
 						int count=0;

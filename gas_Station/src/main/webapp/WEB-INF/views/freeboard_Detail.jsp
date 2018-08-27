@@ -62,6 +62,17 @@ h3{color: white; text-align: center;}
 
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<%
+	FreeBoardDto dtos=(FreeBoardDto)request.getAttribute("dto");
+	SimpleDateFormat yyyyMMddhhmm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	int pageNum =Integer.parseInt(request.getParameter("page"));
+	List<FreeBoardDto> reply=(List<FreeBoardDto>)request.getAttribute("reply");
+	GasUserDto ldtos=(GasUserDto)session.getAttribute("ldto");
+	if(ldtos==null){
+		out.println("<script type='text/javascript'>alert('로그인정보가 없습니다.');parent.document.location.reload();</script>");
+		return;
+	}
+%>
 <script type="text/javascript">
 	$(function(){
 		document.onkeydown = doNotReload;
@@ -113,6 +124,7 @@ h3{color: white; text-align: center;}
 			success:function(Data){
 				var isS=Data["isS"];
 				if(isS){
+					alert("추천하였습니다.");
 					location.reload();
 				}else{
 					alert("실패/시스템오류");
@@ -148,6 +160,7 @@ h3{color: white; text-align: center;}
 			success:function(Data){
 				var isS=Data["isS"];
 				if(isS){
+					alert("추천취소");
 					location.reload();
 				}else{
 					alert("실패/시스템오류");
@@ -201,18 +214,33 @@ h3{color: white; text-align: center;}
 			}
 		});
 	}
-</script>
-<%
-	FreeBoardDto dtos=(FreeBoardDto)request.getAttribute("dto");
-	SimpleDateFormat yyyyMMddhhmm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	int pageNum =Integer.parseInt(request.getParameter("page"));
-	List<FreeBoardDto> reply=(List<FreeBoardDto>)request.getAttribute("reply");
-	GasUserDto ldtos=(GasUserDto)session.getAttribute("ldto");
-	if(ldtos==null){
-		out.println("<script type='text/javascript'>alert('로그인정보가 없습니다.');parent.document.location.reload();</script>");
-		return;
+	
+	function delete_board(seq){
+		var del= confirm("삭제하시겠습니까?");
+		var page= '<%=pageNum%>';
+		if(del){
+			$.ajax({
+				url:"delete_freeboard.do",
+				method:"get",
+				data:{"seq":seq
+				},
+				async:false,
+				dataType:"json",
+				success:function(obj){
+					location.href="boardlist.do?page="+page;
+				},
+				error:function(){
+					alert("서버통신 실패");
+				}
+			});
+		}
 	}
-%>
+	
+	function update_board(){
+		
+	}
+</script>
+
 </head>
 <body>
 <div id="container">	
@@ -248,8 +276,8 @@ h3{color: white; text-align: center;}
 						<div style="text-align: right; ">
 							<button class="btn" onclick="display_reply()">댓글[${fn:length(reply)-1}]</button>
 							<button class="btn" id="like_btn" onclick="likethis()">추천하기</button>
-							<button class="btn" ${ldto.id==dto.id ||ldto.role=='ADMIN'?"":"style='display:none;'"}>삭제</button>
-							<button class="btn" ${ldto.id==dto.id ||ldto.role=='ADMIN'?"":"style='display:none;'"}>수정</button>
+							<button class="btn" ${ldto.id==dto.id ||ldto.role=='ADMIN'?"":"style='display:none;'"} onclick="delete_board('${dto.seq}')">삭제</button>
+							<button class="btn" ${ldto.id==dto.id ||ldto.role=='ADMIN'?"":"style='display:none;'"} onclick="update_board('${dto.seq}')">수정</button>
 							<button class="btn" onclick="location.href='boardlist.do?page=<%=pageNum%>'">글목록</button>
 						</div>
 					</td>

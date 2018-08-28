@@ -1401,6 +1401,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		$("iframe").attr("src", "bookmark.do");
 	}
 	
+	
 	function reload_free(){
 		$("iframe").attr("src", "boardlist.do?page=1");
 	}

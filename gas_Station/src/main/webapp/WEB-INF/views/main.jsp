@@ -1697,18 +1697,18 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 
 
 <!-- 내정보수정 -->
-<div id="update_info" style="position: absolute; z-index: 6;">
+<div id="update_info" style="position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;">
 	<img alt="창닫기" src="image/close.png" onclick="close_update_info()" style="float: right; position: relative; top: 10px; left: -10px; cursor: pointer;">
-	<div id="info_pwd_chk" style="color: black; width: 100%; height: 100%; text-align: center;">
+	<div id="info_pwd_chk" style="color: white; width: 100%; height: 100%; text-align: center;">
 		<fieldset style="width: 90%; margin: 0 auto; position: relative; top: 250px;">
 			<legend>비밀번호 재확인</legend>
 			비밀번호 입력 : <input type="password" name="info_chk_pwd">
 			<br>
-			<button class="btn_old" onclick="info_chk_pwd()">확인</button>
+			<button class="btn_mini" onclick="info_chk_pwd()">확인</button>
 		</fieldset>
 	</div>
 	<br>
-	<div id="info_change" style="color: black; width: 100%; height: 100%; text-align: center; display: none;">
+	<div id="info_change" style="color: white; width: 100%; height: 100%; text-align: center; display: none;">
 		<span class="login_logo" style="font-size: 40px; text-align: center;">정보수정</span>
 		<fieldset style="width: 90%; margin: 0 auto;">
 			<legend>내정보 수정</legend>
@@ -1720,7 +1720,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				<tr><td>가입일 :</td><td id="old_regdate"></td></tr>
 			</table>
 			<hr>
-			<button class="btn_old" onclick="change_myinfo()">확인</button>
+			<button class="btn_mini" onclick="change_myinfo()">확인</button>
 		</fieldset>
 		<hr style="width: 80%; margin: 20px auto;">
 		<fieldset style="width: 90%; margin: 0 auto;">
@@ -1734,7 +1734,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				</tr>
 			</table>
 			<hr>
-			<button class="btn_old" onclick="change_password()">확인</button>
+			<button class="btn_mini" onclick="change_password()">확인</button>
 		</fieldset>
 		
 	</div>

@@ -21,9 +21,9 @@
 			</div>
 			<div id="pwd_input_div">
 			<span class="input_title">비밀번호</span>
-				<input class="l_input" type="password" name="login_pwd">
+				<input class="l_input" type="password" onkeyup="enterkey()" name="login_pwd">
 			</div>
-			<button class="btn" onclick="gas_login()" style="position: relative; left: 23%; ">로그인</button>
+			<button class="btn" onclick="gas_login()"  style="position: relative; left: 23%; ">로그인</button>
 			<hr>
 			<div id="login_sub">
 				<ul>

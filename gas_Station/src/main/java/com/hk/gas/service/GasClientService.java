@@ -103,4 +103,14 @@ public class GasClientService implements IGasClientService {
 	public boolean update_freeboard(FreeBoardDto dto) {
 		return clientDao.update_freeboard(dto);
 	}
+	
+	@Override
+	public boolean reply_update(FreeBoardDto dto) {
+		return clientDao.reply_update(dto);
+	}
+	
+	@Override
+	public boolean reply_delete(int seq) {
+		return clientDao.reply_delete(seq);
+	}
 }

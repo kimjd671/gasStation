@@ -150,10 +150,18 @@
 </update>
 
 <update id="updatefreeboard" parameterType="FreeBoardDto">	
-	UPDATE GASFREEBOARD SET TITLE=#{title}, CONTENT=#{content},REGDATE=SYSDATE WHERE SEQ=#{seq}
+	UPDATE GASFREEBOARD SET TITLE=#{title}, CONTENT=#{content} WHERE SEQ=#{seq}
+</update>
+
+<update id="updatereply" parameterType="FreeBoardDto">	
+	UPDATE GASFREEBOARD SET CONTENT=#{content} WHERE SEQ=#{seq}
 </update>
 
 <delete id="deletefreeboard" parameterType="int">
+	DELETE FROM GASFREEBOARD WHERE REFER=(SELECT REFER FROM GASFREEBOARD WHERE SEQ=#{seq})
+</delete>
+
+<delete id="deletereply" parameterType="int">
 	DELETE FROM GASFREEBOARD WHERE SEQ=#{seq}
 </delete>
 

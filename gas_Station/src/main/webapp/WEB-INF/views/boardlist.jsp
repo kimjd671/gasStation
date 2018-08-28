@@ -163,6 +163,7 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 </head>
 <body>
 
+
 <div id="container">	
 	<div id="main_container">
 		<div id="logo" style="margin: 0 auto; width: 66%;  text-align: center; ">
@@ -294,11 +295,9 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 						</td>
 					</tr>
 				</table>
-
-				
-			</div>
 		</div>
 	</div>
 </div>
+
 </body>
 </html>

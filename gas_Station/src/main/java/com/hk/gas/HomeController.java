@@ -71,6 +71,18 @@ public class HomeController {
 		model.addAttribute("xy",xy);
 		return "main";
 	}
+
+	@RequestMapping(value = "/aroundSearch.do", method = RequestMethod.GET)
+	public String aroundSearch(Locale locale, Model model,String x,String y) {
+		double nx=Double.parseDouble(x);
+		double ny=Double.parseDouble(y);
+		System.out.println(nx+"/"+ny);
+		String xy=utils.projection(nx, ny);
+		model.addAttribute("x",x);
+		model.addAttribute("y",y);
+		model.addAttribute("xy",xy);
+		return "aroundSearch";
+	}
 	
 	@RequestMapping(value = "/bookmark.do", method = RequestMethod.GET)
 	public String bookmark(Locale locale, Model model,HttpServletRequest request) {
@@ -109,9 +121,6 @@ public class HomeController {
 		}
 		
 	}
-
-	
-
 	
 	@RequestMapping(value = "/boardDetatil.do", method = RequestMethod.GET)
 	public String free_boardDetail(Locale locale, Model model,HttpServletRequest request,HttpServletResponse response) {

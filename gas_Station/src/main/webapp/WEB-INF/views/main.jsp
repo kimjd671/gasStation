@@ -717,26 +717,6 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		
 	}
 	
-// 	//반경검색
-// 	function search_Radius(){
-// 		var radius =$("input[name=sido]").val();
-// 		var pro=$("input[name='prodcd']:checked").val();
-// 		$.ajax({
-// 			url:"http://www.opinet.co.kr/api/aroundAll.do",
-// 			method:"get",
-// 			data:{"out":out,
-// 				"radius":radius,
-// 				"code":code,
-// 				"prodcd":pro,
-// 				"sort":"1",
-// 				"x":myXY[0],
-// 				"y":myXY[1]
-// 			},
-// 			async:true,
-// 			datatype:"xml",
-// 			success:function(xmlData){
-// 				var rows=$(xmlData).find("OIL");
-// 			//	alert(rows.eq(0).children().eq(0).text());
 
 // 				var table=makeTable(rows);
 // 				$("#test_div").empty().append(table);
@@ -1381,7 +1361,12 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	function search_area(){
 	 	if (navigator.geolocation) { // GPS를 지원하면
 	    navigator.geolocation.getCurrentPosition(function(position) {
-			alert("페이지이동");
+	    	var gx= position.coords.latitude; //위도
+	    	var gy= position.coords.longitude; //경도
+	    	$("#sub_container").empty();
+			$("#sub_container").append("<iframe id='frame_sub' scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>")
+	    	$("iframe").attr("src","aroundSearch.do?x="+gx+"&y="+gy);
+			call_sub_container();
 	    }, function(error) {
 	      console.error(error);
 	    }, {

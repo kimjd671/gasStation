@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,16 +86,52 @@ public class HomeController {
 	@RequestMapping(value = "/boardlist.do", method = RequestMethod.GET)
 	public String boardlist(Locale locale, Model model,HttpServletRequest request) {
 		int page=Integer.parseInt(request.getParameter("page"));
-		List<FreeBoardDto> freelist=client.freeboard_List();
-		List<FreeBoardDto> pagelist=client.freepage_List(page);
-		model.addAttribute("freelist",freelist);
-		model.addAttribute("pagelist",pagelist);
-		return "boardlist";
+		String category=(String)request.getParameter("category");
+		String value=(String)request.getParameter("value");
+		if(category!=null) {
+			System.out.println("search:"+category +"/"+value);
+			List<FreeBoardDto> list=client.search_List(category, value);
+			List<FreeBoardDto> pagelist=client.search_page(page, category, value);
+			List<FreeBoardDto> alllist=client.searchall_List(category, value);
+			System.out.println("게시물 검색");
+			model.addAttribute("freelist",list);
+			model.addAttribute("pagelist",pagelist);
+			model.addAttribute("alllist",alllist);
+			return "boardlist";
+		}else {
+			List<FreeBoardDto> list=client.freeboard_List();
+			List<FreeBoardDto> pagelist=client.freepage_List(page);
+			List<FreeBoardDto> alllist=client.freeall_List();
+			model.addAttribute("freelist",list);
+			model.addAttribute("pagelist",pagelist);
+			model.addAttribute("alllist",alllist);
+			return "boardlist";
+		}
+		
 	}
+
+	
+
 	
 	@RequestMapping(value = "/boardDetatil.do", method = RequestMethod.GET)
-	public String free_boardDetail(Locale locale, Model model,HttpServletRequest request) {
+	public String free_boardDetail(Locale locale, Model model,HttpServletRequest request,HttpServletResponse response) {
 		int seq=Integer.parseInt(request.getParameter("seq"));
+		Cookie cookies[] = request.getCookies();
+		Map mapcookie=new HashMap();
+		if(request.getCookies() !=null) {
+			for(int i=0;i<cookies.length; i++) {
+				Cookie obj=cookies[i];
+				mapcookie.put(obj.getName(), obj.getValue());
+			}
+		}
+		String read_cookie =(String)mapcookie.get("readcount");
+		String n_cookie="|"+seq;
+		if(StringUtils.indexOfIgnoreCase(read_cookie, n_cookie)==-1) {
+			Cookie cookie=new Cookie("readcount", read_cookie+n_cookie);
+			cookie.setMaxAge(300000);
+			response.addCookie(cookie);
+			client.free_readcount(seq);
+		}
 		List<FreeBoardDto> reply=client.free_getreply(seq);
 		FreeBoardDto detail=client.free_getboard(seq);
 		model.addAttribute("dto",detail);
@@ -213,6 +251,16 @@ public class HomeController {
 		return map;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/delete_freeboard.do", method = RequestMethod.GET)
+	public Map<String,Boolean> delete_bookmark(Locale locale, Model model,HttpServletRequest request) {
+		int seq=Integer.parseInt(request.getParameter("seq"));
+		boolean isS=client.delete_freeboard(seq);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/freeboard_insert.do", method = RequestMethod.GET)
@@ -224,6 +272,23 @@ public class HomeController {
 		return map;
 	}
 	
-
+	@ResponseBody
+	@RequestMapping(value = "/likeup.do", method = RequestMethod.GET)
+	public Map<String,Boolean> likeup(FreeBoardDto dto,Locale locale, Model model) {
+		boolean isS=client.like_up(dto);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/reply_insert.do", method = RequestMethod.GET)
+	public Map<String,Boolean> reply_insert(FreeBoardDto dto,Locale locale, Model model) {
+		System.out.println(dto);
+		boolean isS=client.reply_insert(dto);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
 	
 }

@@ -84,11 +84,61 @@
 
 
 <select id="freeboardlist" resultType="FreeBoardDto">
-	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC
+	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM GASFREEBOARD WHERE STEP=0 ORDER BY REFER DESC,STEP ASC
 </select>
 
+<select id="alllist" resultType="FreeBoardDto">
+	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC
+</select>
 <select id="freeboardpage" resultType="FreeBoardDto" parameterType="Map">
-	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM (SELECT ROWNUM AS RN , SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM (SELECT * FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC) ) WHERE RN BETWEEN #{min} AND #{max}
+	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM (SELECT ROWNUM AS RN , SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM (SELECT * FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC) WHERE STEP=0) WHERE RN BETWEEN #{min} AND #{max}
+</select>
+
+<select id="searchalllist" resultType="FreeBoardDto" parameterType="Map">
+	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT
+	 FROM GASFREEBOARD 
+	 <if test="search=='id'">
+	 	WHERE ID LIKE '%'||#{index}||'%'
+	 </if>
+	 <if test="search=='title'">
+	 	WHERE TITLE LIKE '%'||#{index}||'%'
+	 </if>
+	 <if test="search=='content'">
+	 	WHERE CONTENT LIKE '%'||#{index}||'%'
+	 </if>
+	ORDER BY REFER DESC,STEP ASC
+</select>
+
+<select id="searchlist" resultType="FreeBoardDto" parameterType="Map">
+	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT
+	 FROM GASFREEBOARD 
+	 <if test="search=='id'">
+	 	WHERE STEP=0 AND ID LIKE '%'||#{index}||'%'
+	 </if>
+	 <if test="search=='title'">
+	 	WHERE STEP=0 AND TITLE LIKE '%'||#{index}||'%'
+	 </if>
+	 <if test="search=='content'">
+	 	WHERE STEP=0 AND CONTENT LIKE '%'||#{index}||'%'
+	 </if>
+	ORDER BY REFER DESC,STEP ASC
+</select>
+
+<select id="searchpage" resultType="FreeBoardDto" parameterType="Map">
+	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT 
+	FROM (SELECT ROWNUM AS RN , SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM (SELECT * FROM GASFREEBOARD ORDER BY REFER DESC,STEP ASC) 
+	<if test="search=='id'">
+	 	 WHERE STEP=0 AND ID LIKE '%'||#{index}||'%'
+	 </if>
+	 <if test="search=='title'">
+	 	 WHERE STEP=0 AND TITLE LIKE '%'||#{index}||'%'
+	 </if>
+	 <if test="search=='content'">
+	 	 WHERE STEP=0 AND CONTENT LIKE '%'||#{index}||'%'
+	 </if>
+	) 
+	WHERE RN BETWEEN #{min} AND #{max}
+	
 </select>
 
 <insert id="insertfreeboard" parameterType="FreeBoardDto">
@@ -103,6 +153,10 @@
 	UPDATE GASFREEBOARD SET TITLE=#{title}, CONTENT=#{content},REGDATE=SYSDATE WHERE SEQ=#{seq}
 </update>
 
+<delete id="deletefreeboard" parameterType="int">
+	DELETE FROM GASFREEBOARD WHERE SEQ=#{seq}
+</delete>
+
 <select id="freegetboard" parameterType="int" resultType="FreeBoardDto">
 	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM GASFREEBOARD WHERE SEQ=#{seq}
 </select>
@@ -114,6 +168,10 @@
 <insert id="freeinsertreply" parameterType="FreeBoardDto">
 	INSERT INTO GASFREEBOARD VALUES(GASFREEBOARD_SEQ.NEXTVAL,#{id},#{title},#{content},SYSDATE,(SELECT REFER FROM GASFREEBOARD WHERE SEQ=#{seq}),(SELECT STEP FROM GASFREEBOARD WHERE SEQ=#{seq})+1,(SELECT DEPTH FROM GASFREEBOARD WHERE SEQ=#{seq})+1,0,null)
 </insert>
+
+<update id="likeup" parameterType="FreeBoardDto">
+	UPDATE GASFREEBOARD SET LIKECOUNT=#{likecount} WHERE SEQ=#{seq}
+</update>
 
 <!-- 	<select id="boardlist" resultType="AnsDto" parameterType="Map"> -->
 <!-- 		SELECT SEQ, ID, TITLE, CONTENT, REGDATE, -->
@@ -160,7 +218,7 @@
 <!-- 				from hkanswerboard WHERE SEQ=#{seq} -->
 <!-- </select> -->
 
-	
+
 <!-- 	<sql id="paramseq"> -->
 <!-- 		SEQ=#{seq} -->
 <!-- 	</sql> -->

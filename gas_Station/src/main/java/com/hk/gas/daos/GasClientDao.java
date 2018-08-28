@@ -35,18 +35,51 @@ public class GasClientDao implements IGasClientDao {
 	}
 	
 	@Override
+	public List<FreeBoardDto> freeall_List() {
+		return sqlSession.selectList(namespace+"alllist");
+	}
+	
+	@Override
 	public List<FreeBoardDto> freeboard_List() {
 		return sqlSession.selectList(namespace+"freeboardlist");
 	}
 	
 	@Override
 	public List<FreeBoardDto> freepage_List(int page) {
-		int pageMin=((page-1)*20)+1;
-		int pageMax=page*20;
-		Map<String,Integer> map=new HashMap<>();
-		map.put("min", pageMin);
-		map.put("max", pageMax);
+		int pageMin=((page-1)*15)+1;
+		int pageMax=page*15;
+		Map<String,String> map=new HashMap<>();
+		map.put("min", pageMin+"");
+		map.put("max", pageMax+"");
 		return sqlSession.selectList(namespace+"freeboardpage",map);
+	}
+	
+	@Override
+	public List<FreeBoardDto> searchall_List(String category, String value) {
+		Map<String, String> map=new HashMap<>();
+		map.put("search", category);
+		map.put("index", value);
+		return sqlSession.selectList(namespace+"searchalllist",map);
+	}
+	
+	@Override
+	public List<FreeBoardDto> search_List(String category, String value) {
+		Map<String, String> map=new HashMap<>();
+		map.put("search", category);
+		map.put("index", value);
+		return sqlSession.selectList(namespace+"searchlist",map);
+	}
+	
+	@Override
+	public List<FreeBoardDto> search_page(int page, String category, String value) {
+		int pageMin=((page-1)*15)+1;
+		int pageMax=page*15;
+		Map<String,String> map=new HashMap<>();
+		map.put("min", pageMin+"");
+		map.put("max", pageMax+"");
+		map.put("search", category);
+		map.put("index", value);
+		return sqlSession.selectList(namespace+"searchpage",map);
 	}
 	
 	@Override
@@ -71,4 +104,33 @@ public class GasClientDao implements IGasClientDao {
 		return sqlSession.selectList(namespace+"freegetreply",seq);
 	}
 	
+	@Override
+	public boolean free_readcount(int seq) {
+		int count =sqlSession.update(namespace+"readcount",seq);
+		return count>0?true:false;
+	}
+	
+	@Override
+	public boolean like_up(FreeBoardDto dto) {
+		int count =sqlSession.update(namespace+"likeup",dto);
+		return count>0?true:false;
+	}
+	
+	@Override
+	public boolean reply_insert(FreeBoardDto dto) {
+		int count=sqlSession.insert(namespace+"freeinsertreply",dto);
+		return count>0?true:false;
+	}
+	
+	@Override
+	public boolean delete_freeboard(int seq) {
+		int count=sqlSession.delete(namespace+"deletefreeboard",seq);
+		return count>0?true:false;
+	}
+	
+	@Override
+	public boolean update_freeboard(FreeBoardDto dto) {
+		int count=sqlSession.update(namespace+"updatefreeboard",dto);
+		return count>0?true:false;
+	}
 }

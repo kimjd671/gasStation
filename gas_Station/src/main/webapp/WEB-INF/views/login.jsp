@@ -23,7 +23,7 @@
 			<span class="input_title">비밀번호</span>
 				<input class="l_input" type="password" name="login_pwd">
 			</div>
-			<button class="login_btn_big" onclick="gas_login()">로그인</button>
+			<button class="btn" onclick="gas_login()" style="position: relative; left: 23%; ">로그인</button>
 			<hr>
 			<div id="login_sub">
 				<ul>
@@ -105,7 +105,7 @@
 					</tr>
 					<tr>
 						<th colspan="2">
-							<button onclick="find_id_ajax()" class="btn_mini">확인</button>
+							<button onclick="find_id_ajax()" class="btn_old">확인</button>
 						</th>
 					</tr>
 				</table>
@@ -124,7 +124,7 @@
 					</tr>
 					<tr>
 						<th colspan="2">
-							<button onclick="find_pwd_ajax()" class="btn_mini">확인</button>
+							<button onclick="find_pwd_ajax()" class="btn_old">확인</button>
 						</th>
 					</tr>
 				</table>

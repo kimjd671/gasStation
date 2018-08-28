@@ -1,3 +1,4 @@
+<%@page import="com.hk.gas.dtos.GasUserDto"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.hk.gas.utils.Util"%>
 <%@page import="java.util.List"%>
@@ -48,6 +49,11 @@ th{background-color:  white; color: black; border: 1px dashed black;}
 <%
 	List<BookMarkDto> list=(List<BookMarkDto>)request.getAttribute("lists");
 	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+	GasUserDto ldtos=(GasUserDto)session.getAttribute("ldto");
+	if(ldtos==null){
+		out.println("<script type='text/javascript'>alert('로그인정보가 없습니다.');parent.document.location.reload();</script>");
+		return;
+	}
 // 	BookMarkDto bkdto=(BookMarkDto)session.getAttribute("ldto");
 %>
 <div id ="Progress_Loading" style="position: absolute; z-index: 6; width: 100%;"><!-- 로딩바 -->

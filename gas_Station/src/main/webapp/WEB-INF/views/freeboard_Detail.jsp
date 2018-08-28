@@ -472,7 +472,7 @@ h3{color: white; text-align: center;}
 			</table>
 			</div>
 		</div>
-		<div id="update_form" style="display:none;  width: 70%; height: 70%; color:black; background-color: #F4F6FC;position:absolute;  top: 40%;left: 50%;  transform: translate(-50%, -50%);" >
+		<div id="update_form" style="display:none;  width: 70%; height: 60%; color:black; background-color: #F4F6FC;position:absolute;  top: 50%;left: 50%;  transform: translate(-50%, -50%);" >
 				<br>
 				<span class='login_logo' style="font-size: 50px; text-align: center;">글수정</span>
 				<table style="width: 95%;  margin: 0 auto; position: relative; top: 15px;">

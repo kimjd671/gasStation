@@ -426,6 +426,13 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		
 	});
 
+	function enterkey() {
+        if(window.event.keyCode == 13) {
+             gas_login();
+        }
+	}
+
+	
 	$(document).ajaxStart(function(){
 		$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
 		$("#frame_sub").contents().find("#Progress_Loading").show();

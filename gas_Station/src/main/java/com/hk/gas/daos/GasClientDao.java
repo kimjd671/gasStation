@@ -133,4 +133,16 @@ public class GasClientDao implements IGasClientDao {
 		int count=sqlSession.update(namespace+"updatefreeboard",dto);
 		return count>0?true:false;
 	}
+	
+	@Override
+	public boolean reply_update(FreeBoardDto dto) {
+		int count=sqlSession.update(namespace+"updatereply",dto);
+		return count>0?true:false;
+	}
+	
+	@Override
+	public boolean reply_delete(int seq) {
+		int count=sqlSession.update(namespace+"deletereply",seq);
+		return count>0?true:false;
+	}
 }

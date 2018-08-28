@@ -253,9 +253,19 @@ public class HomeController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/delete_freeboard.do", method = RequestMethod.GET)
-	public Map<String,Boolean> delete_bookmark(Locale locale, Model model,HttpServletRequest request) {
+	public Map<String,Boolean> delete_freeboard(Locale locale, Model model,HttpServletRequest request) {
 		int seq=Integer.parseInt(request.getParameter("seq"));
 		boolean isS=client.delete_freeboard(seq);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/delete_reply.do", method = RequestMethod.GET)
+	public Map<String,Boolean> delete_reply(Locale locale, Model model,HttpServletRequest request) {
+		int seq=Integer.parseInt(request.getParameter("seq"));
+		boolean isS=client.reply_delete(seq);
 		Map<String, Boolean> map=new HashMap<>();
 		map.put("isS",isS);
 		return map;
@@ -267,6 +277,26 @@ public class HomeController {
 	public Map<String,Boolean> freeboard_insert(FreeBoardDto dto,Locale locale, Model model) {
 		System.out.println(dto);
 		boolean isS=client.freeborad_insert(dto);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/freeboard_update.do", method = RequestMethod.GET)
+	public Map<String,Boolean> freeboard_update(FreeBoardDto dto,Locale locale, Model model) {
+		System.out.println(dto);
+		boolean isS=client.update_freeboard(dto);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/reply_update.do", method = RequestMethod.GET)
+	public Map<String,Boolean> reply_update(FreeBoardDto dto,Locale locale, Model model) {
+		System.out.println(dto);
+		boolean isS=client.reply_update(dto);
 		Map<String, Boolean> map=new HashMap<>();
 		map.put("isS",isS);
 		return map;

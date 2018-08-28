@@ -237,8 +237,139 @@ h3{color: white; text-align: center;}
 	}
 	
 	function update_board(){
+		var up=confirm("수정하시겠습니까?");
+		if(up){
+			var seq='${dto.seq}';
+			var title=$("input[name=title]").val();
+			var content=$("textarea[name=content]").val();
+			$.ajax({
+				url:"freeboard_update.do",
+				method:"get",
+				data:{"seq":seq,
+					"title":title,
+					"content":content
+				},
+				async:false,
+				dataType:"json",
+				success:function(Data){
+					var isS=Data["isS"];
+					if(isS){
+						close_update();
+	 					location.reload();
+					}else{
+						alert("글수정실패");
+					}
+					
+				},
+				error:function(){
+					alert("서버통신실패");
+				}
+			});
+		}
 		
 	}
+	
+	function call_updateform(){
+		var title='${dto.title}';
+		var content='<%=dtos.getContent().replaceAll("\n", "<br>")%>';
+		$("input[name=title]").val(title);
+		$("textarea[name=content]").val(content.replace(/<br>/gi, "\r\n"));
+		$("#update_form").fadeIn();
+	}
+	
+	function close_update(){
+		$("#update_form input").not("input[name=id]").val("");
+		$("#update_form textarea").val("");
+		$("#update_form").fadeOut();
+	}
+	
+	function update_reply(seq){
+		var he=$("#reply_view"+seq).height();
+		var content=$("#reply_view"+seq).html();
+		$("#reply_view"+seq).css("display","none");
+		$("#reply_input"+seq).css("display","block");
+		$("#reply_input"+seq).children("textarea").height(he);
+		$("#reply_input"+seq).children("textarea").val(content.replace(/<br>/gi, "\r\n"));
+		
+		$("#reply_del"+seq).css("display","none");
+		$("#reply_up"+seq).css("display","none");
+		
+		$("#reply_up_close"+seq).css("display","inline-block");
+		$("#reply_up_done"+seq).css("display","inline-block");
+		
+	}
+	function reply_up_close(seq) {
+		
+		$("#reply_view"+seq).css("display","block");
+		$("#reply_input"+seq).css("display","none");
+		
+		$("#reply_del"+seq).css("display","inline-block");
+		$("#reply_up"+seq).css("display","inline-block");
+		
+		$("#reply_up_close"+seq).css("display","none");
+		$("#reply_up_done"+seq).css("display","none");
+	}
+	
+	
+	function reply_up_done(seq){
+		
+		var up=confirm("수정하시겠습니까?");
+		if(up){
+			var content=$("textarea[name=reply_"+seq+"]").val()
+			$.ajax({
+				url:"reply_update.do",
+				method:"get",
+				data:{"seq":seq,
+					"content":content
+				},
+				async:false,
+				dataType:"json",
+				success:function(Data){
+					var isS=Data["isS"];
+					if(isS){
+						$("#reply_view"+seq).html(content.replace(/\n/gi,"<br>"));
+						reply_up_close(seq);
+	 					
+					}else{
+						alert("댓글수정실패");
+					}
+					
+				},
+				error:function(){
+					alert("서버통신실패");
+				}
+			});
+		}
+		
+	}
+	
+	function reply_delete(seq){
+		var up=confirm("삭제하시겠습니까?");
+		if(up){
+			$.ajax({
+				url:"delete_reply.do",
+				method:"get",
+				data:{"seq":seq
+				},
+				async:false,
+				dataType:"json",
+				success:function(Data){
+					var isS=Data["isS"];
+					if(isS){
+	 					location.reload();
+					}else{
+						alert("댓글삭제실패");
+					}
+					
+				},
+				error:function(){
+					alert("서버통신실패");
+				}
+			});
+		}
+	}
+	
+	
 </script>
 
 </head>
@@ -277,7 +408,7 @@ h3{color: white; text-align: center;}
 							<button class="btn" onclick="display_reply()">댓글[${fn:length(reply)-1}]</button>
 							<button class="btn" id="like_btn" onclick="likethis()">추천하기</button>
 							<button class="btn" ${ldto.id==dto.id ||ldto.role=='ADMIN'?"":"style='display:none;'"} onclick="delete_board('${dto.seq}')">삭제</button>
-							<button class="btn" ${ldto.id==dto.id ||ldto.role=='ADMIN'?"":"style='display:none;'"} onclick="update_board('${dto.seq}')">수정</button>
+							<button class="btn" ${ldto.id==dto.id ||ldto.role=='ADMIN'?"":"style='display:none;'"} onclick="call_updateform()">수정</button>
 							<button class="btn" onclick="location.href='boardlist.do?page=<%=pageNum%>'">글목록</button>
 						</div>
 					</td>
@@ -302,13 +433,16 @@ h3{color: white; text-align: center;}
 									<td><%=redto.getId()%> (<%=yyyyMMddhhmm.format(redto.getRegdate())%>)</td>
 								</tr>
 								<tr>
-									<td><%=redto.getContent()%></td>
+									<td id="reply_view<%=redto.getSeq()%>"><%=redto.getContent().replaceAll("\n", "<br>")%></td>
+									<td id="reply_input<%=redto.getSeq()%>" style="display: none; "><textarea name="reply_<%=redto.getSeq()%>" class="autosize" style=" width:100%; "></textarea></td>
 								</tr>
 								<tr>
 									<td style="text-align: right;">
 										<div>	
-											<button class="btn" <%=ldtos.getId().equals(redto.getId())?"":"disabled" %>>수정</button>
-											<button class="btn" <%=ldtos.getId().equals(redto.getId())?"":"disabled" %>>삭제</button>
+											<button id="reply_up<%=redto.getSeq()%>"class="btn" <%=ldtos.getId().equals(redto.getId())?"":"disabled" %> onclick="update_reply('<%=redto.getSeq()%>')">수정</button>
+											<button id="reply_del<%=redto.getSeq()%>" class="btn" <%=ldtos.getId().equals(redto.getId())?"":"disabled" %> onclick="reply_delete('<%=redto.getSeq()%>')">삭제</button>
+											<button id="reply_up_done<%=redto.getSeq()%>" class="btn" style="display: none;" onclick="reply_up_done('<%=redto.getSeq()%>')">수정완료</button>
+											<button id="reply_up_close<%=redto.getSeq()%>" style="display: none;" class="btn" onclick="reply_up_close('<%=redto.getSeq()%>')">취소</button>
 										</div>
 									</td>
 								</tr>
@@ -337,7 +471,32 @@ h3{color: white; text-align: center;}
 			</table>
 			</div>
 		</div>
-		
+		<div id="update_form" style="display:none;  width: 70%; height: 70%; color:black; background-color: #F4F6FC;position:absolute;  top: 40%;left: 50%;  transform: translate(-50%, -50%);" >
+				<br>
+				<span class='login_logo' style="font-size: 50px; text-align: center;">글수정</span>
+				<table style="width: 95%;  margin: 0 auto; position: relative; top: 15px;">
+					<col width="100px;">
+					<tr>
+						<th>아이디</th>
+						<td><input type="text" name="id" style="width: 150px;" readonly="readonly" value="${dto.id}"></td>
+					</tr>
+					<tr>
+						<th>제목</th>
+						<td><input type="text" name="title" style="width: 90%;"></td>
+					</tr>
+			
+					<tr>
+						<th>내용</th>
+						<td><textarea rows="20" style="width: 100%;" name="content"></textarea></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: right;">
+							<button onclick="update_board()">완료</button>
+							<button onclick="close_update()">취소</button>
+						</td>
+					</tr>
+				</table>
+		</div>
 		
 	</div>
 </div>

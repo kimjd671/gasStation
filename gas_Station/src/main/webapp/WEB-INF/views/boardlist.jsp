@@ -152,7 +152,6 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 	for(int i=0;i<alllist.size();i++){
 		FreeBoardDto dto=alllist.get(i);
 		arr[dto.getRefer()]= arr[dto.getRefer()]+1;
-		System.out.println(arr[dto.getRefer()]);
 	}
 	
 %>
@@ -287,11 +286,9 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 						</td>
 					</tr>
 				</table>
-
-				
-			</div>
 		</div>
 	</div>
 </div>
+
 </body>
 </html>

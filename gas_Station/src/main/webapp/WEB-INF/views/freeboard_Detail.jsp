@@ -20,8 +20,8 @@ html,body{margin:0; width:100%; height:100%; position: absolute;};
 *>div{border-color: white; margin: 2px;}
 .login_logo{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; font-family: 'Jeju Hallasan', serif; }
 #container{ width: 1440px; height:956px; overflow: hidden; margin: 0 auto; position: relative;}
-
-#main_container{background-color: #3A3A3C; overflow-y: scroll; overflow-x:auto; width: 100%; height:83%; position: absolute; }
+.back_btn{cursor: pointer;margin: 15px;display: inline;}
+#main_container{background-color: #3A3A3C; overflow-y: scroll; overflow-x:auto; width: 100%; height:100%; position: absolute; }
 ::-webkit-scrollbar{display:none;}
 ::-moz-scrollbar{display: none;}
 a{color: white;  text-decoration:none;}
@@ -376,7 +376,8 @@ h3{color: white; text-align: center;}
 <body>
 <div id="container">	
 	<div id="main_container">
-		<div id="logo" style="margin: 0 auto; width: 66%; text-align: center; ">
+	<img class='back_btn' src='image/back.png' alt='돌아가기' onclick='parent.call_main_container()'>
+		<div id="logo" style="margin: 0 auto; width: 66%;  text-align: center;display: inline-block; left: 40%; position: relative; transform: translate(-50%,-50%); ">
 			<span class='login_logo'>글상세보기</span>
 		</div>
 		<div id="detail_div">

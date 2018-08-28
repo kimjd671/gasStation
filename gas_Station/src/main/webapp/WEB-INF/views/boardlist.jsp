@@ -26,7 +26,7 @@ html,body{margin:0; width:100%; height:100%; position: absolute;};
 #login_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:955px; position: absolute; left: 1510px; }
 a{color: white;  text-decoration:none;}
 ul{list-style: none;}
-.back_btn{cursor: pointer;}
+.back_btn{cursor: pointer;margin: 15px;display: inline;}
 .table{ margin: 0 auto; top: 50px;position: relative; border-collapse: collapse; width:70%; height:65%;border: 1px solid #dfbe6a; color: white; line-height: 30px;}
 td{border: 1px solid #dfbe6a; height: 34px;}
 th{background-color:  white; color: black; border: 1px dashed black;height: 34px;}
@@ -166,7 +166,8 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 
 <div id="container">	
 	<div id="main_container">
-		<div id="logo" style="margin: 0 auto; width: 66%;  text-align: center; ">
+	<img class='back_btn' src='image/back.png' alt='돌아가기' onclick='parent.call_main_container()'>
+		<div id="logo" style="margin: 0 auto; width: 66%;  text-align: center;display: inline-block; left: 40%; position: relative; transform: translate(-50%,-50%); ">
 			<span class='login_logo'>자유게시판</span>
 		</div>
 		<table class="table">

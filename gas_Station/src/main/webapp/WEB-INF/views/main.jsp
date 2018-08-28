@@ -1518,7 +1518,6 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	}
 	
 	
-	
 
 </script>
 </head>
@@ -1574,7 +1573,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	<area id="11" shape="poly" onclick="chk_sido(this)" coords="37,459,50,448,73,442,85,441,86,440,89,440,92,443,95,443,97,446,99,450,97,452,98,454,89,465,87,467,70,471,54,471,47,472,44,475,41,475,34,467,35,460">
 </map>
 <div id="gu_map" style="background-color: #3A3A3C; border-top:1px solid #dfbe6a;  width: 100%; margin: 0 auto;">
-	<select id="gugun_selbar" name="gugun_selbar" onchange="gugunsel(this)" style="float: right;" >  </select>
+	<select id="gugun_selbar" name="gugun_selbar" onchange="gugunsel(this)" style="float: right; background-color: #3A3A3C; color: #dfbe6a; border-color: #dfbe6a; margin-top: 5px; height: 25px; width: 100px; " >  </select>
 	<img id="imgs_gugun"  style="margin: 0 auto; display: block;">
 </div>
 </div>

@@ -18,8 +18,7 @@
 <style type="text/css">
 	#header,#footer{
 		height: 80px;
-		background-color: #70F170;
-		text-align: center;
+		background-color: #70F170;/
 		line-height: 80px;
 	}
 	#container{

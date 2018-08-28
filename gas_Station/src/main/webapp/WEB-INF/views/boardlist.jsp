@@ -57,8 +57,39 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
   background-position: 99% 50%;
 }
 
+.paging:hover{
+	color:#dfbe6a;
+}
+
 
 </style>
+<%
+	List<FreeBoardDto> list=(List<FreeBoardDto>)request.getAttribute("pagelist");
+	List<FreeBoardDto> alllist=(List<FreeBoardDto>)request.getAttribute("alllist");
+	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat hhmm = new SimpleDateFormat("HH:mm");
+	Calendar cal=Calendar.getInstance();
+	String year=cal.get(cal.YEAR)+"";
+	String today=cal.get(cal.DATE)+"";
+	String month=(cal.get(cal.MONTH)+1)+"";
+	int pageNum =Integer.parseInt(request.getParameter("page"));
+	if(today.length()<2){
+		today="0"+today;
+	}
+	if(month.length()<2){
+		month="0"+month;
+	}
+	String yymmdd=year+"-"+month+"-"+today;
+	
+	int arr[]=new int[1000];
+	int j=0;
+	for(int i=0;i<alllist.size();i++){
+		FreeBoardDto dto=alllist.get(i);
+		arr[dto.getRefer()]= arr[dto.getRefer()]+1;
+		System.out.println(arr[dto.getRefer()]);
+	}
+	
+%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -72,6 +103,8 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 			document.location.reload();
 			}
 		}
+		var page_num='<%=pageNum%>';
+		$(".paging").eq(page_num-1).css("color","#dfbe6a");
 	});
 
 	function call_insertform(){
@@ -129,33 +162,7 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 
 </head>
 <body>
-<%
-	List<FreeBoardDto> list=(List<FreeBoardDto>)request.getAttribute("pagelist");
-	List<FreeBoardDto> alllist=(List<FreeBoardDto>)request.getAttribute("alllist");
-	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
-	SimpleDateFormat hhmm = new SimpleDateFormat("HH:mm");
-	Calendar cal=Calendar.getInstance();
-	String year=cal.get(cal.YEAR)+"";
-	String today=cal.get(cal.DATE)+"";
-	String month=(cal.get(cal.MONTH)+1)+"";
-	int pageNum =Integer.parseInt(request.getParameter("page"));
-	if(today.length()<2){
-		today="0"+today;
-	}
-	if(month.length()<2){
-		month="0"+month;
-	}
-	String yymmdd=year+"-"+month+"-"+today;
-	
-	int arr[]=new int[1000];
-	int j=0;
-	for(int i=0;i<alllist.size();i++){
-		FreeBoardDto dto=alllist.get(i);
-		arr[dto.getRefer()]= arr[dto.getRefer()]+1;
-		System.out.println(arr[dto.getRefer()]);
-	}
-	
-%>
+
 <div id="container">	
 	<div id="main_container">
 		<div id="logo" style="margin: 0 auto; width: 66%;  text-align: center; ">
@@ -237,13 +244,13 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 					if(category==null){
 						%>
 						<c:forEach var="a" items="${freelist}" begin="1" varStatus="stat" end="${(fn:length(freelist)/15)+1}">
-						<a href="boardlist.do?page=${stat.index}" style="font-weight: bold">${stat.index}</a>
+						<a class="paging" href="boardlist.do?page=${stat.index}" style="font-weight: bold">${stat.index}</a>
 						</c:forEach>
 						<%
 					}else{
 						%>
 						<c:forEach var="a" items="${freelist}" begin="1" varStatus="stat" end="${(fn:length(freelist)/15)+1}">
-						<a href="boardlist.do?page=${stat.index}&category=<%=category%>&value=<%=value%>" style="font-weight: bold">${stat.index}</a>
+						<a class="paging" href="boardlist.do?page=${stat.index}&category=<%=category%>&value=<%=value%>" style="font-weight: bold">${stat.index}</a>
 						</c:forEach>
 						<%
 					}

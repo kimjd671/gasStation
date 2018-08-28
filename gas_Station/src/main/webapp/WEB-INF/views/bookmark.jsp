@@ -26,7 +26,7 @@ ul{list-style: none;}
 .login_logo{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; font-family: 'Jeju Hallasan', serif; }
 #bookmark_list{ color: white; margin: 0 auto; position: relative; top: 30px; width: 80%; border-collapse: collapse; border: 1px solid #dfbe6a;}
 td{border: 1px solid #dfbe6a; height: 50px;}
-th{background-color:  white; color: black; border: 1px dashed black;}
+th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">

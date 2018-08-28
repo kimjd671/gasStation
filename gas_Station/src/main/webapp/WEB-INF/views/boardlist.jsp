@@ -29,7 +29,7 @@ ul{list-style: none;}
 .back_btn{cursor: pointer;}
 .table{ margin: 0 auto; top: 50px;position: relative; border-collapse: collapse; width:70%; height:65%;border: 1px solid #dfbe6a; color: white; line-height: 30px;}
 td{border: 1px solid #dfbe6a; height: 34px;}
-th{background-color:  white; color: black; border: 1px dashed black;height: 34px;}
+th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 34px;}
 .btn {
   display: inline-block;
   background: transparent;
@@ -258,12 +258,12 @@ th{background-color:  white; color: black; border: 1px dashed black;height: 34px
 				%>		
 				</div>
 				<div>
-					<select name="category" style="float: left; margin: 2px; width: 70px; height: 33px;">
+					<select name="category" style="float: left; margin: 2px; width: 70px; height: 33px; background-color: #3A3A3C; color:#dfbe6a;  border-color:#dfbe6a; ">
 						<option value="find_id">아이디</option>
 						<option value="find_title">글 제목</option>
 						<option value="find_content">내용</option>
 					</select>
-					<input type="text" name="findvalue"   style="float: left; margin: 2px; width:180px; height:33px; ">
+					<input type="text" name="findvalue"   style="float: left; margin: 2px; width:180px; height:33px; background-color: #3A3A3C; color: white; border-color:#dfbe6a; ">
 					<button class="btn" style="float: left; margin: 2px; " onclick="search_board()">검색</button>
 				 <button class="btn" onclick="call_insertform()" >글쓰기</button>
 				 </div>

@@ -283,6 +283,7 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 			 </td>
 			</tr>
 		</table>
+
 		<div id="insert_form">
 				<br>
 				<span class='login_logo' style="font-size: 50px; text-align: center;">글쓰기</span>

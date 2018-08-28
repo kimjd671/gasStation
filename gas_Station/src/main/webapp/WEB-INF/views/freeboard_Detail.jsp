@@ -62,11 +62,11 @@ h3{color: white; text-align: center;}
 #update_form{
 	display:none;  
 	width: 70%; 
-	height: 70%; 
+	height: 60%; 
 	color:black; 
 	background-color: #3A3A3C;
 	position:absolute;  
-	top: 40%;
+	top: 50%;
 	left: 49.9999%;  
 	transform: translate(-50%, -50%);
 	border:5px solid #dfbe6a;

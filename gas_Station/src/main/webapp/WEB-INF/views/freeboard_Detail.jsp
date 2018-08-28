@@ -20,8 +20,8 @@ html,body{margin:0; width:100%; height:100%; position: absolute;};
 *>div{border-color: white; margin: 2px;}
 .login_logo{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; font-family: 'Jeju Hallasan', serif; }
 #container{ width: 1440px; height:956px; overflow: hidden; margin: 0 auto; position: relative;}
-
-#main_container{background-color: #3A3A3C; overflow-y: scroll; overflow-x:auto; width: 100%; height:83%; position: absolute; }
+.back_btn{cursor: pointer;margin: 15px;display: inline;}
+#main_container{background-color: #3A3A3C; overflow-y: scroll; overflow-x:auto; width: 100%; height:100%; position: absolute; }
 ::-webkit-scrollbar{display:none;}
 ::-moz-scrollbar{display: none;}
 a{color: white;  text-decoration:none;}
@@ -59,6 +59,20 @@ h3{color: white; text-align: center;}
   color: $white;
   background-position: 99% 50%;
 }
+#update_form{
+	display:none;  
+	width: 70%; 
+	height: 60%; 
+	color:black; 
+	background-color: #3A3A3C;
+	position:absolute;  
+	top: 50%;
+	left: 49.9999%;  
+	transform: translate(-50%, -50%);
+	border:5px solid #dfbe6a;
+	color: white;
+}
+
 
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -376,7 +390,8 @@ h3{color: white; text-align: center;}
 <body>
 <div id="container">	
 	<div id="main_container">
-		<div id="logo" style="margin: 0 auto; width: 66%; text-align: center; ">
+	<img class='back_btn' src='image/back.png' alt='돌아가기' onclick='parent.call_main_container()'>
+		<div id="logo" style="margin: 0 auto; width: 66%;  text-align: center;display: inline-block; left: 40%; position: relative; transform: translate(-50%,-50%); ">
 			<span class='login_logo'>글상세보기</span>
 		</div>
 		<div id="detail_div">
@@ -471,28 +486,28 @@ h3{color: white; text-align: center;}
 			</table>
 			</div>
 		</div>
-		<div id="update_form" style="display:none;  width: 70%; height: 70%; color:black; background-color: #F4F6FC;position:absolute;  top: 40%;left: 50%;  transform: translate(-50%, -50%);" >
+		<div id="update_form">
 				<br>
 				<span class='login_logo' style="font-size: 50px; text-align: center;">글수정</span>
-				<table style="width: 95%;  margin: 0 auto; position: relative; top: 15px;">
+				<table style="width: 95%;  margin: 0 auto; position: relative; top: 15px; border-collapse: collapse;">
 					<col width="100px;">
 					<tr>
 						<th>아이디</th>
-						<td><input type="text" name="id" style="width: 150px;" readonly="readonly" value="${dto.id}"></td>
+						<td><input type="text" name="id" style="background-color: #3A3A3C; color:white; border:none; width: 150px;" readonly="readonly" value="${dto.id}"></td>
 					</tr>
 					<tr>
 						<th>제목</th>
-						<td><input type="text" name="title" style="width: 90%;"></td>
+						<td><input type="text" name="title" style="background-color: #3A3A3C; color:white; border:none; width: 90%;"></td>
 					</tr>
 			
 					<tr>
 						<th>내용</th>
-						<td><textarea rows="20" style="width: 100%;" name="content"></textarea></td>
+						<td><textarea rows="20" style="background-color: #3A3A3C; color:white; border:none; width: 100%;" name="content"></textarea></td>
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align: right;">
-							<button onclick="update_board()">완료</button>
-							<button onclick="close_update()">취소</button>
+							<button class="btn" onclick="update_board()">완료</button>
+							<button class="btn" onclick="close_update()">취소</button>
 						</td>
 					</tr>
 				</table>

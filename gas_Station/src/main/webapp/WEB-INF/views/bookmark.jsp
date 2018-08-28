@@ -22,7 +22,7 @@ html,body{margin:0; width:100%; height:100%; position: absolute;};
 #main_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:955px; position: absolute; }
 a{color: white;  text-decoration:none;}
 ul{list-style: none;}
-.back_btn{cursor: pointer;}
+.back_btn{cursor: pointer;margin: 15px;display: inline;}
 .login_logo{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; font-family: 'Jeju Hallasan', serif; }
 #bookmark_list{ color: white; margin: 0 auto; position: relative; top: 30px; width: 80%; border-collapse: collapse; border: 1px solid #dfbe6a;}
 td{border: 1px solid #dfbe6a; height: 50px;}
@@ -61,7 +61,8 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 </div>
 <div id="container">	
 	<div id="main_container">
-		<div id="logo" style="margin: 0 auto; width: 66%; text-align: center; ">
+		<img class='back_btn' src='image/back.png' alt='돌아가기' onclick='parent.call_main_container()'>
+		<div id="logo" style="margin: 0 auto; width: 66%;  text-align: center;display: inline-block; left: 40%; position: relative; transform: translate(-50%,-50%); ">
 			<span class='login_logo'>즐겨찾기</span>
 		</div>
 		<table id="bookmark_list">

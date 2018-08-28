@@ -60,6 +60,18 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 .paging:hover{
 	color:#dfbe6a;
 }
+#insert_form{
+	display:none;  
+	width: 70%; 
+	height: 60%; 
+	color:white; 
+	background-color: #3A3A3C; 
+	position:absolute;  
+	top: 50%;
+	left: 49.9999%;  
+	transform: translate(-50%, -50%); 
+	border:5px solid #dfbe6a;
+}
 
 
 </style>
@@ -271,28 +283,28 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 			 </td>
 			</tr>
 		</table>
-		<div id="insert_form" style="display:none;  width: 70%; height: 60%; color:black; background-color: #F4F6FC;position:absolute;  top: 30%;left: 50%;  transform: translate(-50%, -50%);" >
+		<div id="insert_form">
 				<br>
 				<span class='login_logo' style="font-size: 50px; text-align: center;">글쓰기</span>
-				<table style="width: 95%;  margin: 0 auto; position: relative; top: 15px;">
+				<table style="width: 95%;  margin: 0 auto; position: relative; top: 15px; border-collapse: collapse;">
 					<col width="100px;">
 					<tr>
 						<th>아이디</th>
-						<td><input type="text" name="id" style="width: 150px;" readonly="readonly" value="${ldto.id}"></td>
+						<td><input type="text" name="id" style="border: none; background-color:#3A3A3C; color:white; width: 150px;" readonly="readonly" value="${ldto.id}"></td>
 					</tr>
 					<tr>
 						<th>제목</th>
-						<td><input type="text" name="title" style="width: 90%;"></td>
+						<td><input type="text" name="title" style="background-color:#3A3A3C; color:white; width: 90%; border: none;"></td>
 					</tr>
 			
 					<tr>
 						<th>내용</th>
-						<td><textarea rows="20" style="width: 100%;" name="content"></textarea></td>
+						<td><textarea rows="20" style="background-color:#3A3A3C; color:white; width: 100%; border: none;" name="content" ></textarea></td>
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align: right;">
-							<button onclick="insert()">완료</button>
-							<button onclick="close_insert()">취소</button>
+							<button class="btn" onclick="insert()">완료</button>
+							<button class="btn" onclick="close_insert()">취소</button>
 						</td>
 					</tr>
 				</table>

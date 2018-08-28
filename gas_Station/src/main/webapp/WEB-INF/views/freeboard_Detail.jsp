@@ -436,7 +436,7 @@ h3{color: white; text-align: center;}
 					<%
 					if(reply==null || reply.size()<=1){
 						%>
-							<span style="color: white;">작성된 댓글이 없니다.</span>
+							<span style="color: white;">작성된 댓글이 없습니다.</span>
 							<hr style="display: block; position: relative ; margin: 10px; background-color: gray; color: gray; border-color: gray;">
 						<%
 					}
@@ -476,7 +476,7 @@ h3{color: white; text-align: center;}
 				<table class="table" style="top:25px;">
 				<tr>
 					<th>내용</th>
-					<td class="reply_textarea"><textarea  name="reply_content"  class="autosize" style=" width:100%; "></textarea></td>
+					<td class="reply_textarea"><textarea  name="reply_content"  class="autosize" style="font-size:15px; width:100%; "></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: right;">

@@ -1,6 +1,7 @@
 package com.hk.gas;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,8 @@ import com.hk.gas.dtos.GasUserDto;
 import com.hk.gas.service.GasClientService;
 import com.hk.gas.service.GasUserService;
 import com.hk.gas.utils.Util;
+
+import net.sf.json.JSONArray;
 
 @Controller
 public class HomeController {
@@ -66,6 +69,8 @@ public class HomeController {
 		//Point2D xy=utils.test01(nx,ny);
 		String xy=utils.projection(nx, ny);
 		//System.out.println(xy.getX()+"/"+xy.getY());
+		
+		
 		model.addAttribute("x",x);
 		model.addAttribute("y",y);
 		model.addAttribute("xy",xy);
@@ -76,7 +81,6 @@ public class HomeController {
 	public String aroundSearch(Locale locale, Model model,String x,String y) {
 		double nx=Double.parseDouble(x);
 		double ny=Double.parseDouble(y);
-		System.out.println(nx+"/"+ny);
 		String xy=utils.projection(nx, ny);
 		model.addAttribute("x",x);
 		model.addAttribute("y",y);
@@ -148,6 +152,39 @@ public class HomeController {
 		return "freeboard_Detail";
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "/projection.do", method = RequestMethod.GET)
+	public List<Map<String,Object>> projection(Locale locale, Model model,HttpServletRequest request){
+		
+		String data=request.getParameter("data");
+		List<Map<String,Object>> resultMap = new ArrayList<Map<String,Object>>();
+		resultMap=JSONArray.fromObject(data);
+		for (int i=0;i<resultMap.size();i++) {
+			Map<String,Object> map=new HashMap<>();
+			map=resultMap.get(i);
+	        System.out.println(map.get("name") + " : " + map.get("price"));
+//	        System.out.println(map.get("x"));
+//	        if(map.get("x").toString().indexOf(".")<0) {
+//	        	map.put("x", map.get("x").toString()+".1");
+//	        }
+//	        System.out.println(map.get("y").toString().indexOf("."));
+//	        if(map.get("y").toString().indexOf(".")<0) {
+//	        	map.put("y", map.get("y").toString()+".10");
+//	        }
+	        String x=  map.get("x")+"";
+	        String y=  map.get("y")+"";
+	        System.out.println(utils.bessel(Double.parseDouble(x),Double.parseDouble(y)));
+	        
+	        
+			String xy=utils.bessel(Double.parseDouble(x),Double.parseDouble(y));
+			String[] myxy=xy.split("/");
+			map.put("x",myxy[0]);
+			map.put("y",myxy[1]);
+	    }
+
+		return resultMap;
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/insertuser.do", method = RequestMethod.GET)

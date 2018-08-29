@@ -6,6 +6,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
+<style type="text/css">
+	#regist_form{
+		background-color: #3A3A3C; 
+		border:5px solid #dfbe6a;
+	}
+	.r_input{
+		border:1px solid #dfbe6a;
+/* 		background-color: #3A3A3C; */
+/* 		color: #dfbe6a; */
+	}
+</style>
 </head>
 <body>
 <div id="sub_container">
@@ -66,8 +77,8 @@
 		<hr>
 		<div style="width: 100%; height:10%; padding: 0; margin: 0;" >
 		<ul style="width: 100%; height:100%; padding: 0; margin: 0;">
-			<li style="border: none;" id="r_cancel_btn" onclick="close_regi()"><span>취소</span></li>
-			<li id="r_ok_btn" onclick="insert_user()"><span>확인</span></li>
+			<li style="border: none; position: relative; top: -5px;" id="r_cancel_btn" onclick="close_regi()"><span>취소</span></li>
+			<li style="position: relative; top: -5px;" id="r_ok_btn" onclick="insert_user()"><span>확인</span></li>
 		</ul>
 		</div>
 	</div>

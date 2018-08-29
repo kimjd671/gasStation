@@ -170,6 +170,12 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 			location.href="boardlist.do?page=1&category=content&value="+value;
 		}
 	}
+	
+	function enterkey_search() {
+        if(window.event.keyCode == 13) {
+        	search_board();
+        }
+	}
 </script>
 
 </head>
@@ -276,7 +282,7 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 						<option value="find_title">글 제목</option>
 						<option value="find_content">내용</option>
 					</select>
-					<input type="text" name="findvalue"   style="float: left; margin: 2px; width:180px; height:33px; background-color: #3A3A3C; color: white; border-color:#dfbe6a; ">
+					<input type="text" name="findvalue" onkeyup="enterkey_search()"  style="float: left; margin: 2px; width:180px; height:33px; background-color: #3A3A3C; color: white; border-color:#dfbe6a; ">
 					<button class="btn" style="float: left; margin: 2px; " onclick="search_board()">검색</button>
 				 <button class="btn" onclick="call_insertform()" >글쓰기</button>
 				 </div>

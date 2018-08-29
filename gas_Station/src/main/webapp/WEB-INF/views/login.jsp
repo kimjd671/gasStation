@@ -154,7 +154,7 @@
 					</tr>
 					<tr>
 						<th class="find_find">연락처<br>(-제외 입력)</th>
-						<td><input class="find_input" type="text" name="f_phone" required="required"></td>
+						<td><input class="find_input" type="text" name="f_phone" required="required" onkeyup="enterkey_find_id()"></td>
 					</tr>
 					<tr>
 						<th colspan="2">
@@ -173,7 +173,7 @@
 					</tr>
 					<tr>
 						<th class="find_find">이메일</th>
-						<td><input class="find_input" type="text" name="f_email" required="required">
+						<td><input class="find_input" type="text" name="f_email" required="required" onkeyup="enterkey_find_pw()">
 					</tr>
 					<tr>
 						<th colspan="2">

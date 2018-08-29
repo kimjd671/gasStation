@@ -433,6 +433,21 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
              gas_login();
         }
 	}
+	function enterkey_find_id() {
+        if(window.event.keyCode == 13) {
+        	find_id_ajax();
+        }
+	}
+	function enterkey_find_pw() {
+        if(window.event.keyCode == 13) {
+        	find_pwd_ajax();
+        }
+	}
+	function enterkey_info() {
+        if(window.event.keyCode == 13) {
+        	info_chk_pwd();
+        }
+	}
 
 	
 	$(document).ajaxStart(function(){
@@ -1689,7 +1704,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	<div id="info_pwd_chk" style="color: white; width: 100%; height: 100%; text-align: center;">
 		<fieldset style="width: 90%; margin: 0 auto; position: relative; top: 250px;">
 			<legend>비밀번호 재확인</legend>
-			비밀번호 입력 : <input type="password" name="info_chk_pwd">
+			비밀번호 입력 : <input type="password" name="info_chk_pwd" onkeyup="enterkey_info()">
 			<br>
 			<button class="btn_mini" onclick="info_chk_pwd()">확인</button>
 		</fieldset>

@@ -893,6 +893,23 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 		my_focus="main";
 	}
 	
+	function call_main_container_around(){
+		var id='${ldto.id}'
+    		if(id==null||id==""){
+    			id=lid;
+    		}
+    		if(id==null || id==""){
+    			$("#login_maincontainer").css("display","block");
+    			$("iframe").remove();
+    		}
+// 		$("#login_maincontainer").css("display","block");
+// 		$("#frame_sub").css("display","none");
+		call_main= setInterval(function() {
+			return_slide();
+		}, 5)
+		my_focus="main";
+	}
+	
 	function return_slide(){
 			var main_x=$("#main_container").position().left;
 			var login_x=$("#sub_container").position().left;
@@ -1388,9 +1405,21 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	    	var gx= position.coords.latitude; //위도
 	    	var gy= position.coords.longitude; //경도
-	    	$("#sub_container").empty();
-			$("#sub_container").append("<iframe id='frame_sub' scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>")
-	    	$("iframe").attr("src","aroundSearch.do?x="+gx+"&y="+gy);
+	    	
+	    	var id='${ldto.id}'
+    		if(id==null||id==""){
+    			id=lid;
+    		}
+    		if(id==null || id==""){
+    			$("#login_maincontainer").css("display","none");
+    			$("#sub_container").append("<iframe id='frame_sub' scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>");
+    			$("iframe").attr("src","aroundSearch.do?x="+gx+"&y="+gy);
+    		}else{
+    			$("iframe").attr("src","aroundSearch.do?x="+gx+"&y="+gy);
+    		}
+// 	    	$("#login_maincontainer").css("display","none");
+			
+	    	
 			call_sub_container();
 	    }, function(error) {
 	      console.error(error);

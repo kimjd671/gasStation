@@ -54,7 +54,7 @@ ul{list-style: none;}
 </div>
 <div id="container">	
 	<div id="main_container" > 
-		<img class='back_btn' src='image/back.png' alt='돌아가기' onclick='parent.call_main_container()'>
+		<img class='back_btn' src='image/back.png' alt='돌아가기' onclick='parent.call_main_container_around()'>
 		<div id="logo" style="margin: 0 auto; width: 66%;  text-align: center;display: inline-block; left: 40%; position: relative; transform: translate(-50%,-50%); ">
 			<span class='login_logo'>주변 주유소 찾기</span>
 		</div>

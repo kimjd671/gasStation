@@ -63,6 +63,7 @@
 </head>
 <body>
 <div id="sub_container">
+	<div id="login_maincontainer">
 	<img class="back_btn" src="image/back.png" alt="돌아가기" onclick="call_main_container()">
 	<div id="logo" style="margin: 0 auto; width: 66%; text-align: center; ">
 		<span class='login_logo'>주유를 어디서 하주유???</span>
@@ -214,6 +215,7 @@
 		</div>
 	</div>
 	<iframe id="frame_sub" style="display: none;"></iframe>
+	</div>
 </div>
 </body>
 </html>

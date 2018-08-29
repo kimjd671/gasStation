@@ -8,7 +8,6 @@
 <title></title>
 <style type="text/css">
 	#regist_form{
-		background-color: #3A3A3C; 
 		border:5px solid #dfbe6a;
 	}
 	.r_input{
@@ -16,6 +15,49 @@
 /* 		background-color: #3A3A3C; */
 /* 		color: #dfbe6a; */
 	}
+	#find_form{
+		background-color: #3A3A3C; 
+		color: #dfbe6a;
+		border:5px solid #dfbe6a;
+	}
+	p{
+		color: #dfbe6a;
+	}
+	.btn_mini {
+	  display: inline-block;
+	  background: transparent;
+	  text-transform: uppercase; 
+	  font-weight: 500; 
+	  font-style: normal; 
+	  font-size: 1rem; 
+	  letter-spacing: 0.3em; 
+	  color: rgba(223,190,106,0.7);
+	  border-radius: 0;
+	  padding: 5px 10px 5px;
+	  transition: all 0.7s ease-out;
+	  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+	  background-position: 1% 50%;
+	  background-size: 300% 300%;
+	  text-decoration: none;
+	  margin: 10px 20px 0px 30px;
+	  border: none;
+	  border: 1px solid rgba(223,190,106,0.3);
+	}
+	.btn_mini:hover {
+	  color: #fff;
+	  border: 1px solid rgba(223,190,106,0);
+	  color: $white;
+	  background-position: 99% 50%;
+	}
+	.find_find{
+		color: #dfbe6a;
+	}
+	.find_input{
+		background-color: #3A3A3C; 
+		color: white;
+		border: 1px solid #dfbe6a;
+	}
+
 </style>
 </head>
 <body>
@@ -35,7 +77,7 @@
 				<input class="l_input" type="password" onkeyup="enterkey()" name="login_pwd">
 			</div>
 			<button class="btn" onclick="gas_login()"  style="position: relative; left: 23%; ">로그인</button>
-			<hr>
+			<hr style="color:#dfbe6a; background-color: #dfbe6a; border-color: #dfbe6a;">
 			<div id="login_sub">
 				<ul>
 					<li style="border: none;" onclick="findForm()">아이디/비밀번호 찾기</li>
@@ -74,7 +116,7 @@
 			<input type="text" class='r_input' name="phone" placeholder="숫자만 입력" oninput="chk_phone()">
 		</div>
 		<br>
-		<hr>
+		<hr style="color:#dfbe6a; background-color: #dfbe6a; border-color: #dfbe6a;">
 		<div style="width: 100%; height:10%; padding: 0; margin: 0;" >
 		<ul style="width: 100%; height:100%; padding: 0; margin: 0;">
 			<li style="border: none; position: relative; top: -5px;" id="r_cancel_btn" onclick="close_regi()"><span>취소</span></li>
@@ -86,7 +128,7 @@
 	<div id="find_form" style="color: gray; display: none;">
 		<span class="login_logo" style="font-size: 32px; margin: 10px; padding: 10px; text-align: center;">아이디 비밀번호 찾기</span>
 		<img alt="나가기" src="image/close.png" onclick="close_find()" style="float: right; position: relative; top: -65px; left: -10px; cursor: pointer;">
-		<hr style="clear: both;"/>
+		<hr style="clear: both; color:#dfbe6a; background-color: #dfbe6a; border-color: #dfbe6a;"/>
 		<div id="idpwd">
 			<table id="sel">
 				<col width="200px">
@@ -96,7 +138,7 @@
 						<img src="image/id.png" alt="아이디찾기" onclick="find_id();"/>
 						<p>아이디 찾기</p>
 					</th>
-					<th style="border-left: 1px solid gray;">
+					<th style="border-left: 1px solid #dfbe6a;">
 						<img src="image/pwd.png" alt="비밀번호찾기" onclick="find_pwd();"/>
 						<p>비밀번호 찾기</p>
 					</th>
@@ -107,16 +149,16 @@
 					<col width="100px">
 					<col width="200px">	
 					<tr>
-						<th>이름</th>
-						<td><input type="text" name="f_name" required="required"></td>
+						<th class="find_find">이름</th>
+						<td><input class="find_input" type="text" name="f_name" required="required"></td>
 					</tr>
 					<tr>
-						<th>연락처<br>(-제외 입력)</th>
-						<td><input type="text" name="f_phone" required="required"></td>
+						<th class="find_find">연락처<br>(-제외 입력)</th>
+						<td><input class="find_input" type="text" name="f_phone" required="required"></td>
 					</tr>
 					<tr>
 						<th colspan="2">
-							<button onclick="find_id_ajax()" class="btn_old">확인</button>
+							<button onclick="find_id_ajax()" class="btn_mini">확인</button>
 						</th>
 					</tr>
 				</table>
@@ -126,16 +168,16 @@
 					<col width="100px">
 					<col width="200px">	
 					<tr>
-						<th>아이디</th>
-						<td><input type="text" name="f_id" required="required"></td>
+						<th class="find_find">아이디</th>
+						<td><input class="find_input" type="text" name="f_id" required="required"></td>
 					</tr>
 					<tr>
-						<th>이메일</th>
-						<td><input type="text" name="f_email" required="required">
+						<th class="find_find">이메일</th>
+						<td><input class="find_input" type="text" name="f_email" required="required">
 					</tr>
 					<tr>
 						<th colspan="2">
-							<button onclick="find_pwd_ajax()" class="btn_old">확인</button>
+							<button onclick="find_pwd_ajax()" class="btn_mini">확인</button>
 						</th>
 					</tr>
 				</table>

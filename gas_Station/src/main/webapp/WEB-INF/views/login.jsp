@@ -50,7 +50,7 @@
 	  background-position: 99% 50%;
 	}
 	.find_find{
-		color: #dfbe6a;		
+		color: #dfbe6a;
 	}
 	.find_input{
 		background-color: #3A3A3C; 

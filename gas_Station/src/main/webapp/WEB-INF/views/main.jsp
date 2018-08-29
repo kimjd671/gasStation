@@ -448,6 +448,16 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
         	info_chk_pwd();
         }
 	}
+	function enterkey_my_info() {
+        if(window.event.keyCode == 13) {
+        	change_myinfo();
+        }
+	}
+	function enterkey_my_pw() {
+        if(window.event.keyCode == 13) {
+        	change_password();
+        }
+	}
 
 	
 	$(document).ajaxStart(function(){
@@ -1718,7 +1728,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 				<tr><td>아이디 :</td><td id="old_id"></td></tr>
 				<tr><td>이름    :</td><td id="old_name"></td></tr>
 				<tr><td>이메일 :</td><td><input name="old_email" type="text"></td></tr>
-				<tr><td>연락처 :</td><td><input name="old_phone" type="text"></td></tr>
+				<tr><td>연락처 :</td><td><input name="old_phone" type="text" onkeyup="enterkey_my_info()"></td></tr>
 				<tr><td>가입일 :</td><td id="old_regdate"></td></tr>
 			</table>
 			<hr>
@@ -1732,7 +1742,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					<td>새 비밀번호 : </td>	<td><input type="password" name="new_pwd"></td>
 				</tr>
 				<tr>	
-					<td>새 비밀번호 재입력 : 	</td><td><input type="password" name="new_repwd"></td>
+					<td>새 비밀번호 재입력 : 	</td><td><input type="password" name="new_repwd" onkeyup="enterkey_my_pw()"></td>
 				</tr>
 			</table>
 			<hr>

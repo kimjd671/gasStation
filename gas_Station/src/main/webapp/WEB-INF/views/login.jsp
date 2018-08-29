@@ -50,12 +50,13 @@
 	  background-position: 99% 50%;
 	}
 	.find_find{
-		color: #dfbe6a;
+		color: #dfbe6a;		
 	}
 	.find_input{
 		background-color: #3A3A3C; 
 		color: white;
 		border: 1px solid #dfbe6a;
+		height: 30px;
 	}
 
 </style>
@@ -76,7 +77,7 @@
 			<span class="input_title">비밀번호</span>
 				<input class="l_input" type="password" onkeyup="enterkey()" name="login_pwd">
 			</div>
-			<button class="btn" onclick="gas_login()"  style="position: relative; left: 23%; ">로그인</button>
+			<button class="btn" onclick="gas_login()"  style="position: relative; left: 23%;">로그인</button>
 			<hr style="color:#dfbe6a; background-color: #dfbe6a; border-color: #dfbe6a;">
 			<div id="login_sub">
 				<ul>

@@ -154,7 +154,7 @@ public class HomeController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/projection.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/projection.do", method = RequestMethod.POST)
 	public List<Map<String,Object>> projection(Locale locale, Model model,HttpServletRequest request){
 		
 		String data=request.getParameter("data");

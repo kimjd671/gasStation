@@ -29,6 +29,32 @@ ul{list-style: none;}
 .customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
 .customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('image/vertex_white.png')}
 #gas_info table{color: white;}
+.btn_mini {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase; 
+  font-weight: 500; 
+  font-style: normal; 
+  font-size: 1rem; 
+  letter-spacing: 0.3em; 
+  color: rgba(223,190,106,0.7);
+  border-radius: 0;
+  padding: 5px 10px 5px;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 10px 20px 0px 30px;
+  border: none;
+  border: 1px solid rgba(223,190,106,0.3);
+}
+.btn_mini:hover {
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: $white;
+  background-position: 99% 50%;
+}
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d5a3febeb4d52aaf0a2bcdd28926d84a&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d5a3febeb4d52aaf0a2bcdd28926d84a"></script>
@@ -254,7 +280,7 @@ ul{list-style: none;}
 						$("#n_adr").text(new_adr);
 						$("#tel").text(tel);
 						$("#price").text();
-						$("#cvs").text(cvs);
+// 						$("#cvs").text(cvs);
 						$("#kpet").text(kpetro);
 						
 // 						alert("이름:"+name+
@@ -337,14 +363,14 @@ ul{list-style: none;}
 			<span class='login_logo'>주변 주유소 찾기</span>
 		</div>
 		<div id="radi_ctrl">
-				<button class="radi_btn" onclick="change_radius('1000')">1000m</button> 
-				<button class="radi_btn" onclick="change_radius('2000')">2000m</button>
-				<button class="radi_btn" onclick="change_radius('3000')">3000m</button>
+				<button class="btn_mini" onclick="change_radius('1000')">1000m</button> 
+				<button class="btn_mini" onclick="change_radius('2000')">2000m</button>
+				<button class="btn_mini" onclick="change_radius('3000')">3000m</button>
 		</div>
 		<div id="map" style="width:55%;height:78%; margin: 0 0 0 100px; float: left; ">
 		</div>
 		<div id="gas_info" style="float: left;">
-			<table>
+			<table border="1" style="border-collapse:collapse; border:1px solid white;">
 				<tr>
 					<th>주유소 이름</th>
 					<td id="u_name"></td>
@@ -363,11 +389,41 @@ ul{list-style: none;}
 				</tr>
 				<tr>
 					<th>가격정보</th>
-					<td id="price"></td>
+					<td id="price">
+						<table class="info_table" border="1" style="border-collapse: collapse; border:1px solid white;">
+							<tr>
+								<th>휘발유</th>
+								<td></td>
+							</tr>
+							<tr>
+								<th>경유</th>
+								<td></td>
+							</tr>
+							<tr>
+								<th>LPG</th>
+								<td></td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<th>편의시설여부</th>
-					<td id="cvs"></td>
+					<td id="cvs">
+						<table class="info_table" border="1" style="border-collapse: collapse; border:1px solid white;">
+							<tr>
+								<th>세차장</th>
+								<td></td>
+							</tr>
+							<tr>
+								<th>편의점</th>
+								<td></td>
+							</tr>
+							<tr>
+								<th>정비소</th>
+								<td></td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<th>품질인증</th>

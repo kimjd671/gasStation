@@ -80,6 +80,10 @@
 	DELETE FROM GASBOOKMARK WHERE ID=#{id} AND UNI_ID=#{uni_id}
 </delete>
 
+<insert id="insertbookmark" parameterType="BookMarkDto">
+	INSERT INTO GASBOOKMARK VALUES(#{id},#{b_name},#{location},#{gasoline},#{diesel},#{lpg},#{uni_id},SYSDATE) 
+</insert>
+
 
 
 

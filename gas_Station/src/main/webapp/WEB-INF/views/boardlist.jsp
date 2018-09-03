@@ -1,3 +1,4 @@
+<%@page import="com.hk.gas.dtos.GasUserDto"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.hk.gas.dtos.FreeBoardDto"%>
@@ -76,6 +77,12 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 
 </style>
 <%
+	GasUserDto ldtos=(GasUserDto)session.getAttribute("ldto");
+	if(ldtos==null){
+		out.println("<script type='text/javascript'>alert('로그인정보가 없습니다.');parent.document.location.reload();</script>");
+		return;
+	}
+
 	List<FreeBoardDto> list=(List<FreeBoardDto>)request.getAttribute("pagelist");
 	List<FreeBoardDto> alllist=(List<FreeBoardDto>)request.getAttribute("alllist");
 	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
@@ -98,7 +105,6 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 	for(int i=0;i<alllist.size();i++){
 		FreeBoardDto dto=alllist.get(i);
 		arr[dto.getRefer()]= arr[dto.getRefer()]+1;
-		System.out.println(arr[dto.getRefer()]);
 	}
 	
 %>

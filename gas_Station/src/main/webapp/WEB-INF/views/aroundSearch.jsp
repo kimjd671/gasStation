@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=utf-8"); %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +30,16 @@ ul{list-style: none;}
 .customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
 .customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('image/vertex_white.png')}
 #gas_info table{color: white;}
+.map_b{
+width:85%;height:78%; margin: 0 0 0 100px; float: left; 
+transition:width 1.2s;
+-moz-transition:width 1.2s;
+-webkit-transition:width 1.2s;
+-o-transition:width 1.2s;
+}
+.lpg_btn{
+	float: right;
+}
 .btn_mini {
   display: inline-block;
   background: transparent;
@@ -39,33 +50,57 @@ ul{list-style: none;}
   letter-spacing: 0.3em; 
   color: rgba(223,190,106,0.7);
   border-radius: 0;
-  padding: 5px 10px 5px;
+  padding: 5px 7% 5px;
   transition: all 0.7s ease-out;
   background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
   background-position: 1% 50%;
   background-size: 300% 300%;
   text-decoration: none;
-  margin: 10px 10px 20px 100px;
+  margin: 5px 5px 5px 5px;
   border: none;
   border: 1px solid rgba(223,190,106,0.3);
 }
 .btn_mini:hover {
   color: #fff;
   border: 1px solid rgba(223,190,106,0);
-  color: $white;
+  color: white;
   background-position: 99% 50%;
+}
+.c_price{ margin-left: 10px; display: block;}
+#book_td button{
+	width: 100%;
+/* 	padding: 5px 30% 5px; */
+	margin: 0;
 }
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d5a3febeb4d52aaf0a2bcdd28926d84a&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d5a3febeb4d52aaf0a2bcdd28926d84a"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<%
+	Object ldto=session.getAttribute("ldto");
+	if(ldto!=null){
+		List<BookMarkDto> booklist=(List<BookMarkDto>)request.getAttribute("booklist");
+
+		if(booklist!=null){
+			for(int i=0;i<booklist.size();i++){
+				BookMarkDto dtob=booklist.get(i);
+				System.out.println(dtob.getUni_id());
+			}
+			
+		}
+
+	}
+
+%>
 <script type="text/javascript">
 	var radius =1000;
 	var prodcd="B027";
 	var kind="";
+	var load_us=false;
 	$(function(){
 		$("#Progress_Loading").hide();
 		document.onkeydown = doNotReload;
+		$("#gas_info").hide();
 		function doNotReload(){
 			if( (event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) //ctrl+N , ctrl+R 
 			|| (event.keyCode == 116)){
@@ -84,7 +119,14 @@ ul{list-style: none;}
 	function road_map(){
 		
 		function search_Radius(){
-			
+			if(prodcd=="B027"){
+				$("#b027btn").css("display","none");
+				$("#k015btn").css("display","block");
+			}
+			if(prodcd=="K015"){
+				$("#b027btn").css("display","block");
+				$("#k015btn").css("display","none");
+			}
 			var xy='${xy}';
 			var myXY=xy.split("/");
 			var pro=$("input[name='prodcd']:checked").val();
@@ -148,7 +190,7 @@ ul{list-style: none;}
 	 					pos.latlng= new daum.maps.LatLng(Data[i].x, Data[i].y);
 	 					pos.content='  <div class="customoverlay">' +
 	 				    '    <span class="title">'+Data[i].name.replace(/\(주\)/gi,"")+'</span>' +
-	 				    '<span class="title">'+kind+"> "+Data[i].price+'원<span>'+
+// 	 				    '<span class="title">'+kind+"> "+Data[i].price+'원<span>'+
 	 				    '  </div>';
 	 					pos.uni_id=Data[i].uni_id;
 	 					positions.push(pos);
@@ -251,6 +293,17 @@ ul{list-style: none;}
 		        $(".customoverlay").parent("div").parent("div").css({"border":"none",'width': '10px','height': '10px',});
 		    };
 		}
+	   function panTo() {
+		    // 이동할 위도 경도 위치를 생성합니다 
+		    var moveLatLon = new daum.maps.LatLng(${x},${y});
+		    
+		    // 지도 중심을 부드럽게 이동시킵니다
+		    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+		    map.panTo(moveLatLon);            
+		}    
+	   function numberWithCommas(x) {  
+	    	return x.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
 	   function makeInfomation(map,marker,infowindow,uid){
 		   return function	() {
 			   $.ajax({
@@ -262,27 +315,106 @@ ul{list-style: none;}
 					},
 					async:false,
 					success:function(Data){
+						
+						var l_t=1200;
+						$(".map_b").css("width","55%");
+						setTimeout(function() {
+							$("#gas_info").fadeIn();
+							if(load_us==false){		
+								$("#map").empty();
+								road_map();
+								load_us=true;
+							}
 						var oil=$(Data).find("OIL");
+						var uni_code=oil.children().eq(0).text();
 						var i=3;
-						var name=oil.children().eq(i++).text();
+						var name=oil.children().eq(i++).text().replace(/\(주\)/gi,"");
 						var old_adr=oil.children().eq(i++).text();
-						var new_adr=oil.children().eq(i++).text();
+						var new_adr=oil.children().eq(i++).text().replace(/특별시/gi,"");;
 						var tel=oil.children().eq(i++).text(); //전화번호
 				     	var sigun=oil.children().eq(i++).text();
 						var category=oil.children().eq(i++).text();
 						var maint=oil.children().eq(i++).text();
 						var wash=oil.children().eq(i++).text();
 						var cvs=oil.children().eq(i++).text();
-						var kpetro=oil.children().eq(i++).text();
+
+						var oil_price=$(Data).find("OIL_PRICE");
+						var d_oil=0;
+						var d_die=0;
+						var d_lpg=0;
+						$("#d_oil").empty();
+						$("#d_die").empty();
+						$("#d_lpg").empty();
+						for(var j=0;j<oil_price.length;j++){
+							if(oil_price.eq(j).find("PRODCD").text()=="B027"){
+								$("#d_oil").text(numberWithCommas(oil_price.eq(j).find("PRICE").text()));
+								d_oil=oil_price.eq(j).find("PRICE").text();
+							}else if(oil_price.eq(j).find("PRODCD").text()=="D047"){
+								$("#d_die").text(numberWithCommas(oil_price.eq(j).find("PRICE").text()));
+								d_die=oil_price.eq(j).find("PRICE").text();
+							}
+							if(oil_price.eq(j).find("PRODCD").text()=="K015"){
+								$("#d_lpg").text(numberWithCommas(oil_price.eq(j).find("PRICE").text()));
+								d_lpg=oil_price.eq(j).find("PRICE").text();
+							}
+						}
+						
+						$("#book_td").empty();
+						var book_use = true;
+						var book_Array=new Array();
+						var book='${booklist}';
+						book_Array=book.split("BookMarkDto");
+						if('${booklist[0].uni_id}'!=''){
+							for(var q=0; q<book_Array.length;q++){
+								if(book_Array[q].indexOf(uni_code)>0){
+										book_use=false;
+										break;
+								}	
+							}
+						}
+						if(book_use){
+							$("#book_td").append("<button class='btn_mini' onclick='insert_bookmark("+'"'+uni_code+'"'+","+'"'+name+'"'+","+'"'+old_adr+'"'+","+'"'+d_oil+'"'+","+'"'+d_die+'"'+","+'"'+d_lpg+'"'+")'>즐겨찾기 등록</button>");
+						}else {
+							$("#book_td").append("<button class='btn_mini'>이미등록된 주유소</button>");
+							
+						}
+						
+						if($("#d_oil").text()==""){
+							$("#d_oil").text("-");
+						}
+						if($("#d_die").text()==""){
+							$("#d_die").text("-");
+						}
+						if($("#d_lpg").text()==""){
+							$("#d_lpg").text("-");
+						}
+						
+						$("#maint_ny").empty();
+						$("#wash_ny").empty();
+						$("#cvs_ny").empty();
+						if(maint=="N"){
+							$("#maint_ny").text("X");
+						}else {
+							$("#maint_ny").text("O");
+						}
+						if(wash=="N"){
+							$("#wash_ny").text("X");
+						}else {
+							$("#wash_ny").text("O");
+						}
+						if(cvs=="N"){
+							$("#cvs_ny").text("X");
+						}else {
+							$("#cvs_ny").text("O");
+						}
 						
 						$("#u_name").text(name);
 						$("#o_adr").text(old_adr);
 						$("#n_adr").text(new_adr);
 						$("#tel").text(tel);
-						$("#price").text();
-// 						$("#cvs").text(cvs);
-						$("#kpet").text(kpetro);
+						l_t=100;
 						
+						}, l_t)
 // 						alert("이름:"+name+
 // 								"\n옛주소:"+old_adr+
 // 								"\n신주소:"+new_adr+
@@ -349,7 +481,55 @@ ul{list-style: none;}
 		$("#map").empty();
 		road_map();
 	}
-	
+	function change_prodcd(procd){
+		prodcd=procd;
+		$("#map").empty();
+		road_map();
+	}
+	function insert_bookmark(uni_code,name,adr,oil,die,lpgs){
+		var id='${ldto.id}';
+		if(id==null||id==""){
+		alert("로그인을 해주세요");
+		}else{
+			
+			
+			var uni_id=uni_code;
+			var b_name=name;
+			var addr=adr;
+			var gas=oil;
+			var diesel=die;
+			var lpg=lpgs;
+			$.ajax({
+				url:"bookmark_insert.do",
+				method:"get",
+				data:{"id":id,
+					"b_name":b_name,
+					"location":addr,
+					"gasoline":gas,
+					"diesel":diesel,
+					"lpg":lpg,
+					"uni_id":uni_id
+				},
+				async:false,
+				dataType:"json",
+				success:function(Data){
+					var isS=Data["isS"];
+					if(isS){
+						alert("즐겨찾기가 등록되었습니다.");
+						$("#book_td").empty();
+						$("#book_td").append("<button class='btn_mini'>이미등록된 주유소</button>");
+					}else{
+						alert("실패/시스템오류");
+					}	
+				},
+				error:function(){
+					alert("서버통신실패");
+				}
+			});
+			
+		}
+// 		alert(uni_code+"/"+name+"/"+adr+"/"+oil+"/"+die+"/"+lpg);
+	}
 </script>
 </head>
 <body>
@@ -362,74 +542,81 @@ ul{list-style: none;}
 		<div id="logo" style="margin: 0 auto; width: 66%;  text-align: center;display: inline-block; left: 40%; position: relative; transform: translate(-50%,-50%); ">
 			<span class='login_logo'>주변 주유소 찾기</span>
 		</div>
-		<div id="radi_ctrl">
-				<button class="btn_mini" onclick="change_radius('1000')">1000m</button> 
-				<button class="btn_mini" onclick="change_radius('2000')">2000m</button>
-				<button class="btn_mini" onclick="change_radius('3000')">3000m</button>
+		<div id="radi_ctrl" style="width:85%; margin: 0 0 0 100px;">
+				<button class="btn_mini radi_btn" onclick="change_radius('1000')">1000m</button> 
+				<button class="btn_mini radi_btn" onclick="change_radius('2000')">2000m</button>
+				<button class="btn_mini radi_btn" onclick="change_radius('3000')">3000m</button>
+				<button class="btn_mini lpg_btn" id="k015btn" onclick="change_prodcd('K015')">LPG충전소</button>
+				<button class="btn_mini lpg_btn" id="b027btn" onclick="change_prodcd('B027')">일반 주유소</button>
 		</div>
-		<div id="map" style="width:55%;height:78%; margin: 0 0 0 100px; float: left; ">
+		<div id="map" class="map_b">
 		</div>
-		<div id="gas_info" style="float: left;">
-			<table border="1" style="border-collapse:collapse; border:1px solid white;">
+		<div id="gas_info" style="float: left; height: 68%; width: 35%; ">
+			<div style="width: 100%; height: 100%;">
+			<table id="gas_info_table" border="1" style="border-collapse:collapse; border:1px solid white; line-height: 40px; position: relative; top: 100px; margin: 0 auto;">
+				<col width="120px">
+				<col width="380px">
 				<tr>
 					<th>주유소 이름</th>
-					<td id="u_name"></td>
+					<td><span id="u_name" class="c_price"></span></td>
 				</tr>
 				<tr>
 					<th>주소</th>
-					<td id="o_adr"></td>
+					<td><span id="o_adr" class="c_price"></span></td>
 				</tr>
 				<tr>
 					<th>새주소</th>
-					<td id="n_adr"></td>
+					<td><span id="n_adr" class="c_price"></span></td>
 				</tr>
 				<tr>
 					<th>전화번호</th>
-					<td id="tel"></td>
+					<td><span id="tel" class="c_price"></span></td>
 				</tr>
 				<tr>
 					<th>가격정보</th>
-					<td id="price">
-						<table class="info_table" border="1" style="border-collapse: collapse; border:1px solid white;">
+					<td>
+						<table class="info_table" border="1" style="border-collapse: collapse; border:1px solid white; width: 100%;" >
+							<col width="70px">
 							<tr>
 								<th>휘발유</th>
-								<td></td>
+								<td><span class="c_price" id="d_oil"></span> </td>
 							</tr>
 							<tr>
 								<th>경유</th>
-								<td></td>
+								<td><span class="c_price" id="d_die"></span></td>
 							</tr>
 							<tr>
 								<th>LPG</th>
-								<td></td>
+								<td><span class="c_price" id="d_lpg"></span></td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<th>편의시설여부</th>
-					<td id="cvs">
-						<table class="info_table" border="1" style="border-collapse: collapse; border:1px solid white;">
+					<th colspan="2">편의시설여부</th>
+				</tr>
+				<tr>
+					<td id="cvs" colspan="2">
+						<table class="info_table" border="1" style="border-collapse: collapse; border:1px solid white; width: 100%; text-align: center;">
 							<tr>
 								<th>세차장</th>
-								<td></td>
-							</tr>
-							<tr>
 								<th>편의점</th>
-								<td></td>
+								<th>정비소</th>
 							</tr>
 							<tr>
-								<th>정비소</th>
-								<td></td>
+								<td id="wash_ny"></td>
+								<td id="cvs_ny"></td>
+								<td id="maint_ny"></td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<th>품질인증</th>
-					<td id="kpet"></td>
+					<td colspan="2" id="book_td"></td>
 				</tr>
 			</table>
+			</div>
+		
 		</div>
 	</div>
 </div>

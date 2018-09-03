@@ -24,7 +24,7 @@ a{color: white;  text-decoration:none;}
 ul{list-style: none;}
 .back_btn{cursor: pointer;margin: 15px;display: inline;}
 .login_logo{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; font-family: 'Jeju Hallasan', serif; }
-#bookmark_list{ color: white; margin: 0 auto; position: relative; top: 30px; width: 80%; border-collapse: collapse; border: 1px solid #dfbe6a;}
+#bookmark_list{ color: white; margin: 0 auto; position: relative; top: 30px; width: 90%; border-collapse: collapse; border: 1px solid #dfbe6a;}
 td{border: 1px solid #dfbe6a; height: 50px;}
 th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 </style>
@@ -47,13 +47,15 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 </head>
 <body>
 <%
-	List<BookMarkDto> list=(List<BookMarkDto>)request.getAttribute("lists");
-	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
 	GasUserDto ldtos=(GasUserDto)session.getAttribute("ldto");
 	if(ldtos==null){
 		out.println("<script type='text/javascript'>alert('로그인정보가 없습니다.');parent.document.location.reload();</script>");
 		return;
 	}
+	List<BookMarkDto> list=(List<BookMarkDto>)request.getAttribute("lists");
+	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
+	
+	
 // 	BookMarkDto bkdto=(BookMarkDto)session.getAttribute("ldto");
 %>
 <div id ="Progress_Loading" style="position: absolute; z-index: 6; width: 100%;"><!-- 로딩바 -->
@@ -67,11 +69,11 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 		</div>
 		<table id="bookmark_list">
 			<tr id="bktr">			
-				<th style="width: 327.7px;">상호명</th>
-				<th style="width: 184.85px;">지역</th>
-				<th style="width: 110.85px;">휘발유</th>
-				<th style="width: 110.85px;">경유</th>
-				<th style="width: 110.85px;">LPG</th>
+				<th style="width: 250.85px;">상호명</th>
+				<th style="width: 250.85px;">주소</th>
+				<th style="width: 90.85px;">휘발유</th>
+				<th style="width: 90.85px;">경유</th>
+				<th style="width: 90.85px;">LPG</th>
 				<th style="width: 124.85px;">업데이트날짜</th>
 				<th style="width: 90px;">-</th>
 			</tr>	

@@ -113,4 +113,9 @@ public class GasClientService implements IGasClientService {
 	public boolean reply_delete(int seq) {
 		return clientDao.reply_delete(seq);
 	}
+	
+	@Override
+	public boolean insert_bookmark(BookMarkDto dto) {
+		return clientDao.insert_bookmark(dto);
+	}
 }

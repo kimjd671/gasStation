@@ -78,10 +78,18 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/aroundSearch.do", method = RequestMethod.GET)
-	public String aroundSearch(Locale locale, Model model,String x,String y) {
+	public String aroundSearch(Locale locale, Model model,String x,String y,HttpServletRequest request) {
+		HttpSession session=request.getSession();
 		double nx=Double.parseDouble(x);
 		double ny=Double.parseDouble(y);
 		String xy=utils.projection(nx, ny);
+		GasUserDto ldto= (GasUserDto)session.getAttribute("ldto");
+		if(ldto!=null) {
+			String id=ldto.getId();
+			List<BookMarkDto> booklist= client.bookmark_List(id);
+			model.addAttribute("booklist",booklist);
+		}
+		
 		model.addAttribute("x",x);
 		model.addAttribute("y",y);
 		model.addAttribute("xy",xy);
@@ -141,7 +149,7 @@ public class HomeController {
 		String n_cookie="|"+seq;
 		if(StringUtils.indexOfIgnoreCase(read_cookie, n_cookie)==-1) {
 			Cookie cookie=new Cookie("readcount", read_cookie+n_cookie);
-			cookie.setMaxAge(300000);
+			cookie.setMaxAge(300);
 			response.addCookie(cookie);
 			client.free_readcount(seq);
 		}
@@ -163,7 +171,7 @@ public class HomeController {
 		for (int i=0;i<resultMap.size();i++) {
 			Map<String,Object> map=new HashMap<>();
 			map=resultMap.get(i);
-	        System.out.println(map.get("name") + " : " + map.get("price"));
+//	        System.out.println(map.get("name") + " : " + map.get("price"));
 //	        System.out.println(map.get("x"));
 //	        if(map.get("x").toString().indexOf(".")<0) {
 //	        	map.put("x", map.get("x").toString()+".1");
@@ -174,7 +182,7 @@ public class HomeController {
 //	        }
 	        String x=  map.get("x")+"";
 	        String y=  map.get("y")+"";
-	        System.out.println(utils.bessel(Double.parseDouble(x),Double.parseDouble(y)));
+//	        System.out.println(utils.bessel(Double.parseDouble(x),Double.parseDouble(y)));
 	        
 	        
 			String xy=utils.bessel(Double.parseDouble(x),Double.parseDouble(y));
@@ -362,6 +370,16 @@ public class HomeController {
 	public Map<String,Boolean> reply_insert(FreeBoardDto dto,Locale locale, Model model) {
 		System.out.println(dto);
 		boolean isS=client.reply_insert(dto);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/bookmark_insert.do")
+	public Map<String,Boolean> bookmark_insert(BookMarkDto dto,Locale locale, Model model) {
+		System.out.println(dto);
+		boolean isS=client.insert_bookmark(dto);
 		Map<String, Boolean> map=new HashMap<>();
 		map.put("isS",isS);
 		return map;

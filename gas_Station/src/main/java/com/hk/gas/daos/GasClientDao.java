@@ -145,4 +145,10 @@ public class GasClientDao implements IGasClientDao {
 		int count=sqlSession.update(namespace+"deletereply",seq);
 		return count>0?true:false;
 	}
+	
+	@Override
+	public boolean insert_bookmark(BookMarkDto dto) {
+		int count=sqlSession.insert(namespace+"insertbookmark",dto);
+		return count>0?true:false;
+	}
 }

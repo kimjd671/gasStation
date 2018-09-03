@@ -10,6 +10,7 @@ public interface IGasClientService {
 	public List<BookMarkDto> bookmark_List(String id);
 	public boolean reload_price(BookMarkDto dto);
 	public boolean delete_bookmark(BookMarkDto dto);
+	public boolean insert_bookmark(BookMarkDto dto);
 	
 //	게시판
 //	글목록

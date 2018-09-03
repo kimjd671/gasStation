@@ -19,7 +19,6 @@
 <body>
 <input type="hidden" name="x">
 <input type="hidden" name="y">
-<button onclick="gotest()">메인페이지</button>
 <script type="text/javascript">
 	$(function(){
 		$.ajax({
@@ -30,6 +29,7 @@
 			success:function(jsonData){
 				$("input[name=x]").val(jsonData.lat);
 				$("input[name=y]").val(jsonData.lon);
+				gotest();
 			},
 			error:function(){
 				alert("서버통신실패");

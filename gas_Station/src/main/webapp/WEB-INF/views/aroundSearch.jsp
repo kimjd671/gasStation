@@ -45,7 +45,7 @@ ul{list-style: none;}
   background-position: 1% 50%;
   background-size: 300% 300%;
   text-decoration: none;
-  margin: 10px 20px 0px 30px;
+  margin: 10px 10px 20px 100px;
   border: none;
   border: 1px solid rgba(223,190,106,0.3);
 }

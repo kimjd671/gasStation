@@ -96,6 +96,23 @@ public class HomeController {
 		return "aroundSearch";
 	}
 	
+	@RequestMapping(value = "/nameSearch.do", method = RequestMethod.GET)
+	public String nameSearch(Locale locale, Model model,String sido,String gugun,String x,String y,HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		GasUserDto ldto= (GasUserDto)session.getAttribute("ldto");
+		if(ldto!=null) {
+			String id=ldto.getId();
+			List<BookMarkDto> booklist= client.bookmark_List(id);
+			model.addAttribute("booklist",booklist);
+		}
+		model.addAttribute("x",x);
+		model.addAttribute("y",y);
+		model.addAttribute("sido",sido);
+		model.addAttribute("gugun",gugun);
+		return "nameSearch";
+	}
+	
+	
 	@RequestMapping(value = "/bookmark.do", method = RequestMethod.GET)
 	public String bookmark(Locale locale, Model model,HttpServletRequest request) {
 		HttpSession session=request.getSession();

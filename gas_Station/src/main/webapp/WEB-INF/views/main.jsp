@@ -18,7 +18,7 @@
 html,body{margin:0; width:100%; height:100%; position: absolute;};
 #shadow{background: black; width: 100%; height: 100%; position:absolute; display: block; opacity: 0.4;  z-index: 4;}
 *>div{color: white; border-color: white; margin: 2px;}
-#container{ width: 79%; height:98%; overflow: hidden; margin: 0 auto; position: relative;}
+#container{ width: 1500px; height:950px; overflow: hidden; margin: 0 auto; position: relative;}
 
 #main_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:100%; position: absolute; }
 #sub_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:100%; position: absolute; left: 1510px; }
@@ -350,15 +350,15 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 // 			                infoDiv.innerHTML = result[i].address_name;
 			                myaddrs=result[i].address_name;
 			                mapping2();
-// 			              	load_allPrice();  //전국평균 로드
-// 			              	load_sidoPrice(); //시도평균 로드
-// 			              	load_allTop10();//전국 Top10 휘발유 주유소로드
-// 			              	load_sidoTop5(sel_prodcd); //로드된 시도기준 탑5 리스트
+			              	load_allPrice();  //전국평균 로드
+			              	load_sidoPrice(); //시도평균 로드
+			              	load_allTop10();//전국 Top10 휘발유 주유소로드
+			              	load_sidoTop5(sel_prodcd); //로드된 시도기준 탑5 리스트
 			              	
-// 							insert_all_oil_avg();
+							insert_all_oil_avg();
 							
-// 			              	chk_sido_avg();
-// 			              	auto();
+			              	chk_sido_avg();
+			              	auto();
 			              	chk_login();
 			              	$(".all_avg_content").hide();
 			    		 	$(".all_avg_content:first").show();
@@ -547,14 +547,16 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
       		}
       		if(sido_Price[j].sidocd==area &&sido_Price[j].prodcd=='B027' ){
       			$("#sido_oil_avg_o1").append("<div id='sido_avg_1'><h3>"+sido_Price[j].sidonm+" 평균가격<small>(원/리터)</small></h3><span class='sido_avg_span'>"+sido_Price[j].price+"</span><span class='sido_diff'>"+plus+sido_Price[j].diff+"</span></div>");
+      			sel_sidonm=sido_Price[j].sidonm;
       		}
       		if(sido_Price[j].sidocd==area &&sido_Price[j].prodcd=='D047'){
       			$("#sido_oil_avg_o2").append("<div id='sido_avg_2'><h3>"+sido_Price[j].sidonm+" 평균가격<small>(원/리터)</small></h3><span class='sido_avg_span'>"+sido_Price[j].price+"</span><span class='sido_diff'>"+plus+sido_Price[j].diff+"</span></div>");
+      			sel_sidonm=sido_Price[j].sidonm;
       		}
       		if(sido_Price[j].sidocd==area &&sido_Price[j].prodcd=='K015'){
       			$("#sido_oil_avg_o3").append("<div id='sido_avg_3'><h3>"+sido_Price[j].sidonm+" 평균가격<small>(원/리터)</small></h3><span class='sido_avg_span'>"+sido_Price[j].price+"</span><span class='sido_diff'>"+plus+sido_Price[j].diff+"</span></div>");
+      			sel_sidonm=sido_Price[j].sidonm;
       		}
-      		sel_sidonm=sido_Price[j].sidonm;
       		plus="";
       	}
   	}
@@ -703,7 +705,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	//시도 클릭시 시도이미변환과 마지막 구/군선택
 	function chk_sido(aa){
 		var id=aa.id;
-		if(aa.id!=area){
+		if(id!=area){
 			var img=document.getElementById("imgs");
 			img.setAttribute("src", "image/sido/"+id+".png");
 			area=id;
@@ -1417,9 +1419,6 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
     		}else{
     			$("iframe").attr("src","aroundSearch.do?x="+gx+"&y="+gy);
     		}
-// 	    	$("#login_maincontainer").css("display","none");
-			
-	    	
 			call_sub_container();
 	    }, function(error) {
 	      console.error(error);
@@ -1432,6 +1431,24 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	    alert('GPS를 지원하지 않습니다');
 	  }
 		
+	}
+	
+	function search_bname(){
+		var gugun=area_cd.substr(2,4);
+		var bx='${x}';
+		var by='${y}';
+		var id='${ldto.id}'
+   		if(id==null||id==""){
+   			id=lid;
+   		}
+   		if(id==null || id==""){
+   			$("#login_maincontainer").css("display","none");
+   			$("#sub_container").append("<iframe id='frame_sub' scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>");
+   			$("iframe").attr("src","nameSearch.do?sido="+area+"&gugun="+gugun+"&x="+bx+"&y="+by);
+   		}else{
+   			$("iframe").attr("src","nameSearch.do?sido="+area+"&gugun="+gugun+"&x="+bx+"&y="+by);
+   		}
+   		call_sub_container();
 	}
 	
 	
@@ -1518,7 +1535,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 					}else if($(jsonData).find("OIL_PRICE").eq(i).children().eq(0).text()=="D047"){
 						 var sel=$(jsonData).find("OIL_PRICE").eq(i).children("PRICE").text();
 						tds.eq(3).text(sel);
-					}else if($(jsonData).find("OIL_PRICE").eq(i).children().eq(0).text()=="C004"){
+					}else if($(jsonData).find("OIL_PRICE").eq(i).children().eq(0).text()=="K015"){
 						var lpg=$(jsonData).find("OIL_PRICE").eq(i).children("PRICE").text();
 						tds.eq(4).text(lpg);
 					}
@@ -1721,7 +1738,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	<img class="r_btn_img" alt="커뮤니티" src="image/board.png" >
 	</div>
 </div>
-<div class="img_btn" id="bottom_view1">
+<div class="img_btn" id="bottom_view1" onclick="search_bname()">
 	<div class="bottom_div">
 	<h3>상호명 검색</h3>
 	<img class="b_btn_img" alt="상호검색" src="image/search.png">

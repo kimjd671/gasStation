@@ -81,14 +81,6 @@ transition:width 1.2s;
 	if(ldto!=null){
 		List<BookMarkDto> booklist=(List<BookMarkDto>)request.getAttribute("booklist");
 
-		if(booklist!=null){
-			for(int i=0;i<booklist.size();i++){
-				BookMarkDto dtob=booklist.get(i);
-				System.out.println(dtob.getUni_id());
-			}
-			
-		}
-
 	}
 
 %>

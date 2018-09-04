@@ -476,7 +476,7 @@ h3{color: white; text-align: center;}
 				<table class="table" style="top:25px;">
 				<tr>
 					<th>내용</th>
-					<td class="reply_textarea"><textarea  name="reply_content"  class="autosize" style="font-size:15px; width:100%; "></textarea></td>
+					<td class="reply_textarea"><textarea  name="reply_content"  class="autosize" style="font-size:15px; width:100%;" placeholder="내용을 입력하세요"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: right;">

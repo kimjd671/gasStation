@@ -266,7 +266,8 @@ ul.tabs li.active {
 .login_logo{font-size: 72px; display: block; width: 90%; margin: 0 auto; color:#dfbe6a; position: relative; font-family: 'Jeju Hallasan', serif; }
 .regist_category{font-size: 30px; color: gray; display: block;}
 .r_input{width: 90%; height: 100%; font-size: 33px; border: 1px dashed gray; background-color: #F4F6FC; }
-input::placeholder{color:#CBCBCD; font-size: 20px;}
+input:placeholder{color:#CBCBCD; font-size: 20px;}
+.placeholder_mini:placeholder{font-size:10px;}
 .r_div{padding-left: 40px;}
 #r_cancel_btn:hover {background: #FC0543;}
 #r_ok_btn:hover{background: #35D500;}
@@ -1760,7 +1761,7 @@ input::placeholder{color:#CBCBCD; font-size: 20px;}
 	<div id="info_pwd_chk" style="color: white; width: 100%; height: 100%; text-align: center;">
 		<fieldset style="width: 90%; margin: 0 auto; position: relative; top: 250px;">
 			<legend>비밀번호 재확인</legend>
-			비밀번호 입력 : <input type="password" name="info_chk_pwd" onkeyup="enterkey_info()">
+			비밀번호 입력 : <input type="password" class="placeholder_mini" name="info_chk_pwd" onkeyup="enterkey_info()" placeholder="비밀번호를 입력하세요.">
 			<br>
 			<button class="btn_mini" onclick="info_chk_pwd()">확인</button>
 		</fieldset>

@@ -307,12 +307,12 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 					</tr>
 					<tr>
 						<th>제목</th>
-						<td><input type="text" name="title" style="background-color:#3A3A3C; color:white; width: 90%; border: none;"></td>
+						<td><input type="text" name="title" style="background-color:#3A3A3C; color:white; width: 90%; border: none;" placeholder="제목을 입력하세요"></td>
 					</tr>
 			
 					<tr>
 						<th>내용</th>
-						<td><textarea rows="20" style="background-color:#3A3A3C; color:white; width: 100%; border: none;" name="content" ></textarea></td>
+						<td><textarea rows="20" style="background-color:#3A3A3C; color:white; width: 100%; border: none;" name="content" placeholder="내용을 입력하세요"></textarea></td>
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align: right;">

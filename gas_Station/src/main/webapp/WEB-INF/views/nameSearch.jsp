@@ -208,6 +208,7 @@ ul{list-style: none;}
 				dataType:"json",
 				success:function(Data){
 					var rows=Data["RESULT"]["OIL"];
+					$("#list").empty();
 					for(var i=0;i<rows.length;i++){
 						if(rows[i].SIGUNCD==gugun){
 							$("#list").append("<div class='find_list' id='"+rows[i].UNI_ID+"'>"+

@@ -112,7 +112,7 @@ ul.tabs li.active {
   letter-spacing: 0.3em; 
   color: rgba(223,190,106,0.7);
   border-radius: 0;
-  padding: 20px 80px 20px;
+  padding: 20px 22% 20px;
   transition: all 0.7s ease-out;
   background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
   background-position: 1% 50%;

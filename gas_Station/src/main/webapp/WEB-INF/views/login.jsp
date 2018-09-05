@@ -152,11 +152,11 @@
 					<col width="200px">	
 					<tr>
 						<th class="find_find">이름</th>
-						<td><input class="find_input" type="text" name="f_name" required="required"></td>
+						<td><input class="find_input" type="text" name="f_name" required="required" placeholder="이름을 입력하세요"></td>
 					</tr>
 					<tr>
 						<th class="find_find">연락처<br>(-제외 입력)</th>
-						<td><input class="find_input" type="text" name="f_phone" required="required" onkeyup="enterkey_find_id()"></td>
+						<td><input class="find_input" type="text" name="f_phone" required="required" onkeyup="enterkey_find_id()" placeholder="연락처를 입력하세요"></td>
 					</tr>
 					<tr>
 						<th colspan="2">
@@ -171,11 +171,11 @@
 					<col width="200px">	
 					<tr>
 						<th class="find_find">아이디</th>
-						<td><input class="find_input" type="text" name="f_id" required="required"></td>
+						<td><input class="find_input" type="text" name="f_id" required="required" placeholder="아이디를 입력하세요"></td>
 					</tr>
 					<tr>
 						<th class="find_find">이메일</th>
-						<td><input class="find_input" type="text" name="f_email" required="required" onkeyup="enterkey_find_pw()">
+						<td><input class="find_input" type="text" name="f_email" required="required" onkeyup="enterkey_find_pw()" placeholder="이메일을 입력하세요">
 					</tr>
 					<tr>
 						<th colspan="2">
@@ -199,11 +199,11 @@
 				<table>
 					<tr>
 						<th>새비밀번호 	:</th>
-						<td><input type="password" name="reset_pwd" required="required"></td>
+						<td><input type="password" name="reset_pwd" required="required" placeholder="새로운 비밀번호를 입력하세요"></td>
 					</tr>
 					<tr>
 						<th>새비밀번호 확인 :</th>
-						<td><input type="password" name="reset_pwd" required="required"></td>
+						<td><input type="password" name="reset_pwd" required="required" placeholder="비밀번호를 확인하세요"></td>
 					</tr>
 					<tr>
 						<th colspan="2">

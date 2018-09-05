@@ -115,7 +115,7 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 						BookMarkDto dto=list.get(i);
 						%>
 						<tr>
-							<td><%=dto.getB_name()%></td>
+							<td><a href="#"><%=dto.getB_name()%></a></td>
 							<td><%=dto.getLocation()%></td>
 							<td><%=dto.getGasoline()%></td>
 							<td><%=dto.getDiesel()%></td>

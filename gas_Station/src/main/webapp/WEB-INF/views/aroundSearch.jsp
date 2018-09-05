@@ -127,7 +127,7 @@ transition:width 1.2s;
 				method:"get",
 				data:{"out":"json",
 					"radius":radius,
-					"code":"F330180731",
+					"code":"F339180809",
 					"prodcd":prodcd,
 					"sort":"1",
 					"x":myXY[0],
@@ -169,13 +169,6 @@ transition:width 1.2s;
 				traditional:true,
 				dataType:"json",
 				success:function(Data){
-					if(prodcd=="B027"){
-						kind="휘발유";
-					}else if(prodcd=="D047"){
-						kind="경유";
-					}else{
-						kind="LPG";
-					}
 	 				for(var i=0; i<Data.length;i++){
 	 					var pos=new Object();
 	 					pos.title=Data[i].name;
@@ -302,7 +295,7 @@ transition:width 1.2s;
 					url:"http://www.opinet.co.kr/api/detailById.do",
 					method:"get",
 					data:{"out":"xml",
-						"code":"F330180731",
+						"code":"F339180809",
 						"id":uid
 					},
 					async:false,

@@ -105,6 +105,10 @@ public class HomeController {
 			List<BookMarkDto> booklist= client.bookmark_List(id);
 			model.addAttribute("booklist",booklist);
 		}
+		String name= request.getParameter("name");
+		if(name!=null) {
+			model.addAttribute("s_name",name);
+		}
 		model.addAttribute("x",x);
 		model.addAttribute("y",y);
 		model.addAttribute("sido",sido);
@@ -210,6 +214,18 @@ public class HomeController {
 
 		return resultMap;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/projection_one.do")
+	public Map<String,String> projection_one(Locale locale, Model model,String x,String y,HttpServletRequest request){
+		Map<String,String> map=new HashMap<>();
+	    String xy=utils.bessel(Double.parseDouble(x),Double.parseDouble(y));
+		String[] myxy=xy.split("/");
+		map.put("x",myxy[0]);
+		map.put("y",myxy[1]);
+		return map;
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/insertuser.do", method = RequestMethod.GET)

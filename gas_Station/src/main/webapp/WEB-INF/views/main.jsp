@@ -293,7 +293,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 %>
 
 <script type="text/javascript">
-	var code="F330180731";
+	var code="F339180809";
 	var out="json";
 	var myaddrs;
 	var a = '${xy}';
@@ -391,12 +391,64 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			        load_sidoTop5(sel_prodcd);
 			});
 			 
-			 $("#top10_slide").children("div").children("ul").mouseover(function() {
-           		clearInterval(roll_id);
+			 $("#top10_slide").children("div").children("ul").mouseover(function(e) {
+           	clearInterval(roll_id);
+           	 var thisEle = event.target;
+           	 var count=1;
+           	 var did= thisEle.id;
+           	 if(thisEle=="[object HTMLSpanElement]"){
+           		 did=$(thisEle).parent().parent().parent().parent("div").prop("id");
+           	 }           	 
+         
+           		if(did=="top10_o1"){
+           			$("#show_all_top10").css("top","-150px");
+           			$("#show_all_top10").css("display","block");
+           			for(var j=0;j<10;j++){
+           				if(all_top10[0][j].price!=0){
+           				
+           				$("#show_all_top10").children("ul").append("<li><a href='#'><span>"+count+".</span><span>"+all_top10[0][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[0][j].price+"</span></a></li>")
+           				count++;
+           				
+           				}
+           			}
+           		}else if(did=="top10_o2"){
+           			$("#show_all_top10").css("top","-80px");
+           			$("#show_all_top10").css("display","block");
+           			for(var j=0;j<10;j++){
+           				if(all_top10[1][j].price!=0){
+               				
+           				$("#show_all_top10").children("ul").append("<li><a href='#'><span>"+count+".</span><span>"+all_top10[1][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[1][j].price+"</span></a></li>")
+           				count++;
+           				}
+           			}
+           		}else if(did=="top10_o3"){
+           			$("#show_all_top10").css("top","-10px");
+           			$("#show_all_top10").css("display","block");
+           			for(var j=0;j<10;j++){
+           				if(all_top10[2][j].price!=0){
+               				
+           				$("#show_all_top10").children("ul").append("<li><a href='#'><span>"+count+".</span><span>"+all_top10[2][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[2][j].price+"</span></a></li>")
+           				count++;
+           				}
+           			}
+           		}
            		
+           		if(count!=11){
+        		var temp=count-1;
+        		for(var n=0;n<10-temp;n++){
+        			$("#show_all_top10").children("ul").append("<li><span>"+count+".</span><span> 조회된 정보가 없습니다.</span><span style='float:right;'>-</span></li>");
+        			count++;
+        		}
+       
+        		
+           	 }
+           	 
            	});
 			 
            	$("#top10_slide").children("div").children("ul").mouseout(function() {
+           		$("#show_all_top10").children("ul").empty();
+           		$("#show_all_top10").css("display","none");
+           		
            		auto();
            	});
            	
@@ -474,6 +526,48 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 		}, 500);
 		$("#shadow").css("display","none");
 	});
+	function top10_nameSearch(aa){
+		var uid=aa.className;
+		var g_x=0;
+		var g_y=0;
+		var sidogugun="";
+		var b_name="";
+		var bx='${x}';
+		var by='${y}';
+		$.ajax({
+			url:"http://www.opinet.co.kr/api/detailById.do",
+			method:"get",
+			data:{"out":"xml",
+				"code":code,
+				"id":uid
+			},
+			async:false,
+			success:function(jsonData){
+				g_x=$(jsonData).find("GIS_X_COOR").text();
+				g_y=$(jsonData).find("GIS_Y_COOR").text();
+				sidogugun=$(jsonData).find("SIGUNCD").text();
+				b_name=$(jsonData).find("OS_NM").text();
+			},
+			error:function(){
+				alert("서버통신실패");
+			}
+		});
+		var sido=sidogugun.substr(0,2);
+		var agugun=sidogugun.substr(2,2);
+		var id='${ldto.id}'
+	   	if(id==null||id==""){
+	   			id=lid;
+	   	}
+	   	if(id==null || id==""){
+	   		$("#login_maincontainer").css("display","none");
+	   		$("#sub_container").append("<iframe id='frame_sub' scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>");
+	   		$("iframe").attr("src","nameSearch.do?sido="+sido+"&gugun="+agugun+"&x="+bx+"&y="+by+"&name="+b_name);
+	   	}else{
+	   		$("iframe").attr("src","nameSearch.do?sido="+sido+"&gugun="+agugun+"&x="+bx+"&y="+by+"&name="+b_name);
+	   	}
+	   	call_sub_container();
+	}
+	
 	
 	function make_slide(){
 		var count1=1;
@@ -483,18 +577,32 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			for(var j=0;j<10;j++){
 				if(all_top10[i][j].price!=0){
 					if(i==0){
-						$("#top10_o1").children("ul").append("<li><a href='#'><span>"+count1+".</span><span>"+all_top10[i][j].u_name+"</span><span style='float:right;'>"+all_top10[i][j].price+"</span></a></li>");	
+						$("#top10_o1").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class="+all_top10[i][j].u_id+"><span>"+count1+".</span><span>"+all_top10[i][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[i][j].price+"</span></a></li>");	
 						count1++;
 					}
 					if(i==1){
-						$("#top10_o2").children("ul").append("<li><a href='#'><span>"+count2+".</span><span>"+all_top10[i][j].u_name+"</span><span style='float:right;'>"+all_top10[i][j].price+"</span></a></li>");	
+						$("#top10_o2").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class="+all_top10[i][j].u_id+"><span>"+count2+".</span><span>"+all_top10[i][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[i][j].price+"</span></a></li>");	
 						count2++;
 					}
 					if(i==2){
-						$("#top10_o3").children("ul").append("<li><a href='#'><span>"+count3+".</span><span>"+all_top10[i][j].u_name+"</span><span style='float:right;'>"+all_top10[i][j].price+"</span></a></li>");	
+						$("#top10_o3").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class="+all_top10[i][j].u_id+"><span>"+count3+".</span><span>"+all_top10[i][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[i][j].price+"</span></a></li>");	
 						count3++;
 					}
 				}
+			}
+		}
+		if(count1!=11){
+			var temp=count1-1;
+			for(var n=0;n<10-temp;n++){
+				$("#top10_o1").children("ul").append("<li><span>"+count1+".</span><span> 조회된 정보가 없습니다.</span><span style='float:right;'>-</span></li>");
+				count1++;
+			}
+		}
+		if(count2!=11){
+			var temp=count2-1;
+			for(var m=0;m<10-temp;m++){
+				$("#top10_o2").children("ul").append("<li><span>"+count2+".</span><span> 조회된 정보가 없습니다.</span><span style='float:right;'>-</span></li>");
+				count2++;
 			}
 		}
 		if(count3!=11){
@@ -1663,21 +1771,26 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 </div>
 <div id="top10_slide" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left; ">
 	<h3>전국 최저가 주유소 TOP10</h3>
-	&nbsp;&nbsp;휘발유<br>
-	<div id="top10_o1" style="height: 41px; width:80%;  overflow: hidden;">
+	&nbsp;&nbsp;<span>휘발유</span><br>
+	<div id="top10_o1" style="height: 41px; width:80%; overflow: hidden; ">
 		<ul>
 		
 		</ul>
 	</div>
-	&nbsp;&nbsp;경유<br>
-	<div id="top10_o2" style="height: 41px; width:80%;   overflow: hidden;">
+	&nbsp;&nbsp;<span>경유</span><br>
+	<div id="top10_o2" style="height: 41px; width:80%; overflow: hidden; ">
 		<ul>
 		
 		</ul>
 	</div>
-	&nbsp;&nbsp;LPG<br>
-	<div id="top10_o3" style="height: 41px; width:80%;  overflow: hidden;">
+	&nbsp;&nbsp;<span>LPG</span><br>
+	<div id="top10_o3" style="height: 41px; width:80%; overflow: hidden; ">
 		<ul>
+		
+		</ul>
+	</div>
+	<div id="show_all_top10" style="background-color:#3A3A3C ; width: 80%; position:relative ; display:none;  margin: 0 auto; z-index: 1000;">
+		<ul style="padding-top: 5px;">
 		
 		</ul>
 	</div>

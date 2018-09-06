@@ -568,6 +568,37 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	   	call_sub_container();
 	}
 	
+	function bookmark_nameSearch(aa){
+		var uid=aa.className;
+		var g_x=0;
+		var g_y=0;
+		var sidogugun="";
+		var b_name="";
+		var bx='${x}';
+		var by='${y}';
+		$.ajax({
+			url:"http://www.opinet.co.kr/api/detailById.do",
+			method:"get",
+			data:{"out":"xml",
+				"code":code,
+				"id":uid
+			},
+			async:false,
+			success:function(jsonData){
+				g_x=$(jsonData).find("GIS_X_COOR").text();
+				g_y=$(jsonData).find("GIS_Y_COOR").text();
+				sidogugun=$(jsonData).find("SIGUNCD").text();
+				b_name=$(jsonData).find("OS_NM").text();
+			},
+			error:function(){
+				alert("서버통신실패");
+			}
+		});
+		var sido=sidogugun.substr(0,2);
+		var agugun=sidogugun.substr(2,2);
+	   	$("iframe").attr("src","nameSearch.do?sido="+sido+"&gugun="+agugun+"&x="+bx+"&y="+by+"&name="+b_name);
+	}
+	
 	
 	function make_slide(){
 		var count1=1;

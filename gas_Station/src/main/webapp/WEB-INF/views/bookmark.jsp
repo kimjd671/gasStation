@@ -111,11 +111,11 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 					</tr>
 					<%
 				}else{
-					for(int i=0;i<list.size();i++){
+					for(int i=0;i<list.size();i++){ 
 						BookMarkDto dto=list.get(i);
 						%>
 						<tr>
-							<td><a href="#"><%=dto.getB_name()%></a></td>
+							<td><a href="#" class="<%=dto.getUni_id()%>" onclick="parent.bookmark_nameSearch(this)"><%=dto.getB_name()%></a></td>
 							<td><%=dto.getLocation()%></td>
 							<td><%=dto.getGasoline()%></td>
 							<td><%=dto.getDiesel()%></td>

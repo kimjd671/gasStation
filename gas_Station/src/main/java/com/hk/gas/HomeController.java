@@ -107,7 +107,7 @@ public class HomeController {
 		}
 		String name= request.getParameter("name");
 		if(name!=null) {
-			model.addAttribute("s_name",name);
+			model.addAttribute("s_name",name); 
 		}
 		model.addAttribute("x",x);
 		model.addAttribute("y",y);

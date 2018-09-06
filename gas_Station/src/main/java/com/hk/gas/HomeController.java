@@ -124,7 +124,7 @@ public class HomeController {
 		String id=ldto.getId();
 		List<BookMarkDto> booklist= client.bookmark_List(id);
 		System.out.println("booklist="+booklist);
-		model.addAttribute("lists",booklist);
+		model.addAttribute("lists",booklist); 
 		return "bookmark";
 	}
 	
@@ -226,7 +226,14 @@ public class HomeController {
 		return map;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/load_boardlist.do")
+	public Map<String,List<FreeBoardDto>> load_boardlist(Locale locale, Model model){
+		Map<String,List<FreeBoardDto>> map=new HashMap<>();
+		List<FreeBoardDto> dto=client.freeall_List();
+		map.put("dto",dto);
+		return map;
+	}
 	@ResponseBody
 	@RequestMapping(value = "/insertuser.do", method = RequestMethod.GET)
 	public Map<String,Boolean> inseruser(GasUserDto dto,Locale locale, Model model) {

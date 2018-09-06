@@ -361,6 +361,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			              	chk_sido_avg();
 			              	auto();
 			              	chk_login();
+			              	load_board_chart();
 			              	$(".all_avg_content").hide();
 			    		 	$(".all_avg_content:first").show();
 			    		 	
@@ -840,7 +841,60 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 		}
 		make_slide();
 	}
+	function load_board_chart(){
+		$.ajax({
+			url:"load_boardlist.do",
+			method:"get",
+			async:false,
+			dataType:"json",
+			success:function(Data){
+				var dto=Data["dto"];
+				var max=0;
+				var max_index=0;
+				for(var j=0;j<10;j++){
+					for(var i=0;i<dto.length;i++){
+						if(dto[i]!=null){
+							if(dto[i].likecount!=null){
+								var like=dto[i].likecount;
+								var likecount=like.split(",");
+								if((likecount.length-1)>max){
+									max=likecount.length-1;
+									max_index=i;
+								}
+							}
+						}
+						
+					}
+					if(max!=0){
+						$("#board_chart").children("table").append("<tr><td><a href='#' onclick='chart_detail(this)' class='"+dto[max_index].seq+"'>"+dto[max_index].title.trim()+"</a></td><th>"+max+"</th></tr>");
+						delete dto[max_index];
+						max=0;
+						max_index=0;
+					}
+				}
+				
+				
+			},
+			error:function(){
+				alert("서버통신 실패");
+			}
+		});
+	}
 	
+	function chart_detail(ch){
+		var seq=ch.className;
+		var id='${ldto.id}'
+		if(id==null||id==""){
+			id=lid;
+		}
+		if(id==null || id==""){
+			alert("로그인을 해주세요.");
+		}else{
+			$("iframe").attr("src", "boardDetatil.do?page=1&seq="+seq);
+			call_sub_container();
+		}
+		
+	}
 	
 	//시도 클릭시 시도이미변환과 마지막 구/군선택
 	function chk_sido(aa){
@@ -1833,9 +1887,16 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 <!-- 	<img id="loading_img" src="image/gugun/loading.gif" alt="로딩" style=" margin: auto auto;"/> -->
 	</div>
 </div>
-<div id="week_day_avg" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left;">
-	<h3 style="float: left;">최근 1주간  평균유가</h3><button class="btn_mini" style="position: relative;" onclick="reload_price('A0028706',this)" >조회하기</button>
-	
+<div id="board_chart" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left;">
+	<h3 style="text-align: center;">게시판 추천글</h3>
+	<table style="width: 90%; margin: 0 auto;">
+		<col width="200px">
+		<col width="40px">
+		<tr>
+			<th>글제목</th>
+			<th>추천수</th>
+		</tr>
+	</table>
 </div>
 </div>
 <div id="right_view1">

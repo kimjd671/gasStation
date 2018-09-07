@@ -259,6 +259,7 @@ ul.tabs li.active {
 .sido_avg_span,.all_avg_span{font-size: 40px;}
 #all_avg_t{	margin: 80px 0 10px 0;}
 #all_oil_avg_o1,#all_oil_avg_o2,#all_oil_avg_o3,.top5_div{width: 90%;}
+.top5_div{margin-bottom: 10px;}
 .all_diff,.sido_diff{position:relative;left:100px; top:0; display:inline-block; font-size:25px;}
 .back_btn{cursor: pointer;margin: 15px;display: inline;}
 .l_input{width: 80%; height: 100%; font-size: 35px; margin: 0 auto; display: block;}
@@ -437,7 +438,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            		if(count!=11){
         		var temp=count-1;
         		for(var n=0;n<10-temp;n++){
-        			$("#show_all_top10").children("ul").append("<li><span>"+count+".</span><span> 조회된 정보가 없습니다.</span><span style='float:right;'>-</span></li>");
+        			$("#show_all_top10").children("ul").append("<li><a href='#'><span>"+count+".</span><span> 조회된 정보가 없습니다.</span><span style='float:right;'>-</span></a></li>");
         			count++;
         		}
        
@@ -626,21 +627,21 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 		if(count1!=11){
 			var temp=count1-1;
 			for(var n=0;n<10-temp;n++){
-				$("#top10_o1").children("ul").append("<li><span>"+count1+".</span><span> 조회된 정보가 없습니다.</span><span style='float:right;'>-</span></li>");
+				$("#top10_o1").children("ul").append("<li><a href='#'><span>"+count1+".</span><span> 조회된 정보가 없습니다.</span><span style='float:right;'>-</span></a></li>");
 				count1++;
 			}
 		}
 		if(count2!=11){
 			var temp=count2-1;
 			for(var m=0;m<10-temp;m++){
-				$("#top10_o2").children("ul").append("<li><span>"+count2+".</span><span> 조회된 정보가 없습니다.</span><span style='float:right;'>-</span></li>");
+				$("#top10_o2").children("ul").append("<li><a href='#'><span>"+count2+".</span><span> 조회된 정보가 없습니다.</span><span style='float:right;'>-</span></a></li>");
 				count2++;
 			}
 		}
 		if(count3!=11){
 			var temp=count3-1;
 			for(var k=0;k<10-temp;k++){
-				$("#top10_o3").children("ul").append("<li><span>"+count3+".</span><span> 조회된 정보가 없습니다.</span><span style='float:right;'>-</span></li>");
+				$("#top10_o3").children("ul").append("<li><a href='#'><span>"+count3+".</span><span> 조회된 정보가 없습니다.</span><span style='float:right;'>-</span></a></li>");
 				count3++;
 			}
 		}
@@ -781,7 +782,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 				success:function(jsonData){
 					var rows=jsonData["RESULT"]["OIL"];
 					$("#gugun_oil_top5").empty();
-					$("#gugun_oil_top5").append("<h5>"+sel_gugun+"의 최저가 "+o_name+" 주유소</h5>");
+					$("#gugun_oil_top5").append("<h4>"+sel_gugun+"<small>의 최저가 "+o_name+" 주유소</small></h4>");
 					for(var i=0; i<5; i++){
 						if(rows[i] !=null){
 							sido_Top5[i]={
@@ -794,7 +795,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 									x:rows[i].GIS_X_COOR,
 									y:rows[i].GIS_Y_COOR
 							}
-						$("#gugun_oil_top5").append("<div class='top5_div'>"+(i+1)+". "+sido_Top5[i].u_name+"<span style='display:block; float:right;'>"+sido_Top5[i].price+"</span> </div>");
+						$("#gugun_oil_top5").append("<div class='top5_div'>"+(i+1)+". <a href='#' onclick='top10_nameSearch(this)' class='"+sido_Top5[i].u_id+"'>"+sido_Top5[i].u_name+"<span style='display:block; float:right;'>"+sido_Top5[i].price+"</span></a> </div>");
 						}
 					}
 				},
@@ -1711,7 +1712,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	
 	function reload_price(id,target){
 		var tar=target.className;
-		var tds=$("#frame_sub").contents().find("."+tar).parent("td").siblings("td");
+		var tds=$(target).parent("td").siblings("td");
 		$.ajax({
 			url:"http://www.opinet.co.kr/api/detailById.do",
 			method:"get",
@@ -1741,7 +1742,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 		        if (("" + month).length == 1) { month = "0" + month; }
 		        if (("" + day).length   == 1) { day   = "0" + day;   }
 // 			        alert(tds.eq(5).html());
-		        tds.eq(5).text(""+year+"-"+month+"-"+day);        
+		        tds.eq(5).text(""+year+"-"+month+"-"+day);
 		        save_bookmark(gas,sel,lpg,id);
 			},
 			error:function(){
@@ -1882,7 +1883,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	
 </div>
 <div id="oil_top5" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left;">
-	<h3>최저가 Top5 주유소</h3>
+	<h3>지역 최저가 Top5 주유소</h3>
 	<div id="gugun_oil_top5">
 <!-- 	<img id="loading_img" src="image/gugun/loading.gif" alt="로딩" style=" margin: auto auto;"/> -->
 	</div>
@@ -1912,7 +1913,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 				</table>
 			</fieldset>
 			<button id="information" class="btn_mini" onclick="call_update_info()" style="float:left;">정보수정</button>
-			<button id="superuser" class="btn_mini" onclick='amdin_page()' style="float:left; margin: 10px 10px 10px 10px;">관리자페이지</button>
+			<button id="superuser" class="btn_mini" onclick='amdin_page()' style="float:left; margin: 10px 10px 10px 10px; display: none;">관리자페이지</button>
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>
 			<%	}else{	%>
@@ -1927,7 +1928,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 				</table>
 			</fieldset>
 			<button class="btn_mini" onclick="call_update_info()" ${ldto.role=='USER'?"":"style='display:none;'"} style="float:left;">정보수정</button>
-			<button class="btn_mini" onclick='amdin_page()' ${ldto.role!='USER'?"":"style='display:none;'"} style="float:left; margin: 10px 10px 10px 10px;">관리자페이지</button>
+			<button class="btn_mini" onclick='amdin_page()' ${ldto.role!='USER'?"":"style='display:none;'"} style="float:left; margin: 10px 10px 10px 10px; display: none;">관리자페이지</button>
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>	
 			<%		}	%>

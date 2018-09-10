@@ -33,7 +33,8 @@ h3{margin: 10px;}
 .r_btn_img{display:block; position: relative; top: 50%;left: 50%;transform: translate(-50%, -50%); width: 50%;height: 100%; object-fit: contain;}
 .b_btn_img{display:block; position: relative; top: 50%;left: 50%;transform: translate(-50%, -50%); width: 35%;height: 100%; object-fit: contain;}
 #frame_sub{position: relative;}
-
+::-webkit-scrollbar{display:none;}
+::-moz-scrollbar{display: none;}
 
 ul.tabs {
     margin: 0 auto;
@@ -221,7 +222,7 @@ ul.tabs li.active {
 }
 
 
-#bottom_view1,#bottom_view2{width:35%; height:24%; border: 1px solid #dfbe6a; background-color:#3A3A3C; float: left; overflow: hidden; position: relative;}
+#bottom_view1,#bottom_view2,#bottom_view3{width:32%; height:24%; border: 1px solid #dfbe6a; background-color:#3A3A3C; float: left; overflow: hidden; position: relative;}
 .bottom_div *{transition: all 0.35s ease; box-sizing: border-box; }
 .bottom_div:hover img{opacity: 0.5; }
 .bottom_div h3{
@@ -284,6 +285,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 
 
 </style>
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=d5a3febeb4d52aaf0a2bcdd28926d84a&libraries=services,clusterer,drawing"></script>
 <%
@@ -361,6 +363,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			              	auto();
 			              	chk_login();
 			              	load_board_chart();
+			              	
 			              	$(".all_avg_content").hide();
 			    		 	$(".all_avg_content:first").show();
 			    		 	
@@ -473,6 +476,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 						id=lid;
 				}
 				if(id!=null){
+					openSocket();
 					$("#sub_container").empty();
 					$("#sub_container").append("<iframe id='frame_sub' scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>")
 				}
@@ -1448,8 +1452,8 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 						$("#sub_container").empty();
 						$("#sub_container").append("<iframe id='frame_sub' scrolling='no'  frameborder='0' width='100%' height='100%'  ></iframe>")
 						call_main_container();
-
-						
+						$("#sender").val(id);
+						openSocket();
 					}
 				},
 				error:function(){
@@ -1780,6 +1784,53 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	}
 	
 	
+// 	채팅
+	 var ws;
+     var messages=document.getElementById("messages");
+     
+     function openSocket(){
+         if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
+             writeResponse("WebSocket is already opened.");
+             return;
+         }
+         //웹소켓 객체 만드는 코드
+         ws=new WebSocket("ws://192.168.3.111:8090/gas/echo.do");
+         
+         ws.onopen=function(event){
+             if(event.data===undefined) return;
+             
+             writeResponse(event.data);
+         };
+         ws.onmessage=function(event){
+             writeResponse(event.data);
+         };
+         ws.onclose=function(event){
+             writeResponse("연결이 종료되었습니다.");
+         }
+     }
+     
+     function send(){
+         var text=document.getElementById("messageinput").value+","+document.getElementById("sender").value;
+         ws.send(text);
+         text="";
+         $("#messageinput").val("");
+         
+     }
+     
+     function enter_chat(){
+    	 if(window.event.keyCode == 13) {
+             send();
+        }
+     }
+     
+     function closeSocket(){
+         ws.close();
+     }
+     function writeResponse(text){
+//     	 messages.innerHTML+="<br/>"+text;
+		$("#messages").append("<div>"+text+"</div>");
+		$('#messages').scrollTop($('#messages')[0].scrollHeight+30);
+     }
 
 </script>
 </head>
@@ -1955,6 +2006,15 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	<div class="bottom_div">
 	<h3>주변주유소 찾기</h3>
 	<img class="b_btn_img" alt="반경검색" src="image/maker.png" >
+	</div>
+</div>
+<div class="gas_chat"  id="bottom_view3">
+	 <input type="hidden" id="sender" value="${ldto.id}">
+	<div id="messages" style="width: 99%; height: 85%; overflow-y: scroll; overflow-x:auto; ">
+	
+	</div>
+	<div>
+		<input type="text" id="messageinput" onkeyup="enter_chat()" style="width: 80%"><button type="button" style="width: 20%" onclick="send();">보내기</button>
 	</div>
 </div>
 <div style="clear: left;"></div>

@@ -37,18 +37,19 @@ public class EchoHandler extends TextWebSocketHandler {
 	     logger.info("Open session id:"+session.getId());
 	     try {
 	    	 final Basic basic=session.getBasicRemote();
-	    	 basic.sendText("Connection Established");
+	    	 basic.sendText("채팅방에 연결되었습니다.");
+	    	 sessionlist.add(session);
+		     basic.sendText(sessionlist.size()+"명 접속중");
 	     }catch (Exception e) {
 	            // TODO: handle exception
 	        System.out.println(e.getMessage());
-	     }
-	        sessionlist.add(session);
+	     } 
 	    }
 	private void sendAllSessionToMessage(Session self,String message) {
         try {
             for(Session session : EchoHandler.sessionlist) {
                 if(!self.getId().equals(session.getId())) {
-                    session.getBasicRemote().sendText(message.split(",")[1]+" : "+message);
+                    session.getBasicRemote().sendText(message.split(",")[1]+" : "+message.split(",")[0]);
                 }
             }
         }catch (Exception e) {

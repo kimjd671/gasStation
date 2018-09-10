@@ -1693,7 +1693,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	}
 
 	function del_bookmark(uid,target){
-		var trs=$("#frame_sub").contents().find("."+target.className).parent("td").parent("tr");
+		var trs=$(target).parent("td").parent("tr");
 		var myid='${ldto.id}';
 		if(myid==null||myid==""){
 			myid=lid;

@@ -253,9 +253,7 @@ ul.tabs li.active {
 	color:white;
   	opacity: 1;
 }
-
-
-
+#show_all_top10 h4{margin: 0 auto; display: block;width: 50%;}
 .sido_avg_span,.all_avg_span{font-size: 40px;}
 #all_avg_t{	margin: 80px 0 10px 0;}
 #all_oil_avg_o1,#all_oil_avg_o2,#all_oil_avg_o3,.top5_div{width: 90%;}
@@ -403,8 +401,10 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            	 }           	 
          
            		if(did=="top10_o1"){
-           			$("#show_all_top10").css("top","-150px");
+           			$("#show_all_top10").css("top","-140px");
            			$("#show_all_top10").css("display","block");
+           			$("#show_all_top10").append("<h4>휘발유 리스트</h4><ul style='padding-top: 5px;'></ul>");
+           			
            			for(var j=0;j<10;j++){
            				if(all_top10[0][j].price!=0){
            				
@@ -414,8 +414,9 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            				}
            			}
            		}else if(did=="top10_o2"){
-           			$("#show_all_top10").css("top","-80px");
+           			$("#show_all_top10").css("top","-70px");
            			$("#show_all_top10").css("display","block");
+           			$("#show_all_top10").append("<h4>경유 리스트</h4><ul style='padding-top: 5px;'></ul>");
            			for(var j=0;j<10;j++){
            				if(all_top10[1][j].price!=0){
                				
@@ -426,6 +427,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            		}else if(did=="top10_o3"){
            			$("#show_all_top10").css("top","-10px");
            			$("#show_all_top10").css("display","block");
+           			$("#show_all_top10").append("<h4>LPG 리스트</h4><ul style='padding-top: 5px;'></ul>");
            			for(var j=0;j<10;j++){
            				if(all_top10[2][j].price!=0){
                				
@@ -448,7 +450,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            	});
 			 
            	$("#top10_slide").children("div").children("ul").mouseout(function() {
-           		$("#show_all_top10").children("ul").empty();
+           		$("#show_all_top10").empty();
            		$("#show_all_top10").css("display","none");
            		
            		auto();
@@ -1875,10 +1877,8 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 		
 		</ul>
 	</div>
-	<div id="show_all_top10" style="background-color:#3A3A3C ; width: 80%; position:relative ; display:none;  margin: 0 auto; z-index: 1000;">
-		<ul style="padding-top: 5px;">
+	<div id="show_all_top10" style="background-color:#606064 ; width: 95%; height:300px; position:relative ; display:none;  margin: 0 auto; z-index: 1000;">
 		
-		</ul>
 	</div>
 	
 </div>

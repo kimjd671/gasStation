@@ -290,6 +290,7 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 					</select>
 					<input type="text" name="findvalue" onkeyup="enterkey_search()"  style="float: left; margin: 2px; width:180px; height:33px; background-color: #3A3A3C; color: white; border-color:#dfbe6a; ">
 					<button class="btn" style="float: left; margin: 2px; " onclick="search_board()">검색</button>
+					<button class="btn" style="float: left; margin: 2px; " onclick="location.href='boardlist.do?page=1'">처음으로</button>
 				 <button class="btn" onclick="call_insertform()" >글쓰기</button>
 				 </div>
 			 </td>

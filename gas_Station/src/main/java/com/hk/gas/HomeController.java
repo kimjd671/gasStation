@@ -128,6 +128,12 @@ public class HomeController {
 		return "bookmark";
 	}
 	
+
+	@RequestMapping(value = "/testchat.do", method = RequestMethod.GET)
+	public String testchat(Locale locale, Model model,HttpServletRequest request) {
+		return "testchat";
+	}
+	
 	@RequestMapping(value = "/boardlist.do", method = RequestMethod.GET)
 	public String boardlist(Locale locale, Model model,HttpServletRequest request) {
 		int page=Integer.parseInt(request.getParameter("page"));

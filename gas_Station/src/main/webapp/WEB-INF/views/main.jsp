@@ -258,6 +258,8 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 #sub_container fieldset{color: black;}
 #main_container fieldset{margin-top: 20px; color: white; line-height: 30px;}
 #update_info{background-color:#F4F6FC; width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
+#declar{background-color:#F4F6FC; width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
+
 /* 아이디비번찾기 */
 #find_form{background-color:#F4F6FC; width: 30%; height: 50%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px;  z-index: 5;}
 #idpwd{margin: 0 auto}

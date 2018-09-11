@@ -2130,7 +2130,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 		<tr>
 			<th style="border-bottom: 1px solid #dfbe6a;">사유</th>
 			<td style="border-bottom: 1px solid #dfbe6a;">
-				<input type="radio" name="dec" value="홍보성">홍보성
+				<input type="radio" name="dec" value="홍보성글">홍보성글(광고)
 				<br>
 				<input type="radio" name="dec" value="불법정보">불법정보
 				<br>

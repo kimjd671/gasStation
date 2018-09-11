@@ -64,7 +64,9 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 	left: 20px;
 }
 #user_allList{width: 70%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; }
-#blacklist{width: 70%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; }
+#blacklist{width: 90%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; }
+::-webkit-scrollbar{display:none;}
+::-moz-scrollbar{display: none;}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
@@ -83,12 +85,50 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 	});
 	
 	function open_user_list(){
+		$.ajax({
+			url:"userlist.do",
+			method:"get",			
+			async:false,
+			dataType:"json",
+			success:function(Data){
+				var list=Data["list"];
+// 				alert(list.length);
+				for(var i =0; i<list.length;i++){
+					//list쓸때 
+// 					alert(list[i].id);	
+					var date =new Date(list[i].regdate).toISOString().slice(0,10);
+					$("#usertable").append("<tr><td>"+list[i].id+"</td><td>"+list[i].name+"</td><td>"+list[i].email+"</td><td>"+list[i].phone+"</td><td>"+date+"</td></tr>")
+				}
+			},
+			error:function(){
+				alert("서버통신실패");
+			}
+		});
 		$("#user_allList").fadeIn();		
 	}
 	function close_user_list(){
 		$("#user_allList").fadeOut();		
 	}
 	function open_blacklist(){
+		$.ajax({
+			url:"blacklist.do",
+			method:"get",			
+			async:false,
+			dataType:"json",
+			success:function(Data){
+				var list=Data["list"];
+// 				alert(list.length);
+// 				alert(list[0].ID);
+				for(var i =0; i<list.length;i++){
+					//list쓸때 
+					var date =new Date(list[i].REGDATE).toISOString().slice(0,10);
+					$("#blacktable").append("<tr><td>"+list[i].ID+"</td><td>"+list[i].BLACK_ID+"</td><td>"+list[i].WHY+"</td><td>"+list[i].CONTENT+"</td><td>"+date+"</td></tr>")
+				}
+			},
+			error:function(){
+				alert("서버통신실패");
+			}
+		});
 		$("#blacklist").fadeIn();		
 	}
 	function close_blacklist(){
@@ -108,11 +148,11 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 				<button class="btn " onclick="open_blacklist()">신고회원</button>
 		</div>
 	</div>	
-	<div id="user_allList" style="position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95; display: none;">
+	<div id="user_allList" style="overflow-y:scroll; overflow-x:auto; position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95; display: none;">
 	<img alt="창닫기" src="image/close.png" onclick="close_user_list()" style="float: right; position: relative; top: 10px; left: -10px; cursor: pointer; z-index: 100;">
 		<div id="user_list">		
 			<span class='login_logo' style="font-size: 50px; text-align: center;">회원리스트</span>
-			<table style="width: 95%;  margin: 0 auto; position: relative; top: 15px; border-collapse: collapse;">
+			<table id="usertable" style="width: 95%;  margin: 0 auto; position: relative; top: 15px; border-collapse: collapse;">
 				<col width="100px;">
 				<tr>
 					<th>아이디</th>
@@ -128,13 +168,14 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 	<img alt="창닫기" src="image/close.png" onclick="close_blacklist()" style="float: right; position: relative; top: 10px; left: -10px; cursor: pointer; z-index: 100;">
 		<div id="user_black">		
 			<span class='login_logo' style="font-size: 50px; text-align: center;">블랙리스트</span>
-			<table style="width: 95%;  margin: 0 auto; position: relative; top: 15px; border-collapse: collapse;">
+			<table id="blacktable" style="width: 95%;  margin: 0 auto; position: relative; top: 15px; border-collapse: collapse;">
 				<col width="100px;">
 				<tr>
 					<th style="width: 150px;">신고자아이디</th>
 					<th style="width: 150px;">신고당한아이디</th>
 					<th>신고사유</th>
 					<th>채팅내용</th>
+					<th width="180px">신고날짜</th>
 				</tr>
 			</table>			
 		</div>

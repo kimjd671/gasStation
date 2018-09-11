@@ -1,6 +1,8 @@
 package com.hk.gas.daos;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,10 @@ public class GasUserDaoImp implements IGasUserDao {
 		return count>0?true:false;
 	}
 	
+	@Override
+	public List<GasUserDto> userlist() {		
+		return sqlSession.selectList(namespace+"userlist");
+	}
 	
 	@Override
 	public boolean chk_id(GasUserDto dto) {
@@ -33,6 +39,23 @@ public class GasUserDaoImp implements IGasUserDao {
 		count=sqlSession.selectOne(namespace+"chkid",dto);
 		System.out.println(count);
 		return count>0?true:false;
+	}
+	
+	@Override
+	public boolean black_insert(String id, String black_id, String why, String content) {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("id", id);
+		map.put("black_id", black_id);
+		map.put("why", why);
+		map.put("content", content);
+		
+		int count=sqlSession.insert(namespace+"black_insert",map);
+		return count>0?true:false;
+	}
+	
+	@Override
+	public List<Map<String, Object>> blacklist() {
+		return sqlSession.selectList(namespace+"blacklist");
 	}
 	
 	@Override

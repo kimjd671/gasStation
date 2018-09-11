@@ -2,6 +2,7 @@ package com.hk.gas.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import com.hk.gas.dtos.GasUserDto;
 @Service
 public class GasUserService implements IGasUserService{
 
+	//service는 다오쪽으로 연결용도
 	
 	@Autowired
 	GasUserDaoImp userdao;
@@ -18,6 +20,21 @@ public class GasUserService implements IGasUserService{
 	@Override
 	public boolean insert_User(GasUserDto dto) {
 		return userdao.insert_User(dto);
+	}
+	
+@Override
+	public boolean black_insert(String id, String black_id, String why, String content) {
+		return userdao.black_insert(id, black_id, why, content);
+	}
+	
+	@Override
+	public List<GasUserDto> userlist() {
+		return userdao.userlist();
+	}
+	
+	@Override
+	public List<Map<String, Object>> blacklist() {
+		return userdao.blacklist();
 	}
 	
 	@Override

@@ -271,8 +271,10 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 #sub_container fieldset{color: black;}
 #main_container fieldset{margin-top: 20px; color: white; line-height: 30px;}
 #update_info{background-color:#F4F6FC; width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
-#declar{background-color:#3A3A3C; width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
+#declar{position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;width: 40%; height: 65%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height:30px; display: none;}
+#declar_table{ border-collapse: collapse; width: 100%; table-layout:fixed; border: none;}
 
+}
 /* 아이디비번찾기 */
 #find_form{background-color:#F4F6FC; width: 30%; height: 50%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px;  z-index: 5;}
 #idpwd{margin: 0 auto}
@@ -2115,19 +2117,19 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	<img alt="창닫기" src="image/close.png" onclick="close_declar()" style="z-index:10; float: right; position: relative; top: 10px; left: -10px; cursor: pointer;">
 	
 	<span class="login_logo" style="font-size: 40px; top:30px; text-align: center;">신고하기</span>
-	<table style="position: relative; top: 30px;"> 
+	<table id="declar_table" style="position: relative; top: 30px;"> 
 	 <col width="100px">
 		<tr>
-			<th>아이디</th>
-			<td id="black_id"></td>
+			<th style="border-bottom: 1px solid #dfbe6a;">아이디</th>
+			<td id="black_id" style="border-bottom: 1px solid #dfbe6a;"></td>
 		</tr>
 		<tr>
-			<th>내용</th>
-			<td id="black_context"></td>
+			<th style="border-bottom: 1px solid #dfbe6a;">내용</th>
+			<td id="black_context" height="100px" style="border-bottom: 1px solid #dfbe6a;"></td>
 		</tr>
 		<tr>
-			<th>사유</th>
-			<td>
+			<th style="border-bottom: 1px solid #dfbe6a;">사유</th>
+			<td style="border-bottom: 1px solid #dfbe6a;">
 				<input type="radio" name="dec" value="홍보성">홍보성
 				<br>
 				<input type="radio" name="dec" value="불법정보">불법정보

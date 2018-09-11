@@ -248,7 +248,7 @@ ul.tabs li.active {
 }
 
 
-#bottom_view1,#bottom_view2,#bottom_view3{width:32%; height:24%; border: 1px solid #dfbe6a; background-color:#3A3A3C; float: left; overflow: hidden; position: relative;}
+#bottom_view1,#bottom_view2,#bottom_view3{width:32.58%; height:24%; border: 1px solid #dfbe6a; background-color:#3A3A3C; float: left; overflow: hidden; position: relative;}
 .bottom_div *{transition: all 0.35s ease; box-sizing: border-box; }
 .bottom_div:hover img{opacity: 0.5; }
 .bottom_div h3{

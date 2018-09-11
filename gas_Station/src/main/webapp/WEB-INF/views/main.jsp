@@ -1856,6 +1856,11 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
     	$("textarea[name=g_dec_text]").val("");
  		$("#declar").fadeOut();
      }
+     
+     function send_decla(){
+    	 
+    	 
+     }
 </script>
 </head>
 <body>

@@ -1871,9 +1871,46 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
  		$("#declar").fadeOut();
      }
      
-     function send_decla(){    	 
-    	 
+     function send_decla(){
+    	 var myid='${ldto.id}';
+			if(myid==null||myid==""){
+				myid=lid;
+		}
+		var black_id=$("#black_id").text();
+		var content=$("#black_context").text();
+		var why=$("input:radio[name=dec]:checked").val();
+		if(why=="기타"){
+			why=$("textarea[name=g_dec_text]").val();
+			if(why.length==0){
+				alert("신고내용을 작성해주세요.");
+				return
+			}
+		}
+    	 $.ajax({
+ 			url:"black_insert.do",
+ 			method:"get",
+ 			data:{"id":myid,
+ 				"black_id":black_id,
+ 				"why":why,
+ 				"content":content
+ 			},
+ 			async:false,
+ 			dataType:"json",
+ 			success:function(obj){
+ 				var isS=obj["isS"];
+ 				if(isS){
+ 					alert("신고처리 되었습니다.");
+ 					close_declar();
+ 				}else{
+ 					alert("시스템 오류");
+ 				}
+ 			},
+ 			error:function(){
+ 				alert("서버통신 실패");
+ 			}
+ 		});
      }
+     
      function admin_page() {
     	$("iframe").attr("src", "admin_page.do");
 		call_sub_container();

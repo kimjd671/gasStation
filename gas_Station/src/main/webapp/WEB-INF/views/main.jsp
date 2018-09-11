@@ -1928,8 +1928,8 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 <div id = "Progress_Loading" style="position: absolute; z-index: 6; width: 100%;"><!-- 로딩바 -->
 	<img src="image/gugun/loading.gif" style="display: block; top:50%;left:50%;  transform: translate(-50%, -50%);  position: fixed;"/>
 </div>
-<div id="main_view" style="width:75%; height:71%;  float: left;">
-<div id="map_div" style="width:31%; height:100%;   float: left; border: 1px solid #dfbe6a; overflow: hidden;" >
+<div id="main_view" style="width:75%; height:72%;  float: left;">
+<div id="map_div" style="width:33%; height:100.5%;   float: left; border: 1px solid #dfbe6a; overflow: hidden;" >
 <div style="background-color: #3A3A3C; width: 90%; margin: 10px auto 10px auto;">
 <img id="imgs" src="image/map.png" usemap="#sido" style="margin: 0 auto; display: block;">
 <map name="sido">
@@ -1974,7 +1974,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 </div>
 </div>
 </div>
-<div id="sido_oil_avg_div" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left;">
+<div id="sido_oil_avg_div" style="width:32.5%; height:50%; border: 1px solid #dfbe6a; float: left;">
 	<ul class="tabs">
         <li class="active" id="avg_o1">휘발유</li>
         <li id="avg_o2">경유</li>
@@ -2016,7 +2016,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	</div>
 	
 </div>
-<div id="oil_top5" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left;">
+<div id="oil_top5" style="width:32.5%; height:50%; border: 1px solid #dfbe6a; float: left;">
 	<h3>지역 최저가 Top5 주유소</h3>
 	<div id="gugun_oil_top5">
 <!-- 	<img id="loading_img" src="image/gugun/loading.gif" alt="로딩" style=" margin: auto auto;"/> -->

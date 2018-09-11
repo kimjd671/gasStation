@@ -156,6 +156,32 @@ ul.tabs li.active {
   color: $white;
   background-position: 99% 50%;
 }
+.btn_mini_chat{
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase; 
+  font-weight: 500; 
+  font-style: normal; 
+  font-size: 1rem; 
+  letter-spacing: 0.3em; 
+  color: rgba(223,190,106,0.7);
+  border-radius: 0;
+  padding: 1px 0px 1px;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 0;
+  border: none;
+  border: 1px solid rgba(223,190,106,0.3);
+}
+.btn_mini_chat:hover {
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: $white;
+  background-position: 99% 50%;
+}
 /* .btn{ */
 /* 	background:    #dfbe6a; */
 /* 	background:    -webkit-linear-gradient(#dfbe6a, #897952); */
@@ -1831,6 +1857,11 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 		$("#messages").append("<div>"+text+"</div>");
 		$('#messages').scrollTop($('#messages')[0].scrollHeight+30);
      }
+     
+     function admin_page() {
+    	 $("iframe").attr("src", "admin_page.do");
+			call_sub_container();
+	}
 
 </script>
 </head>
@@ -1964,7 +1995,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 				</table>
 			</fieldset>
 			<button id="information" class="btn_mini" onclick="call_update_info()" style="float:left;">정보수정</button>
-			<button id="superuser" class="btn_mini" onclick='amdin_page()' style="float:left; margin: 10px 10px 10px 10px; display: none;">관리자페이지</button>
+			<button id="superuser" class="btn_mini" onclick='admin_page()' style="float:left; margin: 10px 10px 10px 10px;">관리자페이지</button>
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>
 			<%	}else{	%>
@@ -1979,7 +2010,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 				</table>
 			</fieldset>
 			<button class="btn_mini" onclick="call_update_info()" ${ldto.role=='USER'?"":"style='display:none;'"} style="float:left;">정보수정</button>
-			<button class="btn_mini" onclick='amdin_page()' ${ldto.role!='USER'?"":"style='display:none;'"} style="float:left; margin: 10px 10px 10px 10px; display: none;">관리자페이지</button>
+			<button class="btn_mini" onclick='admin_page()' ${ldto.role!='USER'?"":"style='display:none;'"} style="float:left; margin: 10px 10px 10px 10px;">관리자페이지</button>
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>	
 			<%		}	%>
@@ -2014,7 +2045,8 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	
 	</div>
 	<div>
-		<input type="text" id="messageinput" onkeyup="enter_chat()" style="width: 80%"><button type="button" style="width: 20%" onclick="send();">보내기</button>
+		<input type="text" id="messageinput" onkeyup="enter_chat()" style="width: 75%">
+		<button class="btn_mini_chat" type="button" style="width: 20%" onclick="send();">보내기</button>
 	</div>
 </div>
 <div style="clear: left;"></div>

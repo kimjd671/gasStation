@@ -116,6 +116,12 @@ public class HomeController {
 		return "nameSearch";
 	}
 	
+	@RequestMapping(value = "/admin_page.do", method = RequestMethod.GET)
+	public String admin_page(Locale locale, Model model,HttpServletRequest request) {
+		
+		return "admin_page";
+	}
+	
 	
 	@RequestMapping(value = "/bookmark.do", method = RequestMethod.GET)
 	public String bookmark(Locale locale, Model model,HttpServletRequest request) {

@@ -156,48 +156,6 @@ ul.tabs li.active {
   color: $white;
   background-position: 99% 50%;
 }
-.btn_mini_chat{
-  display: inline-block;
-  background: transparent;
-  text-transform: uppercase; 
-  font-weight: 500; 
-  font-style: normal; 
-  font-size: 1rem; 
-  letter-spacing: 0.3em; 
-  color: rgba(223,190,106,0.7);
-  border-radius: 0;
-  padding: 1px 0px 1px;
-  transition: all 0.7s ease-out;
-  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
-  background-position: 1% 50%;
-  background-size: 300% 300%;
-  text-decoration: none;
-  margin: 0;
-  border: none;
-  border: 1px solid rgba(223,190,106,0.3);
-}
-.btn_mini_chat:hover {
-  color: #fff;
-  border: 1px solid rgba(223,190,106,0);
-  color: $white;
-  background-position: 99% 50%;
-}
-/* .btn{ */
-/* 	background:    #dfbe6a; */
-/* 	background:    -webkit-linear-gradient(#dfbe6a, #897952); */
-/* 	background:    linear-gradient(#dfbe6a, #897952); */
-/* 	border-radius: 1000px; */
-/* 	border-color:#3A3A3C; */
-/* 	padding:       3% 15%; */
-/* 	color:         #000000; */
-/* 	display:       block; */
-/* 	font:          normal 400 3vw/1 "Zenhei", sans-serif; */
-/* 	text-align:    center; */
-/* 	text-shadow:   none; */
-/* 	margin: 20px auto; */
-/* 	position:relative; */
-/* 	cursor: pointer; */
-/* } */
 .btn_old{ 
  	background:    #dfbe6a; 
  	background:    -webkit-linear-gradient(#dfbe6a, #897952); 
@@ -309,7 +267,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 #findid,#findpwd,#id_list,#changepwd,#pwd_reset{display: none;} 
 .info_btn{float: left; margin-left: 10px;}
 
-
+#messages div:hover{background-color:#606064 }
 </style>
 <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -401,6 +359,18 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			    }    
 			}
 			
+			 
+			 $("input:radio[name=dec]").click(function(){
+				 var thisEle = event.target;
+				 if(thisEle.id!="g_dec"){
+					 $("textarea[name=g_dec_text]").prop("disabled", true);
+				 }else{
+					 $("textarea[name=g_dec_text]").prop("disabled", false);
+				 }
+			 });
+
+
+			
 			 $("ul.tabs li").click(function () {
 			        $("ul.tabs li").removeClass("active").css("color", "gray");
 			        //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
@@ -420,7 +390,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			        load_sidoTop5(sel_prodcd);
 			});
 			 
-			 $("#top10_slide").children("div").children("ul").mouseover(function(e) {
+			 $("#top10_slide").children("div").children("ul").mouseover(function() {
            	 clearInterval(roll_id);
            	 var thisEle = event.target;
            	 var count=1;
@@ -1493,7 +1463,6 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	function call_update_info(){
 		$("#shadow").css("display","block");
 		$("#update_info").fadeIn();
-		
 	}
 	
 	function close_update_info(){
@@ -1853,16 +1822,42 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
          ws.close();
      }
      function writeResponse(text){
+    	 var id=document.getElementById("sender").value;
 //     	 messages.innerHTML+="<br/>"+text;
-		$("#messages").append("<div>"+text+"</div>");
-		$('#messages').scrollTop($('#messages')[0].scrollHeight+30);
+		if(text.indexOf(":")<0 || text.split(":")[0]==id){
+			$("#messages").append("<div><span>"+text+"</span></div>");
+			$('#messages').scrollTop($('#messages')[0].scrollHeight+30);
+		}else{
+			$("#messages").append("<div><span>"+text+"</span>"+
+					"<span style='color:#3A3A3C; float:right; cursor:pointer;' onclick='Declaration(this)' >[신고하기]</span>"+
+					"</div>");
+			$('#messages').scrollTop($('#messages')[0].scrollHeight+30);
+		}
+		
+     }
+
+     function Declaration(target){
+    	 var text=$(target).prev("span").text();
+    	 var id=text.split(":")[0];
+    	 var context=text.split(":")[1];
+    	 
+    	 $("#shadow").css("display","block");
+ 		 $("#black_id").text(id);
+ 		 $("#black_context").text(context);
+    	 $("#declar").fadeIn();
+    	 
      }
      
-     function admin_page() {
-    	 $("iframe").attr("src", "admin_page.do");
-			call_sub_container();
-	}
-
+     function close_declar(){
+    	$("#shadow").css("display","none");
+    	$("textarea[name=g_dec_text]").val("");
+ 		$("#declar").fadeOut();
+     }
+     
+     function send_decla(){
+    	 
+    	 
+     }
 </script>
 </head>
 <body>
@@ -1995,7 +1990,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 				</table>
 			</fieldset>
 			<button id="information" class="btn_mini" onclick="call_update_info()" style="float:left;">정보수정</button>
-			<button id="superuser" class="btn_mini" onclick='admin_page()' style="float:left; margin: 10px 10px 10px 10px;">관리자페이지</button>
+			<button id="superuser" class="btn_mini" onclick='amdin_page()' style="float:left; margin: 10px 10px 10px 10px; display: none;">관리자페이지</button>
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>
 			<%	}else{	%>
@@ -2010,7 +2005,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 				</table>
 			</fieldset>
 			<button class="btn_mini" onclick="call_update_info()" ${ldto.role=='USER'?"":"style='display:none;'"} style="float:left;">정보수정</button>
-			<button class="btn_mini" onclick='admin_page()' ${ldto.role!='USER'?"":"style='display:none;'"} style="float:left; margin: 10px 10px 10px 10px;">관리자페이지</button>
+			<button class="btn_mini" onclick='amdin_page()' ${ldto.role!='USER'?"":"style='display:none;'"} style="float:left; margin: 10px 10px 10px 10px; display: none;">관리자페이지</button>
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>	
 			<%		}	%>
@@ -2045,8 +2040,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	
 	</div>
 	<div>
-		<input type="text" id="messageinput" onkeyup="enter_chat()" style="width: 75%">
-		<button class="btn_mini_chat" type="button" style="width: 20%" onclick="send();">보내기</button>
+		<input type="text" id="messageinput" onkeyup="enter_chat()" style="width: 80%"><button type="button" style="width: 20%" onclick="send();">보내기</button>
 	</div>
 </div>
 <div style="clear: left;"></div>
@@ -2054,7 +2048,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 
 
 <!-- 내정보수정 -->
-<div id="update_info" style="position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;">
+<div id="update_info">
 	<img alt="창닫기" src="image/close.png" onclick="close_update_info()" style="float: right; position: relative; top: 10px; left: -10px; cursor: pointer;">
 	<div id="info_pwd_chk" style="color: white; width: 100%; height: 100%; text-align: center;">
 		<fieldset style="width: 90%; margin: 0 auto; position: relative; top: 250px;">
@@ -2093,8 +2087,49 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			<hr>
 			<button class="btn_mini" onclick="change_password()">확인</button>
 		</fieldset>
-		
 	</div>
+	
+</div>
+
+<!-- 신고창 -->
+<div id="declar">
+	<img alt="창닫기" src="image/close.png" onclick="close_declar()" style="z-index:10; float: right; position: relative; top: 10px; left: -10px; cursor: pointer;">
+	
+	<span class="login_logo" style="font-size: 40px; top:30px; text-align: center;">신고하기</span>
+	<table style="position: relative; top: 30px;"> 
+	 <col width="100px">
+		<tr>
+			<th>아이디</th>
+			<td id="black_id"></td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td id="black_context"></td>
+		</tr>
+		<tr>
+			<th>사유</th>
+			<td>
+				<input type="radio" name="dec" value="홍보성">홍보성
+				<br>
+				<input type="radio" name="dec" value="불법정보">불법정보
+				<br>
+				<input type="radio" name="dec" value="음란성">음란성
+				<br>
+				<input type="radio" name="dec" value="욕설/인신공격">욕설/인신공격
+				<br>
+				<input type="radio" name="dec" value="개인정보노출">개인정보노출
+				<br>
+				<input type="radio" name="dec" value="도배">도배
+				<br>
+				<input type="radio" name="dec" id="g_dec" value="기타">기타
+				<br>
+				<textarea rows="4" cols="60" name="g_dec_text" disabled="disabled" placeholder="기타 항목 선택 후 입력해주세요(최대 500자)"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2"><button class="btn_mini" onclick="send_decla()">신고하기</button> </th>
+		</tr>
+	</table>
 </div>
 <!-- 로그인창 -->
 

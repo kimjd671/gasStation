@@ -156,22 +156,6 @@ ul.tabs li.active {
   color: $white;
   background-position: 99% 50%;
 }
-/* .btn{ */
-/* 	background:    #dfbe6a; */
-/* 	background:    -webkit-linear-gradient(#dfbe6a, #897952); */
-/* 	background:    linear-gradient(#dfbe6a, #897952); */
-/* 	border-radius: 1000px; */
-/* 	border-color:#3A3A3C; */
-/* 	padding:       3% 15%; */
-/* 	color:         #000000; */
-/* 	display:       block; */
-/* 	font:          normal 400 3vw/1 "Zenhei", sans-serif; */
-/* 	text-align:    center; */
-/* 	text-shadow:   none; */
-/* 	margin: 20px auto; */
-/* 	position:relative; */
-/* 	cursor: pointer; */
-/* } */
 .btn_old{ 
  	background:    #dfbe6a; 
  	background:    -webkit-linear-gradient(#dfbe6a, #897952); 
@@ -273,7 +257,9 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 #r_ok_btn:hover{background: #35D500;}
 #sub_container fieldset{color: black;}
 #main_container fieldset{margin-top: 20px; color: white; line-height: 30px;}
-#update_info{background-color:#F4F6FC; width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
+#update_info{position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
+
+#declar{position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;width: 40%; height: 70%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
 /* 아이디비번찾기 */
 #find_form{background-color:#F4F6FC; width: 30%; height: 50%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px;  z-index: 5;}
 #idpwd{margin: 0 auto}
@@ -283,6 +269,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 #findid,#findpwd,#id_list,#changepwd,#pwd_reset{display: none;} 
 .info_btn{float: left; margin-left: 10px;}
 
+#messages div:hover{background-color:#606064 }
 
 </style>
 <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
@@ -375,6 +362,18 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			    }    
 			}
 			
+			 
+			 $("input:radio[name=dec]").click(function(){
+				 var thisEle = event.target;
+				 if(thisEle.id!="g_dec"){
+					 $("textarea[name=g_dec_text]").prop("disabled", true);
+				 }else{
+					 $("textarea[name=g_dec_text]").prop("disabled", false);
+				 }
+			 });
+
+
+			
 			 $("ul.tabs li").click(function () {
 			        $("ul.tabs li").removeClass("active").css("color", "gray");
 			        //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
@@ -394,7 +393,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			        load_sidoTop5(sel_prodcd);
 			});
 			 
-			 $("#top10_slide").children("div").children("ul").mouseover(function(e) {
+			 $("#top10_slide").children("div").children("ul").mouseover(function() {
            	 clearInterval(roll_id);
            	 var thisEle = event.target;
            	 var count=1;
@@ -1467,7 +1466,6 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	function call_update_info(){
 		$("#shadow").css("display","block");
 		$("#update_info").fadeIn();
-		
 	}
 	
 	function close_update_info(){
@@ -1827,11 +1825,37 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
          ws.close();
      }
      function writeResponse(text){
+    	 var id=document.getElementById("sender").value;
 //     	 messages.innerHTML+="<br/>"+text;
-		$("#messages").append("<div>"+text+"</div>");
-		$('#messages').scrollTop($('#messages')[0].scrollHeight+30);
+		if(text.indexOf(":")<0 || text.split(":")[0]==id){
+			$("#messages").append("<div><span>"+text+"</span></div>");
+			$('#messages').scrollTop($('#messages')[0].scrollHeight+30);
+		}else{
+			$("#messages").append("<div><span>"+text+"</span>"+
+					"<span style='color:#3A3A3C; float:right; cursor:pointer;' onclick='Declaration(this)' >[신고하기]</span>"+
+					"</div>");
+			$('#messages').scrollTop($('#messages')[0].scrollHeight+30);
+		}
+		
      }
 
+     function Declaration(target){
+    	 var text=$(target).prev("span").text();
+    	 var id=text.split(":")[0];
+    	 var context=text.split(":")[1];
+    	 
+    	 $("#shadow").css("display","block");
+ 		 $("#black_id").text(id);
+ 		 $("#black_context").text(context);
+    	 $("#declar").fadeIn();
+    	 
+     }
+     
+     function close_declar(){
+    	$("#shadow").css("display","none");
+    	$("textarea[name=g_dec_text]").val("");
+ 		$("#declar").fadeOut();
+     }
 </script>
 </head>
 <body>
@@ -2022,7 +2046,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 
 
 <!-- 내정보수정 -->
-<div id="update_info" style="position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;">
+<div id="update_info">
 	<img alt="창닫기" src="image/close.png" onclick="close_update_info()" style="float: right; position: relative; top: 10px; left: -10px; cursor: pointer;">
 	<div id="info_pwd_chk" style="color: white; width: 100%; height: 100%; text-align: center;">
 		<fieldset style="width: 90%; margin: 0 auto; position: relative; top: 250px;">
@@ -2061,8 +2085,49 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			<hr>
 			<button class="btn_mini" onclick="change_password()">확인</button>
 		</fieldset>
-		
 	</div>
+	
+</div>
+
+<!-- 신고창 -->
+<div id="declar">
+	<img alt="창닫기" src="image/close.png" onclick="close_declar()" style="z-index:10; float: right; position: relative; top: 10px; left: -10px; cursor: pointer;">
+	
+	<span class="login_logo" style="font-size: 40px; top:30px; text-align: center;">신고하기</span>
+	<table style="position: relative; top: 30px;"> 
+	 <col width="100px">
+		<tr>
+			<th>아이디</th>
+			<td id="black_id"></td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td id="black_context"></td>
+		</tr>
+		<tr>
+			<th>사유</th>
+			<td>
+				<input type="radio" name="dec" value="홍보성">홍보성
+				<br>
+				<input type="radio" name="dec" value="불법정보">불법정보
+				<br>
+				<input type="radio" name="dec" value="음란성">음란성
+				<br>
+				<input type="radio" name="dec" value="욕설/인신공격">욕설/인신공격
+				<br>
+				<input type="radio" name="dec" value="개인정보노출">개인정보노출
+				<br>
+				<input type="radio" name="dec" value="도배">도배
+				<br>
+				<input type="radio" name="dec" id="g_dec" value="기타">기타
+				<br>
+				<textarea rows="4" cols="60" name="g_dec_text" disabled="disabled" placeholder="기타 항목 선택 후 입력해주세요(최대 500자)"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2"><button class="btn_mini" onclick="send_decla()">신고하기</button> </th>
+		</tr>
+	</table>
 </div>
 <!-- 로그인창 -->
 

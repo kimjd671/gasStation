@@ -30,7 +30,9 @@ ul{list-style: none;}
 th,td{border: 1px solid #dfbe6a; }
 h3{color: white; text-align: center;}
 .reply td{border:none}
-
+#declar{position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height:30px; display: none;}
+#declar table{border: none; color: white; border-collapse: collapse; width: 100%; table-layout:fixed; height: 70%;}
+#declar td,th{border:none; border-bottom: 1px solid #dfbe6a;}
 #detail_div{width: 70%; margin: 0 auto;}
 
 .btn {
@@ -382,7 +384,22 @@ h3{color: white; text-align: center;}
 			});
 		}
 	}
-	
+	 function Declaration(){
+    	 var id='${dto.id}';
+    	 var context=$("textarea[name=content_box]").val();
+    	 
+    	 $("#shadow").css("display","block");
+ 		 $("#black_id").text(id);
+ 		 $("#black_context").text(context);
+    	 $("#declar").fadeIn();
+    	 
+     }
+     
+     function close_declar(){
+    	$("#shadow").css("display","none");
+    	$("textarea[name=g_dec_text]").val("");
+ 		$("#declar").fadeOut();
+     }
 	
 </script>
 
@@ -411,11 +428,11 @@ h3{color: white; text-align: center;}
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td>${dto.title}</td>
+					<td>${dto.title}<div style="float: right; cursor:pointer;"><span  onclick='Declaration(this)' ${ldto.id==dto.id?"style='display:none;'":"" }>[신고하기]</span></div></td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><textarea style="width: 100%; border:none; color: white; background-color:#3A3A3C; " rows="20" readonly="readonly" >${dto.content}</textarea></td>
+					<td><textarea name="content_box"  style="width: 100%; border:none; color: white; background-color:#3A3A3C; " rows="20" readonly="readonly" >${dto.content}</textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -514,6 +531,45 @@ h3{color: white; text-align: center;}
 		</div>
 		
 	</div>
+</div>
+<div id="declar">
+	<img alt="창닫기" src="image/close.png" onclick="close_declar()" style="z-index:10; float: right; position: relative; top: 10px; left: -10px; cursor: pointer;">
+	
+	<span class="login_logo" style="font-size: 40px; top:30px; text-align: center;">신고하기</span>
+	<table style="position: relative; top: 30px;"> 
+	 <col width="100px">
+		<tr>
+			<th>아이디</th>
+			<td id="black_id"></td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td id="black_context" height="135px" style="overflow: scroll; word-break:break-all;"></td>
+		</tr>
+		<tr>
+			<th>사유</th>
+			<td>
+				<input type="radio" name="dec" value="홍보성">홍보성
+				<br>
+				<input type="radio" name="dec" value="불법정보">불법정보
+				<br>
+				<input type="radio" name="dec" value="음란성">음란성
+				<br>
+				<input type="radio" name="dec" value="욕설/인신공격">욕설/인신공격
+				<br>
+				<input type="radio" name="dec" value="개인정보노출">개인정보노출
+				<br>
+				<input type="radio" name="dec" value="도배">도배
+				<br>
+				<input type="radio" name="dec" id="g_dec" value="기타">기타
+				<br>
+				<textarea rows="4" cols="60" name="g_dec_text" disabled="disabled" placeholder="기타 항목 선택 후 입력해주세요(최대 500자)"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2"><button class="btn" onclick="send_decla()">신고하기</button> </th>
+		</tr>
+	</table>
 </div>
 </body>
 </html>

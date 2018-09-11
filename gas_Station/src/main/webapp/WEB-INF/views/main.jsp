@@ -206,7 +206,7 @@ ul.tabs li.active {
 }
 
 
-#bottom_view1,#bottom_view2,#bottom_view3{width:32%; height:24%; border: 1px solid #dfbe6a; background-color:#3A3A3C; float: left; overflow: hidden; position: relative;}
+#bottom_view1,#bottom_view2,#bottom_view3{width:32.58%; height:24%; border: 1px solid #dfbe6a; background-color:#3A3A3C; float: left; overflow: hidden; position: relative;}
 .bottom_div *{transition: all 0.35s ease; box-sizing: border-box; }
 .bottom_div:hover img{opacity: 0.5; }
 .bottom_div h3{
@@ -257,9 +257,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 #r_ok_btn:hover{background: #35D500;}
 #sub_container fieldset{color: black;}
 #main_container fieldset{margin-top: 20px; color: white; line-height: 30px;}
-#update_info{position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
-
-#declar{position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;width: 40%; height: 70%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
+#update_info{background-color:#F4F6FC; width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
 /* 아이디비번찾기 */
 #find_form{background-color:#F4F6FC; width: 30%; height: 50%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px;  z-index: 5;}
 #idpwd{margin: 0 auto}
@@ -270,7 +268,6 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 .info_btn{float: left; margin-left: 10px;}
 
 #messages div:hover{background-color:#606064 }
-
 </style>
 <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>

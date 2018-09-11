@@ -67,6 +67,22 @@
 	UPDATE GASMEMBER SET EMAIL=#{email}, PHONE=#{phone} WHERE UPPER(ID)=UPPER(#{id})
 </update>
 
+<select id="userlist" resultType="GasUserDto">
+	SELECT * FROM GASMEMBER
+</select>
+
+<!-- dto없이 사용하는방법 -->
+<!-- resultType="HashMap" 이렇게 해준다 -->
+<!-- 키값은 칼럼명이 된다 -->
+<select id="blacklist" resultType="HashMap">
+	SELECT * FROM GAS_BLACKLIST
+</select>
+
+<!-- dto없이 사용하는방법 -->
+<!-- parameterType="Map" 이렇게 -->
+<insert id="black_insert" parameterType="Map">
+	INSERT INTO GAS_BLACKLIST VALUES(#{id},#{black_id},#{why},#{content},SYSDATE)
+</insert>
 
 <select id="bookmarklist" resultType="BookMarkDto" parameterType="String">
 	SELECT ID,B_NAME,LOCATION,GASOLINE,DIESEL,LPG,UNI_ID,REGDATE FROM GASBOOKMARK WHERE ID=#{id} ORDER BY REGDATE DESC
@@ -83,9 +99,6 @@
 <insert id="insertbookmark" parameterType="BookMarkDto">
 	INSERT INTO GASBOOKMARK VALUES(#{id},#{b_name},#{location},#{gasoline},#{diesel},#{lpg},#{uni_id},SYSDATE) 
 </insert>
-
-
-
 
 <select id="freeboardlist" resultType="FreeBoardDto">
 	SELECT SEQ,ID,TITLE,CONTENT,REGDATE,REFER,STEP,DEPTH,READCOUNT,LIKECOUNT FROM GASFREEBOARD WHERE STEP=0 ORDER BY REFER DESC,STEP ASC

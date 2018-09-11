@@ -37,7 +37,7 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	
+	//객체생성 선언
 	@Autowired
 	private Util utils;
 	@Autowired
@@ -75,7 +75,7 @@ public class HomeController {
 		model.addAttribute("y",y);
 		model.addAttribute("xy",xy);
 		return "main";
-	}
+	}	
 
 	@RequestMapping(value = "/aroundSearch.do", method = RequestMethod.GET)
 	public String aroundSearch(Locale locale, Model model,String x,String y,HttpServletRequest request) {
@@ -114,6 +114,12 @@ public class HomeController {
 		model.addAttribute("sido",sido);
 		model.addAttribute("gugun",gugun);
 		return "nameSearch";
+	}
+	
+	@RequestMapping(value = "/admin_page.do", method = RequestMethod.GET)
+	public String admin_page(Locale locale, Model model,HttpServletRequest request) {
+		
+		return "admin_page";
 	}
 	
 	
@@ -215,6 +221,7 @@ public class HomeController {
 		return resultMap;
 	}
 	
+	//ajax
 	@ResponseBody
 	@RequestMapping(value = "/projection_one.do")
 	public Map<String,String> projection_one(Locale locale, Model model,String x,String y,HttpServletRequest request){
@@ -227,6 +234,15 @@ public class HomeController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/black_insert.do")
+	public Map<String,Boolean> black_insert(Locale locale, Model model,String id, String black_id, String why, String content,HttpServletRequest request){
+		Map<String,Boolean> map=new HashMap<>();
+		boolean isS=gasuser.black_insert(id, black_id, why, content);
+		map.put("isS", isS);
+		return map;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/load_boardlist.do")
 	public Map<String,List<FreeBoardDto>> load_boardlist(Locale locale, Model model){
 		Map<String,List<FreeBoardDto>> map=new HashMap<>();
@@ -234,6 +250,26 @@ public class HomeController {
 		map.put("dto",dto);
 		return map;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/userlist.do")
+	public Map<String,List<GasUserDto>> userlist(Locale locale, Model model){
+		Map<String,List<GasUserDto>> map=new HashMap<>();
+		List<GasUserDto> dto=gasuser.userlist();
+		map.put("list",dto);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/blacklist.do")                
+	public Map<String,List<Map<String, Object>>> blacklist(Locale locale, Model model){
+		Map<String,List<Map<String, Object>>> map=new HashMap<>();
+		List<Map<String, Object>> dto=gasuser.blacklist();
+		System.out.println(dto.get(0));
+		map.put("list",dto);
+		return map;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/insertuser.do", method = RequestMethod.GET)
 	public Map<String,Boolean> inseruser(GasUserDto dto,Locale locale, Model model) {

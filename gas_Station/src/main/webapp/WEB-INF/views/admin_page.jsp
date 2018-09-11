@@ -93,6 +93,8 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 			success:function(Data){
 				var list=Data["list"];
 // 				alert(list.length);
+				$("#usertable").empty();
+				$("#usertable").append("<tr><th>아이디</th><th>이름</th><th>이메일</th><th>연락처</th><th>가입일</th></tr>")
 				for(var i =0; i<list.length;i++){
 					//list쓸때 
 // 					alert(list[i].id);	
@@ -119,6 +121,8 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 				var list=Data["list"];
 // 				alert(list.length);
 // 				alert(list[0].ID);
+				$("#blacktable").empty();
+				$("#blacktable").append("<tr><th style='width: 150px;'>신고자아이디</th><th style='width: 150px;'>신고당한아이디</th><th>신고사유</th><th>채팅내용</th><th width='180px'>신고날짜</th></tr>");
 				for(var i =0; i<list.length;i++){
 					//list쓸때 
 					var date =new Date(list[i].REGDATE).toISOString().slice(0,10);
@@ -154,14 +158,7 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 			<span class='login_logo' style="font-size: 50px; text-align: center;">회원리스트</span>
 			<table id="usertable" style="width: 95%;  margin: 0 auto; position: relative; top: 15px; border-collapse: collapse;">
 				<col width="100px;">
-				<tr>
-					<th>아이디</th>
-					<th>이름</th>
-					<th>이메일</th>
-					<th>연락처</th>
-					<th>가입일</th>
-					
-				</tr>
+				
 			</table>			
 		</div>
 	</div>
@@ -170,14 +167,7 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 		<div id="user_black">		
 			<span class='login_logo' style="font-size: 50px; text-align: center;">블랙리스트</span>
 			<table id="blacktable" style="width: 95%;  margin: 0 auto; position: relative; top: 15px; border-collapse: collapse;">
-				<col width="100px;">
-				<tr>
-					<th style="width: 150px;">신고자아이디</th>
-					<th style="width: 150px;">신고당한아이디</th>
-					<th>신고사유</th>
-					<th>채팅내용</th>
-					<th width="180px">신고날짜</th>
-				</tr>
+
 			</table>			
 		</div>
 	</div>

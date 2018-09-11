@@ -156,21 +156,34 @@ ul.tabs li.active {
   color: $white;
   background-position: 99% 50%;
 }
-.btn_old{ 
- 	background:    #dfbe6a; 
- 	background:    -webkit-linear-gradient(#dfbe6a, #897952); 
-	background:    linear-gradient(#dfbe6a, #897952); 
- 	border-radius: 500px; 
- 	border-color:#3A3A3C; 
- 	padding:       1% 5%; 
- 	color:         #000000; 
- 	display:       block; 
- 	font:          normal 400 1vw/1 "Zenhei", sans-serif; 
- 	text-align:    center; 
- 	text-shadow:   none; 
- 	margin: 0 auto; 
- 	cursor: pointer; 
- } 
+.btn_chat {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase; 
+  font-weight: 500; 
+  font-style: normal; 
+  font-size: 1rem; 
+  letter-spacing: 0.3em; 
+  color: rgba(223,190,106,0.7);
+  border-radius: 0;
+  padding: 1px 0px 1px;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 0;
+  border: none;
+  border: 1px solid rgba(223,190,106,0.3);
+}
+.btn_chat:hover {
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: $white;
+  background-position: 99% 50%;
+}
+
+
 #right_view1,#right_view2,#right_view3{width:23%; height:24%; border: 1px solid #dfbe6a; background-color:#3A3A3C;  float:left; overflow: hidden; position: relative;  }
 .right_div,.bottom_div{width: 100%;height: 100%;}
 .right_div *{transition: all 0.35s ease; box-sizing: border-box; }
@@ -258,7 +271,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 #sub_container fieldset{color: black;}
 #main_container fieldset{margin-top: 20px; color: white; line-height: 30px;}
 #update_info{background-color:#F4F6FC; width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
-#declar{background-color:#F4F6FC; width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
+#declar{background-color:#3A3A3C; width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
 
 /* 아이디비번찾기 */
 #find_form{background-color:#F4F6FC; width: 30%; height: 50%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px;  z-index: 5;}
@@ -1856,10 +1869,13 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
  		$("#declar").fadeOut();
      }
      
-     function send_decla(){
-    	 
+     function send_decla(){    	 
     	 
      }
+     function admin_page() {
+    	$("iframe").attr("src", "admin_page.do");
+		call_sub_container();
+	}
 </script>
 </head>
 <body>
@@ -1992,7 +2008,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 				</table>
 			</fieldset>
 			<button id="information" class="btn_mini" onclick="call_update_info()" style="float:left;">정보수정</button>
-			<button id="superuser" class="btn_mini" onclick='amdin_page()' style="float:left; margin: 10px 10px 10px 10px; display: none;">관리자페이지</button>
+			<button id="superuser" class="btn_mini" onclick='admin_page()' style="float:left; margin: 10px 10px 10px 10px;">관리자페이지</button>
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>
 			<%	}else{	%>
@@ -2007,7 +2023,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 				</table>
 			</fieldset>
 			<button class="btn_mini" onclick="call_update_info()" ${ldto.role=='USER'?"":"style='display:none;'"} style="float:left;">정보수정</button>
-			<button class="btn_mini" onclick='amdin_page()' ${ldto.role!='USER'?"":"style='display:none;'"} style="float:left; margin: 10px 10px 10px 10px; display: none;">관리자페이지</button>
+			<button class="btn_mini" onclick='admin_page()' ${ldto.role!='USER'?"":"style='display:none;'"} style="float:left; margin: 10px 10px 10px 10px;">관리자페이지</button>
 			<button class="btn_mini" onclick="logout()">로그아웃</button>
 		</div>	
 			<%		}	%>
@@ -2042,7 +2058,8 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	
 	</div>
 	<div>
-		<input type="text" id="messageinput" onkeyup="enter_chat()" style="width: 80%"><button type="button" style="width: 20%" onclick="send();">보내기</button>
+		<input type="text" id="messageinput" onkeyup="enter_chat()" style="width: 75%">
+		<button class="btn_chat" type="button" style="width: 20%" onclick="send();">보내기</button>
 	</div>
 </div>
 <div style="clear: left;"></div>

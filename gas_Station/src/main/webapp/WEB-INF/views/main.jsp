@@ -395,7 +395,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			});
 			 
 			 $("#top10_slide").children("div").children("ul").mouseover(function(e) {
-           	clearInterval(roll_id);
+           	 clearInterval(roll_id);
            	 var thisEle = event.target;
            	 var count=1;
            	 var did= thisEle.id;
@@ -404,37 +404,37 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            	 }           	 
          
            		if(did=="top10_o1"){
-           			$("#show_all_top10").css("top","-140px");
+           			$("#show_all_top10").css("top","-170px");
            			$("#show_all_top10").css("display","block");
            			$("#show_all_top10").append("<h4>휘발유 리스트</h4><ul style='padding-top: 5px;'></ul>");
            			
            			for(var j=0;j<10;j++){
            				if(all_top10[0][j].price!=0){
            				
-           				$("#show_all_top10").children("ul").append("<li><a href='#'><span>"+count+".</span><span>"+all_top10[0][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[0][j].price+"</span></a></li>")
+           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[0][j].u_id+"'><span>"+count+".</span><span>"+all_top10[0][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[0][j].price+"</span></a></li>")
            				count++;
            				
            				}
            			}
            		}else if(did=="top10_o2"){
-           			$("#show_all_top10").css("top","-70px");
+           			$("#show_all_top10").css("top","-100px");
            			$("#show_all_top10").css("display","block");
            			$("#show_all_top10").append("<h4>경유 리스트</h4><ul style='padding-top: 5px;'></ul>");
            			for(var j=0;j<10;j++){
            				if(all_top10[1][j].price!=0){
                				
-           				$("#show_all_top10").children("ul").append("<li><a href='#'><span>"+count+".</span><span>"+all_top10[1][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[1][j].price+"</span></a></li>")
+           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[0][j].u_id+"'><span>"+count+".</span><span>"+all_top10[1][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[1][j].price+"</span></a></li>")
            				count++;
            				}
            			}
            		}else if(did=="top10_o3"){
-           			$("#show_all_top10").css("top","-10px");
+           			$("#show_all_top10").css("top","-40px");
            			$("#show_all_top10").css("display","block");
            			$("#show_all_top10").append("<h4>LPG 리스트</h4><ul style='padding-top: 5px;'></ul>");
            			for(var j=0;j<10;j++){
            				if(all_top10[2][j].price!=0){
                				
-           				$("#show_all_top10").children("ul").append("<li><a href='#'><span>"+count+".</span><span>"+all_top10[2][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[2][j].price+"</span></a></li>")
+           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[0][j].u_id+"'><span>"+count+".</span><span>"+all_top10[2][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[2][j].price+"</span></a></li>")
            				count++;
            				}
            			}
@@ -452,13 +452,13 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            	 
            	});
 			 
-           	$("#top10_slide").children("div").children("ul").mouseout(function() {
+           	$("#top10_slide").children("#show_all_top10").mouseleave(function(e) {
            		$("#show_all_top10").empty();
-           		$("#show_all_top10").css("display","none");
-           		
-           		auto();
+               	$("#show_all_top10").css("display","none");
+               	auto();
            	});
            	
+        	
 			function auto() {
 				roll_id=setInterval(function() {
               		top10_roll();

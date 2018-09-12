@@ -22,6 +22,9 @@ ul{list-style: none;}
 #bookmark_list{ color: white; margin: 0 auto; position: relative; top: 30px; width: 90%; border-collapse: collapse; border: 1px solid #dfbe6a;}
 td{border: 1px solid #dfbe6a; height: 50px;}
 th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
+#info_form{position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;width: 40%; height: 60%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height:40px; display: none;}
+#info_form table{border-collapse: collapse; height: 70%;}
+#info_form input{margin: 2px; width:180px; height:33px; background-color: #3A3A3C; color: white; border-color:#dfbe6a;}
 .btn {
   display: inline-block;
   background: transparent;
@@ -48,6 +51,34 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
   color: white;
   background-position: 99% 50%;
 }
+
+.btn_mini {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase; 
+  font-weight: 500; 
+  font-style: normal; 
+  font-size: 1rem; 
+  letter-spacing: 0.3em; 
+  color: rgba(223,190,106,0.7);
+  border-radius: 0;
+  padding: 10px 15px 10px;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 10px 30px;
+  border: none;
+  border: 1px solid rgba(223,190,106,0.3);
+}
+.btn_mini:hover {
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: $white;
+  background-position: 99% 50%;
+}
+
 #radi_ctrl{
 	position: relative; 
 	top: 80px;
@@ -99,7 +130,7 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 					//list쓸때 
 // 					alert(list[i].id);	
 					var date =new Date(list[i].regdate).toISOString().slice(0,10);
-					$("#usertable").append("<tr><td><a href='#'>"+list[i].id+"</a></td><td>"+list[i].name+"</td><td>"+list[i].email+"</td><td>"+list[i].phone+"</td><td>"+list[i].role+"</td><td>"+date+"</td></tr>")
+					$("#usertable").append("<tr><td><a href='#' onclick='call_info(this)'>"+list[i].id+"</a></td><td>"+list[i].name+"</td><td>"+list[i].email+"</td><td>"+list[i].phone+"</td><td>"+list[i].role+"</td><td>"+date+"</td></tr>")
 				}
 			},
 			error:function(){
@@ -138,6 +169,23 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 	function close_blacklist(){
 		$("#blacklist").fadeOut();		
 	}
+	
+	function call_info(info){	
+		$("#info_id").text($(info).text());
+		$("#info_name").val($(info).parent().next().text());
+		$("#info_email").val($(info).parent().next().next().text());
+		$("#info_phone").val($(info).parent().next().next().next().text());
+		$("#info_regdate").text($(info).parent().next().next().next().next().next().text());
+		var role=$(info).parent().next().next().next().next().text();
+		$("#role_sel").val(role).prop("selected",true);
+
+		$("#info_form").fadeIn();
+		
+	}
+	
+	function close_info(){
+		$("#info_form").fadeOut();		
+	}
 </script>
 </head>
 <body>
@@ -172,7 +220,48 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 		</div>
 	</div>
 </div>
-
+<div id="info_form">
+	<img alt="창닫기" src="image/close.png" onclick="close_info()" style="z-index:10; float: right; position: relative; top: 10px; left: -10px; cursor: pointer;">
+	
+	<span class="login_logo" style="font-size: 40px; top:30px; text-align: center;">회원정보</span>
+	<table style="position: relative; top: 50px; left: 20px"> 
+	 <col width="150px">
+	 <col width="400px">
+		<tr>
+			<th>아이디</th>
+			<td id="info_id"></td>
+		</tr>
+		<tr>
+			<th>이름</th>
+			<td><input type="text"  id="info_name"></td>
+		</tr>
+		<tr>
+			<th>이메일</th>
+			<td><input type="text"  id="info_email"></td>
+		</tr>
+		<tr>
+			<th>연락처</th>
+			<td><input type="text"  id="info_phone"></td>
+		</tr>
+		<tr>
+			<th>등급</th>
+			<td id="info_role">
+				<select id="role_sel" style="margin: 2px; width:180px; height:33px; background-color: #3A3A3C; color: white; border-color:#dfbe6a;">
+					<option value="ADMIN">관리자</option>
+					<option value="USER">일반유저</option>
+					<option value="BLACK">불량유저</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>가입일</th>
+			<td id="info_regdate"></td>
+		</tr>
+		<tr>
+			<th colspan="2"><button class="btn_mini" onclick="">수정하기</button><button class="btn_mini" onclick="">회원삭제</button></th>
+		</tr>
+	</table>
+</div>
 
 </body>
 </html>

@@ -243,6 +243,15 @@ public class HomeController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/del_blacklist.do")
+	public Map<String,Boolean> del_blacklist(Locale locale, Model model,String id, String black_id, String why, String content,HttpServletRequest request){
+		Map<String,Boolean> map=new HashMap<>();
+		boolean isS=gasuser.del_blacklist(id, black_id, why, content);
+		map.put("isS", isS);
+		return map;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/load_boardlist.do")
 	public Map<String,List<FreeBoardDto>> load_boardlist(Locale locale, Model model){
 		Map<String,List<FreeBoardDto>> map=new HashMap<>();
@@ -265,7 +274,8 @@ public class HomeController {
 	public Map<String,List<Map<String, Object>>> blacklist(Locale locale, Model model){
 		Map<String,List<Map<String, Object>>> map=new HashMap<>();
 		List<Map<String, Object>> dto=gasuser.blacklist();
-		System.out.println(dto.get(0));
+		
+//		System.out.println(dto.get(0));
 		map.put("list",dto);
 		return map;
 	}

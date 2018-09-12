@@ -22,9 +22,14 @@ public class GasUserService implements IGasUserService{
 		return userdao.insert_User(dto);
 	}
 	
-@Override
+	@Override
 	public boolean black_insert(String id, String black_id, String why, String content) {
 		return userdao.black_insert(id, black_id, why, content);
+	}
+
+	@Override
+	public boolean del_blacklist(String id, String black_id, String why, String content) {
+		return userdao.del_blacklist(id, black_id, why, content);
 	}
 	
 	@Override

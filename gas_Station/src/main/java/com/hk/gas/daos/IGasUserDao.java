@@ -18,4 +18,5 @@ public interface IGasUserDao {
 	public boolean black_insert(String id, String black_id, String why, String content);
 	//resultType이 없으면 boolean
 	public boolean del_id(GasUserDto dto);
+	public boolean del_blacklist(String id, String black_id, String why, String content);
 }

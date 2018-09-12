@@ -54,6 +54,18 @@ public class GasUserDaoImp implements IGasUserDao {
 	}
 	
 	@Override
+	public boolean del_blacklist(String id, String black_id, String why, String content) {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("id", id);
+		map.put("black_id", black_id);
+		map.put("why", why);
+		map.put("content", content);
+		//dao에서는 무조건sqlSession
+		int count=sqlSession.delete(namespace+"del_blacklist",map);
+		return count>0?true:false;
+	}
+	
+	@Override
 	public List<Map<String, Object>> blacklist() {
 		return sqlSession.selectList(namespace+"blacklist");
 	}
@@ -61,7 +73,7 @@ public class GasUserDaoImp implements IGasUserDao {
 	@Override
 	public List<GasUserDto> find_id(GasUserDto dto) {
 		return sqlSession.selectList(namespace+"findid",dto);
-	}
+	}	
 	
 	@Override
 	public boolean del_id(GasUserDto dto) {		

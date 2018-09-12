@@ -86,6 +86,11 @@
 	SELECT * FROM GAS_BLACKLIST
 </select>
 
+                     <!-- dto안만들고 쓰는 파라미터는 Map이편함 -->
+<delete id="del_blacklist" parameterType="Map">
+	DELETE FROM GAS_BLACKLIST WHERE ID=#{id} AND BLACK_ID=#{black_id} AND WHY=#{why} AND CONTENT=#{content}
+</delete>
+
 <!-- dto없이 사용하는방법 -->
 <!-- parameterType="Map" 이렇게 -->
 <insert id="black_insert" parameterType="Map">

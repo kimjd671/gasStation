@@ -18,7 +18,7 @@
 html,body{margin:0; width:100%; height:100%; position: absolute;};
 #shadow{background: black; width: 100%; height: 100%; position:absolute; display: block; opacity: 0.4;  z-index: 4;}
 *>div{color: white; border-color: white; margin: 2px;}
-#container{ width: 1500px; height:950px; overflow: hidden; margin: 0 auto; position: relative;}
+#container{ width: 1500px; height:950px; overflow: hidden; margin: 0 auto; position: relative; float: left;}
 
 #main_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:100%; position: absolute; }
 #sub_container{background-color: #3A3A3C; overflow: hidden; width: 100%; height:100%; position: absolute; left: 1510px; }
@@ -1951,6 +1951,9 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 
 <div id="map" style="display: none;" ></div>
 <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=d5a3febeb4d52aaf0a2bcdd28926d84a"></script>
+<div class="right_ad" style="border: 1px solid red; width: 200px; height: 948px; float: left;">
+	
+</div>
 <div id="container">
 <div id="shadow">
 </div>
@@ -2224,6 +2227,9 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 <!-- 로그인창 -->
 
 <%@include file="login.jsp"%>
+</div>
+<div class="left_ad" style="border: 1px solid red; width: 210px; height: 948px; float: left;">
+	
 </div>
 
 </body>

@@ -79,6 +79,33 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
   background-position: 99% 50%;
 }
 
+.btn_mini_black {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase; 
+  font-weight: 500; 
+  font-style: normal; 
+  font-size: 1rem; 
+  letter-spacing: 0.3em; 
+  color: rgba(223,190,106,0.7);
+  border-radius: 0;
+  padding: 10px 15px 10px;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 0 7px;
+  border: none;
+  border: 1px solid rgba(223,190,106,0.3);
+}
+.btn_mini_black:hover {
+  color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: $white;
+  background-position: 99% 50%;
+}
+
 #radi_ctrl{
 	position: relative; 
 	top: 80px;
@@ -152,12 +179,15 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 				var list=Data["list"];
 // 				alert(list.length);
 // 				alert(list[0].ID);
-				$("#blacktable").empty();
-				$("#blacktable").append("<tr><th style='width: 150px;'>신고자아이디</th><th style='width: 150px;'>신고당한아이디</th><th>신고사유</th><th>채팅내용</th><th width='180px'>신고날짜</th></tr>");
+				$("#blacktable").empty();				
+				$("#blacktable").append("<tr><th style='width: 130px;'>신고자아이디</th><th style='width: 130px;'>신고당한아이디</th><th style='width:200px'>신고사유</th><th>채팅내용</th><th width='180px'>신고날짜</th></tr>");
+				if(list.length==0){
+					$("#blacktable").append("<tr><th colspan='5'>신고된 유저가 없습니다.</th></tr>");
+				}
 				for(var i =0; i<list.length;i++){
 					//list쓸때 
 					var date =new Date(list[i].REGDATE).toISOString().slice(0,10);
-					$("#blacktable").append("<tr><td>"+list[i].ID+"</td><td><a href='#'>"+list[i].BLACK_ID+"</a></td><td>"+list[i].WHY+"</td><td>"+list[i].CONTENT+"</td><td>"+date+"</td></tr>")
+					$("#blacktable").append("<tr><td>"+list[i].ID+"</td><td><a href='#' onclick='black_info(this)'>"+list[i].BLACK_ID+"</a></td><td>"+list[i].WHY+"</td><td>"+list[i].CONTENT+"</td><td>"+date+"<button onclick='black_del(this)' class='btn_mini_black'>삭제</button></td></tr>")
 				}
 			},
 			error:function(){
@@ -167,7 +197,8 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 		$("#blacklist").fadeIn();		
 	}
 	function close_blacklist(){
-		$("#blacklist").fadeOut();		
+		$("#blacklist").fadeOut();	
+		$("#user_allList").css("display","none");
 	}
 	
 	function call_info(info){	
@@ -210,7 +241,6 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 			success:function(Data){
 				var isS=Data["isS"];
 				if(isS){
-					alert("수정완료");
 					//유저리스트 테이블 재생성 
 					//수정했을때 바로 바뀔수 있게 해줌
 					close_info();
@@ -225,17 +255,28 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 			}
 		});
 	}
-// 	var ren = $("#usertable").find("tr").length;
-// 	var id="kimjd671";
-// 	for(var i=0;i<ren;i++){
-// 		var find=$("#usertable").find("tr").eq(i).children("td").eq(0);
-// 		var find_id=find.text();
-// 		if(id==find_id){
-// 			alert("찾았다"+i);
-// 			alert("이름:"+find.next().text());
-			
-// 		}
-// 	}
+	
+	function black_info(black) {
+		var black_id=$(black).text().trim();
+		open_user_list();
+		$("#user_allList").css("display","none");	
+		var ren = $("#usertable").find("tr").length;
+		for(var i=0;i<ren;i++){
+			var find=$("#usertable").find("tr").eq(i).children("td").eq(0);
+			var find_id=find.text();
+			if(find_id==black_id){
+				$("#info_id").text(black_id);
+				$("#info_name").val(find.siblings().eq(0).text());
+				$("#info_email").val(find.siblings().eq(1).text());
+				$("#info_phone").val(find.siblings().eq(2).text());
+				$("#info_regdate").text(find.siblings().eq(4).text());
+				var role=find.siblings().eq(3).text();
+				$("#role_sel").val(role).prop("selected",true);
+
+				$("#info_form").fadeIn();
+			}	
+		}
+	}
 	function del_user(){
 		var id= $("#info_id").text();
 		var con=confirm("삭제하시겠습니까?");
@@ -267,6 +308,39 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 			});			
 		}		
 	}
+	function black_del(reg_button) {
+		var id=$(reg_button).parent().siblings().eq(0).text();
+		var black_id=$(reg_button).parent().siblings().eq(1).text();
+		var why=$(reg_button).parent().siblings().eq(2).text();
+		var content=$(reg_button).parent().siblings().eq(3).text();
+		$.ajax({//화면에서 추가로 보여줄때 추가해주는것  새로고침안되고 추가되는형식			
+			url:"del_blacklist.do",//데이터를보낼주소//필수입력		
+			method:"get",//전송방식//필수입력			
+			async:false,//동기(=true)동기(synchronous : 동시에 일어나는)요청과 결과가 한 자리에서 동시에 일어남,비동기여부(=false)비동기(Asynchronous : 동시에 일어나지 않는) 요청한 그 자리에서 결과가 주어지지 않음//생략가능 자기가 알아서 잡음	
+			dataType:"json",
+			
+			//json방식
+			data:{"id":id,
+				"black_id":black_id,
+				"why":why,
+				"content":content
+			},
+			success:function(Data){
+				var isS=Data["isS"];
+				if(isS){
+					alert("삭제되었습니다.");
+					//블랙리스트 테이블 재생성 
+					//수정했을때 바로 바뀔수 있게 해줌
+					open_blacklist()
+				}else{
+					alert("삭제실패");
+				}			
+			},			
+			error:function(){
+				alert("서버통신실패");
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -291,7 +365,7 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 			</table>			
 		</div>
 	</div>
-	<div id="blacklist" style="position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95; display: none;">
+	<div id="blacklist" style="position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95; display: none; overflow-y:scroll; overflow-x:auto;">
 	<img alt="창닫기" src="image/close.png" onclick="close_blacklist()" style="float: right; position: relative; top: 10px; left: -10px; cursor: pointer; z-index: 100;">
 		<div id="user_black">		
 			<span class='login_logo' style="font-size: 50px; text-align: center;">블랙리스트</span>

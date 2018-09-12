@@ -186,6 +186,87 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 	function close_info(){
 		$("#info_form").fadeOut();		
 	}
+	function fix_info() {
+		var id= $("#info_id").text();
+		var name=$("#info_name").val();
+		var email=$("#info_email").val();
+		var phone=$("#info_phone").val();
+		//select 적용할때
+		var role=$("#info_role option:selected").val();		
+		
+		$.ajax({//화면에서 추가로 보여줄때 추가해주는것  새로고침안되고 추가되는형식			
+			url:"update_info.do",//데이터를보낼주소//필수입력		
+			method:"get",//전송방식//필수입력			
+			async:false,//동기(=true)동기(synchronous : 동시에 일어나는)요청과 결과가 한 자리에서 동시에 일어남,비동기여부(=false)비동기(Asynchronous : 동시에 일어나지 않는) 요청한 그 자리에서 결과가 주어지지 않음//생략가능 자기가 알아서 잡음	
+			dataType:"json",
+			
+			//json방식
+			data:{"id":id,
+				"name":name,
+				"email":email,
+				"phone":phone,
+				"role":role
+			},
+			success:function(Data){
+				var isS=Data["isS"];
+				if(isS){
+					alert("수정완료");
+					//유저리스트 테이블 재생성 
+					//수정했을때 바로 바뀔수 있게 해줌
+					close_info();
+					open_user_list();
+				}else{
+					alert("수정실패");
+				}			
+			},
+			
+			error:function(){
+				alert("서버통신실패");
+			}
+		});
+	}
+// 	var ren = $("#usertable").find("tr").length;
+// 	var id="kimjd671";
+// 	for(var i=0;i<ren;i++){
+// 		var find=$("#usertable").find("tr").eq(i).children("td").eq(0);
+// 		var find_id=find.text();
+// 		if(id==find_id){
+// 			alert("찾았다"+i);
+// 			alert("이름:"+find.next().text());
+			
+// 		}
+// 	}
+	function del_user(){
+		var id= $("#info_id").text();
+		var con=confirm("삭제하시겠습니까?");
+		if(con){
+			$.ajax({//화면에서 추가로 보여줄때 추가해주는것  새로고침안되고 추가되는형식			
+				url:"del_id.do",//데이터를보낼주소//필수입력		
+				method:"get",//전송방식//필수입력			
+				async:false,//동기(=true)동기(synchronous : 동시에 일어나는)요청과 결과가 한 자리에서 동시에 일어남,비동기여부(=false)비동기(Asynchronous : 동시에 일어나지 않는) 요청한 그 자리에서 결과가 주어지지 않음//생략가능 자기가 알아서 잡음	
+				dataType:"json",
+				
+				//json방식
+				data:{"id":id			
+				},
+				success:function(Data){
+					var isS=Data["isS"];
+					if(isS){
+						alert("삭제되었습니다.");
+						//유저리스트 테이블 재생성 
+						//수정했을때 바로 바뀔수 있게 해줌
+						close_info();
+						open_user_list();
+					}else{
+						alert("삭제실패");
+					}			
+				},			
+				error:function(){
+					alert("서버통신실패");
+				}
+			});			
+		}		
+	}
 </script>
 </head>
 <body>
@@ -258,7 +339,10 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 			<td id="info_regdate"></td>
 		</tr>
 		<tr>
-			<th colspan="2"><button class="btn_mini" onclick="">수정하기</button><button class="btn_mini" onclick="">회원삭제</button></th>
+			<th colspan="2">
+				<button class="btn_mini" onclick="fix_info()">수정하기</button>
+				<button class="btn_mini" onclick="del_user()">회원삭제</button>
+			</th>
 		</tr>
 	</table>
 </div>

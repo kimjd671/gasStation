@@ -362,6 +362,17 @@ public class HomeController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/del_id.do", method = RequestMethod.GET)
+	public Map<String,Boolean> del_id(GasUserDto dto,Locale locale, Model model) {
+		System.out.println(dto);
+		boolean isS=gasuser.del_id(dto);
+		Map<String, Boolean> map=new HashMap<>();
+		map.put("isS",isS);
+		return map;
+	}
+	
+	
+	@ResponseBody
 	@RequestMapping(value = "/reload_price.do", method = RequestMethod.GET)
 	public Map<String,Boolean> reload_price(BookMarkDto dto,Locale locale, Model model) {
 		System.out.println(dto);

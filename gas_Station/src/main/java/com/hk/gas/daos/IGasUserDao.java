@@ -16,4 +16,6 @@ public interface IGasUserDao {
 	public List<GasUserDto> userlist();
 	public List<Map<String, Object>> blacklist();
 	public boolean black_insert(String id, String black_id, String why, String content);
+	//resultType이 없으면 boolean
+	public boolean del_id(GasUserDto dto);
 }

@@ -27,12 +27,13 @@ html,body{margin:0; width:100%; height:100%; position: absolute;};
 a{color: white;  text-decoration:none;}
 ul{list-style: none;}
 .table{ margin: 0 auto; top: 50px;position: relative; border-collapse: collapse; width:100%;border: 1px solid #dfbe6a; color: white; line-height: 35px;}
-th,td{border: 1px solid #dfbe6a; }
+td{border: 1px solid #dfbe6a; }
+th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 34px; }
 h3{color: white; text-align: center;}
 .reply td{border:none}
 #declar{position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height:30px; display: none;}
 #declar table{border: none; color: white; border-collapse: collapse; width: 100%; table-layout:fixed; height: 70%;}
-#declar td,th{border:none; border-bottom: 1px solid #dfbe6a;}
+#declar td,#declar th{border:none; border-bottom: 1px solid #dfbe6a;}
 #detail_div{width: 70%; margin: 0 auto;}
 
 .btn {
@@ -588,7 +589,7 @@ h3{color: white; text-align: center;}
 	<table style="position: relative; top: 30px;"> 
 	 <col width="100px">
 		<tr>
-			<th>아이디</th>
+			<th >아이디</th>
 			<td id="black_id"></td>
 		</tr>
 		<tr>

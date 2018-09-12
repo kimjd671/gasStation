@@ -16,4 +16,5 @@ public interface IGasUserService {
 	public List<GasUserDto> userlist();
 	public List<Map<String, Object>> blacklist();
 	public boolean black_insert(String id, String black_id, String why, String content);
+	public boolean del_id(GasUserDto dto);
 }

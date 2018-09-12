@@ -64,6 +64,12 @@ public class GasUserDaoImp implements IGasUserDao {
 	}
 	
 	@Override
+	public boolean del_id(GasUserDto dto) {		
+		int count=sqlSession.delete(namespace+"del_id",dto);
+		return count>0?true:false;
+	}
+	
+	@Override
 	public boolean find_pwd(GasUserDto dto) {
 		int count=sqlSession.selectOne(namespace+"findpwd",dto);
 		return count>0?true:false;

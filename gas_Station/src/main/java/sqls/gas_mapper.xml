@@ -64,8 +64,16 @@
 </select>
 
 <update id="updateinfo" parameterType="GasUserDto">
-	UPDATE GASMEMBER SET EMAIL=#{email}, PHONE=#{phone} WHERE UPPER(ID)=UPPER(#{id})
+	UPDATE GASMEMBER SET EMAIL=#{email}, PHONE=#{phone}
+	 <if test="name!=null">
+	 	,NAME=#{name}, ROLE=#{role} 
+	 </if>
+	 WHERE UPPER(ID)=UPPER(#{id})
 </update>
+
+<delete id="del_id" parameterType="GasUserDto">
+	DELETE FROM GASMEMBER WHERE ID=#{id}
+</delete>
 
 <select id="userlist" resultType="GasUserDto">
 	SELECT * FROM GASMEMBER

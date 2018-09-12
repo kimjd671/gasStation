@@ -16,7 +16,6 @@
 /* 		color: #dfbe6a; */
 	}
 	#find_form{
-		background-color: #3A3A3C; 
 		color: #dfbe6a;
 		border:5px solid #dfbe6a;
 	}
@@ -59,6 +58,12 @@
 		height: 30px;
 	}
 
+	#find_form{background-color:#3A3A3C; width: 30%; height: 50%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px;  z-index: 5;}
+	#idpwd{margin: 0 auto}
+	#find_form table {margin: 50px 0 0 0; border-spacing: 10px; color: gray}
+	#find_form th>img{opacity: 0.5;}
+	#find_form th>img:hover {opacity: 1;}
+	#findid,#findpwd,#id_list,#changepwd,#pwd_reset{display: none;} 
 </style>
 </head>
 <body>
@@ -185,7 +190,7 @@
 				</table>
 			</div>
 			<div id="id_list">
-				<fieldset style="text-align: left;" >
+				<fieldset style="text-align: left; color: white;" >
 					<legend>ID</legend>
 					조회된 회원님의 아이디수는<span id="id_index"></span>개 입니다.
 					<br>

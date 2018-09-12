@@ -270,18 +270,14 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 #r_ok_btn:hover{background: #35D500;}
 #sub_container fieldset{color: black;}
 #main_container fieldset{margin-top: 20px; color: white; line-height: 30px;}
-#update_info{background-color:#F4F6FC; width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none;}
-#declar{position: absolute; z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;width: 40%; height: 65%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height:30px; display: none;}
+#update_info{z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;width: 40%; height: 80%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height:30px; display: none;}
+#update_info input{margin: 2px; width:180px; height:33px; background-color: #3A3A3C; color: white; border-color:#dfbe6a;}
+#declar{z-index: 6; background-color: #3A3A3C; border: 5px solid #dfbe6a;  opacity: 0.95;width: 40%; height: 65%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height:30px; display: none;}
 #declar_table{ border-collapse: collapse; width: 100%; table-layout:fixed; border: none;}
 
 }
 /* 아이디비번찾기 */
-#find_form{background-color:#F4F6FC; width: 30%; height: 50%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px;  z-index: 5;}
-#idpwd{margin: 0 auto}
-#find_form table {margin: 50px 0 0 0; border-spacing: 10px; color: gray}
-#find_form th>img{opacity: 0.5;}
-#find_form th>img:hover {opacity: 1;}
-#findid,#findpwd,#id_list,#changepwd,#pwd_reset{display: none;} 
+
 .info_btn{float: left; margin-left: 10px;}
 
 #messages div:hover{background-color:#606064 }
@@ -1921,6 +1917,34 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
     	$("iframe").attr("src", "admin_page.do");
 		call_sub_container();
 	}
+ 	function del_user(){
+		var id= $("#old_id").text();
+		var con=confirm("탈퇴하시겠습니까?");
+		if(con){
+			$.ajax({//화면에서 추가로 보여줄때 추가해주는것  새로고침안되고 추가되는형식			
+				url:"del_id.do",//데이터를보낼주소//필수입력		
+				method:"get",//전송방식//필수입력			
+				async:false,//동기(=true)동기(synchronous : 동시에 일어나는)요청과 결과가 한 자리에서 동시에 일어남,비동기여부(=false)비동기(Asynchronous : 동시에 일어나지 않는) 요청한 그 자리에서 결과가 주어지지 않음//생략가능 자기가 알아서 잡음	
+				dataType:"json",
+				
+				//json방식
+				data:{"id":id			
+				},
+				success:function(Data){
+					var isS=Data["isS"];
+					if(isS){
+						alert("탈퇴되었습니다.");
+						logout();
+					}else{
+						alert("탈퇴실패");
+					}			
+				},			
+				error:function(){
+					alert("서버통신실패");
+				}
+			});			
+		}		
+	}
 </script>
 </head>
 <body>
@@ -2113,7 +2137,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 
 <!-- 내정보수정 -->
 <div id="update_info">
-	<img alt="창닫기" src="image/close.png" onclick="close_update_info()" style="float: right; position: relative; top: 10px; left: -10px; cursor: pointer;">
+	<img alt="창닫기" src="image/close.png" onclick="close_update_info()" style="z-index:10; float: right; position: relative; top: 10px; left: -10px; cursor: pointer;">
 	<div id="info_pwd_chk" style="color: white; width: 100%; height: 100%; text-align: center;">
 		<fieldset style="width: 90%; margin: 0 auto; position: relative; top: 250px;">
 			<legend>비밀번호 재확인</legend>
@@ -2125,7 +2149,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	<br>
 	<div id="info_change" style="color: white; width: 100%; height: 100%; text-align: center; display: none;">
 		<span class="login_logo" style="font-size: 40px; text-align: center;">정보수정</span>
-		<fieldset style="width: 90%; margin: 0 auto;">
+		<fieldset style="width: 90%; margin: 0 auto; top: 40px;">
 			<legend>내정보 수정</legend>
 			<table>
 				<tr><td>아이디 :</td><td id="old_id"></td></tr>
@@ -2151,6 +2175,8 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			<hr>
 			<button class="btn_mini" onclick="change_password()">확인</button>
 		</fieldset>
+		<hr style="width: 80%; margin: 20px auto;">
+		<button class="btn_mini" onclick="del_user()">회원탈퇴</button>
 	</div>
 	
 </div>

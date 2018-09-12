@@ -48,6 +48,11 @@ public class GasUserService implements IGasUserService{
 	}
 	
 	@Override
+	public boolean del_id(GasUserDto dto) {		
+		return userdao.del_id(dto);
+	}
+	
+	@Override
 	public boolean find_pwd(GasUserDto dto) {
 		
 		return userdao.find_pwd(dto);

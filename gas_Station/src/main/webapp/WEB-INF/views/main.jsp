@@ -436,7 +436,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            			for(var j=0;j<10;j++){
            				if(all_top10[1][j].price!=0){
                				
-           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[0][j].u_id+"'><span>"+count+".</span><span>"+all_top10[1][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[1][j].price+"</span></a></li>")
+           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[1][j].u_id+"'><span>"+count+".</span><span>"+all_top10[1][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[1][j].price+"</span></a></li>")
            				count++;
            				}
            			}
@@ -447,7 +447,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            			for(var j=0;j<10;j++){
            				if(all_top10[2][j].price!=0){
                				
-           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[0][j].u_id+"'><span>"+count+".</span><span>"+all_top10[2][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[2][j].price+"</span></a></li>")
+           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[2][j].u_id+"'><span>"+count+".</span><span>"+all_top10[2][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[2][j].price+"</span></a></li>")
            				count++;
            				}
            			}
@@ -1448,6 +1448,10 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 						alert("로그인 정보가 잘못되었습니다.");
 					}else{
 						lid=str.id;
+						if(str.role=="BLACK"){
+							alert("관리자에 의해 접속이 제한된 계정입니다.");
+						}else{
+						
 						$("#sub_container input").val("");
 						$("#login_button").css("display","none");
 						$("#myInfo").fadeIn();
@@ -1467,6 +1471,8 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 						call_main_container();
 						$("#sender").val(id);
 						openSocket();
+						
+						}
 					}
 				},
 				error:function(){

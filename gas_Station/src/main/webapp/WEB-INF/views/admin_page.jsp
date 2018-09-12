@@ -94,12 +94,12 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 				var list=Data["list"];
 // 				alert(list.length);
 				$("#usertable").empty();
-				$("#usertable").append("<tr><th>아이디</th><th>이름</th><th>이메일</th><th>연락처</th><th>가입일</th></tr>")
+				$("#usertable").append("<tr><th>아이디</th><th>이름</th><th>이메일</th><th>연락처</th><th>등급</th><th>가입일</th></tr>")
 				for(var i =0; i<list.length;i++){
 					//list쓸때 
 // 					alert(list[i].id);	
 					var date =new Date(list[i].regdate).toISOString().slice(0,10);
-					$("#usertable").append("<tr><td>"+list[i].id+"</td><td>"+list[i].name+"</td><td>"+list[i].email+"</td><td>"+list[i].phone+"</td><td>"+date+"</td></tr>")
+					$("#usertable").append("<tr><td><a href='#'>"+list[i].id+"</a></td><td>"+list[i].name+"</td><td>"+list[i].email+"</td><td>"+list[i].phone+"</td><td>"+list[i].role+"</td><td>"+date+"</td></tr>")
 				}
 			},
 			error:function(){
@@ -126,7 +126,7 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;}
 				for(var i =0; i<list.length;i++){
 					//list쓸때 
 					var date =new Date(list[i].REGDATE).toISOString().slice(0,10);
-					$("#blacktable").append("<tr><td>"+list[i].ID+"</td><td>"+list[i].BLACK_ID+"</td><td>"+list[i].WHY+"</td><td>"+list[i].CONTENT+"</td><td>"+date+"</td></tr>")
+					$("#blacktable").append("<tr><td>"+list[i].ID+"</td><td><a href='#'>"+list[i].BLACK_ID+"</a></td><td>"+list[i].WHY+"</td><td>"+list[i].CONTENT+"</td><td>"+date+"</td></tr>")
 				}
 			},
 			error:function(){

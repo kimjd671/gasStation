@@ -285,6 +285,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=d5a3febeb4d52aaf0a2bcdd28926d84a&libraries=services,clusterer,drawing"></script>
+
 <%
 	GasUserDto sdto=(GasUserDto)session.getAttribute("ldto");
 	SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyy-MM-dd");
@@ -1947,12 +1948,12 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	}
 </script>
 </head>
-<body>
+<body style="background: #f2f4f7;">
 
 <div id="map" style="display: none;" ></div>
 <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=d5a3febeb4d52aaf0a2bcdd28926d84a"></script>
-<div class="right_ad" style="border: 1px solid red; width: 200px; height: 948px; float: left;">
-	
+<div class="right_ad" style="width: 200px; height: 948px; float: left; font-size: 200px; text-align: center;">	
+	<a href="https://www.nemoapp.kr/?src=image&kw=000013&gclid=EAIaIQobChMIx5DUiPu03QIVyiiWCh0TFQPKEAEYASAAEgKgVvD_BwE" target="_blank"><img style="position: relative; top: 50px;" alt="네모" src="image/nemo.png"></a>
 </div>
 <div id="container">
 <div id="shadow">
@@ -2228,8 +2229,8 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 
 <%@include file="login.jsp"%>
 </div>
-<div class="left_ad" style="border: 1px solid red; width: 210px; height: 948px; float: left;">
-	
+<div class="left_ad" style="width: 210px; height: 948px; float: left; font-size:200px; text-align: center;">
+	<a href="https://www.landroverkorea.co.kr/index.html?utm_source=Pro160600&utm_medium=CPM&utm_campaign=LRD&utm_term=NA&utm_content=PPB_" target="_blank"><img style="position: relative; top: 50px;" alt="랜드로버" src="image/landrover.png"></a>
 </div>
 
 </body>

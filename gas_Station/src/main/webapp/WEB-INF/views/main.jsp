@@ -1297,6 +1297,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	}
 	
 	function close_find(){
+		$("#find_form").children(".login_logo").text("아이디 비밀번호 찾기");
 		$("#find_form").fadeOut();
 		$("#shadow").css("display","none");
 		$("#idpwd").children().css("display","none");
@@ -1306,7 +1307,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	}
 	
 	function find_id(){
-		$("#main").children("span").text("아이디 찾기");
+		$("#find_form").children(".login_logo").text("아이디 찾기");
 		$("#sel").css("display","none");
 		$("#findid").css("display","block");
 	}
@@ -1370,7 +1371,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	}
 	
 	function find_pwd(){
-		$("#main").children("span").text("비밀번호 찾기");
+		$("#find_form").children(".login_logo").text("비밀번호 찾기");
 		$("#sel").css("display","none");
 		$("#findpwd").css("display","block");
 	}

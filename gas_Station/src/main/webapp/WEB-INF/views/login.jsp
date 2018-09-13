@@ -152,7 +152,7 @@
 				</tr>
 			</table>
 			<div id="findid">
-				<table>
+				<table>				
 					<col width="100px">
 					<col width="200px">	
 					<tr>

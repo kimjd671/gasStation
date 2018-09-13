@@ -144,7 +144,7 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 		var id=$("input[name=id]").val();
 		var title=$("input[name=title]").val();
 		var content=$("textarea[name=content]").val();
-		if(title.length<0 || content.length<0){
+		if(title=="" || content==""){
 			alert("모두 작성해주세요.");	
 		}else{
 		

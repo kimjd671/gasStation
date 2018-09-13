@@ -1495,6 +1495,13 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 		
 	}
 	
+	function re_logout(){
+		var logable=confirm("로그아웃 하시겠습니까?");
+		if(logable){
+			logout();
+		}
+	}
+	
 	function logout(){
 		$.ajax({
 			url:"logout.do",
@@ -2083,7 +2090,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			</fieldset>
 			<button id="information" class="btn_mini" onclick="call_update_info()" style="float:left;">정보수정</button>
 			<button id="superuser" class="btn_mini" onclick='admin_page()' style="float:left; margin: 10px 10px 10px 10px;">관리자페이지</button>
-			<button class="btn_mini" onclick="logout()">로그아웃</button>
+			<button class="btn_mini" onclick="re_logout()">로그아웃</button>
 		</div>
 			<%	}else{	%>
 		<button id="login_button" class="btn" onclick="call_sub_container()" style="display: none;" >로그인</button>
@@ -2098,7 +2105,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			</fieldset>
 			<button class="btn_mini" onclick="call_update_info()" ${ldto.role=='USER'?"":"style='display:none;'"} style="float:left;">정보수정</button>
 			<button class="btn_mini" onclick='admin_page()' ${ldto.role!='USER'?"":"style='display:none;'"} style="float:left; margin: 10px 10px 10px 10px;">관리자페이지</button>
-			<button class="btn_mini" onclick="logout()">로그아웃</button>
+			<button class="btn_mini" onclick="re_logout()">로그아웃</button>
 		</div>	
 			<%		}	%>
 </div>

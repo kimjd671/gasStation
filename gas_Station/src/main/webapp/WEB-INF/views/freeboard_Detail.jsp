@@ -268,29 +268,34 @@ h3{color: white; text-align: center;}
 			var seq='${dto.seq}';
 			var title=$("input[name=title]").val();
 			var content=$("textarea[name=content]").val();
-			$.ajax({
-				url:"freeboard_update.do",
-				method:"get",
-				data:{"seq":seq,
-					"title":title,
-					"content":content
-				},
-				async:false,
-				dataType:"json",
-				success:function(Data){
-					var isS=Data["isS"];
-					if(isS){
-						close_update();
-	 					location.reload();
-					}else{
-						alert("글수정실패");
+			if(title=="" || content=="" ){
+				alert("모두 입력해주세요.");
+			}else{
+				$.ajax({
+					url:"freeboard_update.do",
+					method:"get",
+					data:{"seq":seq,
+						"title":title,
+						"content":content
+					},
+					async:false,
+					dataType:"json",
+					success:function(Data){
+						var isS=Data["isS"];
+						if(isS){
+							close_update();
+		 					location.reload();
+						}else{
+							alert("글수정실패");
+						}
+						
+					},
+					error:function(){
+						alert("서버통신실패");
 					}
-					
-				},
-				error:function(){
-					alert("서버통신실패");
-				}
-			});
+				});
+			}
+			
 		}
 		
 	}

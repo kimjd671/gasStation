@@ -31,7 +31,7 @@ ul{list-style: none;}
 .customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('image/vertex_white.png')}
 #gas_info table{color: white;}
 .map_b{
-width:85%;height:78%; margin: 0 0 0 100px; float: left; 
+width:85%;height:75%; margin: 0 0 0 100px; float: left; 
 transition:width 1.2s;
 -moz-transition:width 1.2s;
 -webkit-transition:width 1.2s;

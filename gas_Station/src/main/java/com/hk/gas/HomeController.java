@@ -148,6 +148,8 @@ public class HomeController {
 			model.addAttribute("freelist",list);
 			model.addAttribute("pagelist",pagelist);
 			model.addAttribute("alllist",alllist);
+			model.addAttribute("search_value",value);
+			model.addAttribute("category",category);
 			return "boardlist";
 		}else {
 			List<FreeBoardDto> list=client.freeboard_List();

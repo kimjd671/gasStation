@@ -123,6 +123,11 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 		}
 		var page_num='<%=pageNum%>';
 		$(".paging").eq(page_num-1).css("color","#dfbe6a");
+		var cate='${category}';
+		if(cate.length>0){
+			
+			$("#category").val("find_${category}").prop("selected",true);
+		}	
 	});
 
 	function call_insertform(){
@@ -139,30 +144,35 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 		var id=$("input[name=id]").val();
 		var title=$("input[name=title]").val();
 		var content=$("textarea[name=content]").val();
-		$.ajax({
-			url:"freeboard_insert.do",
-			method:"get",
-			data:{"id":id,
-				"title":title,
-				"content":content
-			},
-			async:false,
-			dataType:"json",
-			success:function(Data){
-				var isS=Data["isS"];
-				if(isS){
-					close_insert();
- 					parent.reload_free();
-				}else{
-					alert("글작성실패");
-				}
-				
-			},
-			error:function(){
-				alert("서버통신실패");
-			}
-		});
+		if(title.length<0 || content.length<0){
+			alert("모두 작성해주세요.");	
+		}else{
 		
+			$.ajax({
+				url:"freeboard_insert.do",
+				method:"get",
+				data:{"id":id,
+					"title":title,
+					"content":content
+				},
+				async:false,
+				dataType:"json",
+				success:function(Data){
+					var isS=Data["isS"];
+					if(isS){
+						close_insert();
+	 					parent.reload_free();
+					}else{
+						alert("글작성실패");
+					}
+					
+				},
+				error:function(){
+					alert("서버통신실패");
+				}
+			});
+		
+		}
 	}
 	
 	function search_board(){
@@ -283,12 +293,12 @@ th{background-color:  #3A3A3C; color: white; border: 1px solid #dfbe6a;height: 3
 				%>		
 				</div>
 				<div>
-					<select name="category" style="float: left; margin: 2px; width: 70px; height: 33px; background-color: #3A3A3C; color:#dfbe6a;  border-color:#dfbe6a; ">
+					<select id="category" name="category" style="float: left; margin: 2px; width: 70px; height: 33px; background-color: #3A3A3C; color:#dfbe6a;  border-color:#dfbe6a; ">
 						<option value="find_id">아이디</option>
 						<option value="find_title">글 제목</option>
 						<option value="find_content">내용</option>
 					</select>
-					<input type="text" name="findvalue" onkeyup="enterkey_search()"  style="float: left; margin: 2px; width:180px; height:33px; background-color: #3A3A3C; color: white; border-color:#dfbe6a; ">
+					<input type="text" name="findvalue" onkeyup="enterkey_search()" value="${search_value}"  style="float: left; margin: 2px; width:180px; height:33px; background-color: #3A3A3C; color: white; border-color:#dfbe6a; ">
 					<button class="btn" style="float: left; margin: 2px; " onclick="search_board()">검색</button>
 					<button class="btn" style="float: left; margin: 2px; " onclick="location.href='boardlist.do?page=1'">목록으로</button>
 				 <button class="btn" onclick="call_insertform()" >글쓰기</button>

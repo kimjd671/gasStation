@@ -35,7 +35,7 @@ h3{color: white; text-align: center;}
 #declar table{border: none; color: white; border-collapse: collapse; width: 100%; table-layout:fixed; height: 70%;}
 #declar td,#declar th{border:none; border-bottom: 1px solid #dfbe6a;}
 #detail_div{width: 70%; margin: 0 auto;}
-
+.reply_decla{float: right; cursor: pointer;}
 .btn {
   display: inline-block;
   background: transparent;
@@ -394,13 +394,23 @@ h3{color: white; text-align: center;}
 			});
 		}
 	}
-	 function Declaration(){
-    	 var id='${dto.id}';
-    	 var context=$("textarea[name=content_box]").val();
+	 function Declaration(board){
+		 var sup=board.className;
+		 if(sup=="board_decla"){
+			 var id='${dto.id}';
+	    	 var context=$("textarea[name=content_box]").val();
+	    	 
+	    	 $("#shadow").css("display","block");
+	 		 $("#black_id").text(id);
+	 		 $("#black_context").text(context);
+		 }else if(sup=="reply_decla"){
+			 var id=$(board).siblings("span").eq(0).text();
+			 var context=$(board).parent().parent().next().children().eq(0).text();
+			 $("#shadow").css("display","block");
+	 		 $("#black_id").text(id);
+	 		 $("#black_context").text(context);
+		 }
     	 
-    	 $("#shadow").css("display","block");
- 		 $("#black_id").text(id);
- 		 $("#black_context").text(context);
     	 $("#declar").fadeIn();
     	 
      }
@@ -462,7 +472,7 @@ h3{color: white; text-align: center;}
 			<span class='login_logo'>글상세보기</span>
 		</div>
 		<div id="detail_div">
-			<table class="table" >
+			<table class="table">
 				<col width="100px;">
 				<tr>
 					<th>글번호</th>
@@ -478,7 +488,7 @@ h3{color: white; text-align: center;}
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td>${dto.title}<div style="float: right; cursor:pointer;"><span  onclick='Declaration(this)' ${ldto.id==dto.id?"style='display:none;'":"" }>[신고하기]</span></div></td>
+					<td>${dto.title}<div style="float: right; cursor:pointer;"><span class="board_decla" onclick='Declaration(this)' ${ldto.id==dto.id?"style='display:none;'":"" }>[신고하기]</span></div></td>
 				</tr>
 				<tr>
 					<th>내용</th>
@@ -499,7 +509,7 @@ h3{color: white; text-align: center;}
 		</div>
 		<div id="replyform" style="position: relative; top: 50px; display: none;">
 			<h3>댓글</h3>
-			<div style="width: 70%; margin: 0 auto;" >
+			<div id="reply_div" style="width: 70%; margin: 0 auto;" >
 					<%
 					if(reply==null || reply.size()<=1){
 						%>
@@ -512,7 +522,7 @@ h3{color: white; text-align: center;}
 						%>
 							<table class="table reply"  style="top:0; position: relative;">
 								<tr>	
-									<td><%=redto.getId()%> (<%=yyyyMMddhhmm.format(redto.getRegdate())%>)</td>
+									<td><span><%=redto.getId()%></span>(<%=yyyyMMddhhmm.format(redto.getRegdate())%>)<span class="reply_decla" onclick='Declaration(this)' <%=ldtos.getId().equals(redto.getId())?"style='display:none;'":"" %>>[신고하기]</span></td>
 								</tr>
 								<tr>
 									<td id="reply_view<%=redto.getSeq()%>"><%=redto.getContent().replaceAll("\n", "<br>")%></td>
@@ -521,8 +531,8 @@ h3{color: white; text-align: center;}
 								<tr>
 									<td style="text-align: right;">
 										<div>	
-											<button id="reply_up<%=redto.getSeq()%>"class="btn" <%=ldtos.getId().equals(redto.getId())?"":"disabled" %> onclick="update_reply('<%=redto.getSeq()%>')">수정</button>
-											<button id="reply_del<%=redto.getSeq()%>" class="btn" <%=ldtos.getId().equals(redto.getId())?"":"disabled" %> onclick="reply_delete('<%=redto.getSeq()%>')">삭제</button>
+											<button id="reply_up<%=redto.getSeq()%>"class="btn" <%=ldtos.getId().equals(redto.getId())?"":"style='display:none;'" %> onclick="update_reply('<%=redto.getSeq()%>')">수정</button>
+											<button id="reply_del<%=redto.getSeq()%>" class="btn" <%=ldtos.getId().equals(redto.getId())?"":"style='display:none;'" %> onclick="reply_delete('<%=redto.getSeq()%>')">삭제</button>
 											<button id="reply_up_done<%=redto.getSeq()%>" class="btn" style="display: none;" onclick="reply_up_done('<%=redto.getSeq()%>')">수정완료</button>
 											<button id="reply_up_close<%=redto.getSeq()%>" style="display: none;" class="btn" onclick="reply_up_close('<%=redto.getSeq()%>')">취소</button>
 										</div>
@@ -539,8 +549,8 @@ h3{color: white; text-align: center;}
 			
 			
 			</div>			
-			<div style="margin: 0 auto; width: 70%;">
-				<table class="table" style="top:25px;">
+			<div style="margin: 0 auto; width: 70%; ">
+				<table class="table" style="top:15px;">
 				<tr>
 					<th>내용</th>
 					<td class="reply_textarea"><textarea  name="reply_content"  class="autosize" style="font-size:15px; width:100%;" placeholder="내용을 입력하세요"></textarea></td>
@@ -551,7 +561,10 @@ h3{color: white; text-align: center;}
 					</td>
 				</tr>
 			</table>
+			
 			</div>
+			<br>
+			<br>
 		</div>
 		<div id="update_form">
 				<br>

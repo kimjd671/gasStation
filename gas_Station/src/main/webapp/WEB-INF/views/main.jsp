@@ -35,7 +35,7 @@ h3{margin: 10px;}
 #frame_sub{position: relative;}
 ::-webkit-scrollbar{display:none;}
 ::-moz-scrollbar{display: none;}
-
+#top10_o1,#top10_o2,#top10_o3{height: 41px; width:90%; overflow: hidden; }
 ul.tabs {
     margin: 0 auto;
     padding: 0;
@@ -423,7 +423,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            			for(var j=0;j<10;j++){
            				if(all_top10[0][j].price!=0){
            				
-           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[0][j].u_id+"'><span>"+count+".</span><span>"+all_top10[0][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[0][j].price+"</span></a></li>")
+           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[0][j].u_id+"'><span>"+count+".</span><span>"+all_top10[0][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right; margin-right:5px;'>"+numberWithCommas(all_top10[0][j].price.toString()) +"</span></a></li>")
            				count++;
            				
            				}
@@ -435,7 +435,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            			for(var j=0;j<10;j++){
            				if(all_top10[1][j].price!=0){
                				
-           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[1][j].u_id+"'><span>"+count+".</span><span>"+all_top10[1][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[1][j].price+"</span></a></li>")
+           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[1][j].u_id+"'><span>"+count+".</span><span>"+all_top10[1][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right; margin-right:5px;'>"+numberWithCommas(all_top10[1][j].price.toString()) +"</span></a></li>")
            				count++;
            				}
            			}
@@ -446,7 +446,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            			for(var j=0;j<10;j++){
            				if(all_top10[2][j].price!=0){
                				
-           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[2][j].u_id+"'><span>"+count+".</span><span>"+all_top10[2][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[2][j].price+"</span></a></li>")
+           				$("#show_all_top10").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class='"+all_top10[2][j].u_id+"'><span>"+count+".</span><span>"+all_top10[2][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right; margin-right:5px;'>"+numberWithCommas(all_top10[2][j].price.toString()) +"</span></a></li>")
            				count++;
            				}
            			}
@@ -628,15 +628,15 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			for(var j=0;j<10;j++){
 				if(all_top10[i][j].price!=0){
 					if(i==0){
-						$("#top10_o1").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class="+all_top10[i][j].u_id+"><span>"+count1+".</span><span>"+all_top10[i][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[i][j].price+"</span></a></li>");	
+						$("#top10_o1").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class="+all_top10[i][j].u_id+"><span>"+count1+".</span><span>"+all_top10[i][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+numberWithCommas(all_top10[i][j].price.toString()) +"</span></a></li>");	
 						count1++;
 					}
 					if(i==1){
-						$("#top10_o2").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class="+all_top10[i][j].u_id+"><span>"+count2+".</span><span>"+all_top10[i][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[i][j].price+"</span></a></li>");	
+						$("#top10_o2").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class="+all_top10[i][j].u_id+"><span>"+count2+".</span><span>"+all_top10[i][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+numberWithCommas(all_top10[i][j].price.toString()) +"</span></a></li>");	
 						count2++;
 					}
 					if(i==2){
-						$("#top10_o3").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class="+all_top10[i][j].u_id+"><span>"+count3+".</span><span>"+all_top10[i][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+all_top10[i][j].price+"</span></a></li>");	
+						$("#top10_o3").children("ul").append("<li><a href='#' onclick='top10_nameSearch(this)' class="+all_top10[i][j].u_id+"><span>"+count3+".</span><span>"+all_top10[i][j].u_name.replace(/\(주\)/gi,"")+"</span><span style='float:right;'>"+numberWithCommas(all_top10[i][j].price.toString()) +"</span></a></li>");	
 						count3++;
 					}
 				}
@@ -813,7 +813,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 									x:rows[i].GIS_X_COOR,
 									y:rows[i].GIS_Y_COOR
 							}
-						$("#gugun_oil_top5").append("<div class='top5_div'>"+(i+1)+". <a href='#' onclick='top10_nameSearch(this)' class='"+sido_Top5[i].u_id+"'>"+sido_Top5[i].u_name+"<span style='display:block; float:right;'>"+sido_Top5[i].price+"</span></a> </div>");
+						$("#gugun_oil_top5").append("<div class='top5_div'>"+(i+1)+". <a href='#' onclick='top10_nameSearch(this)' class='"+sido_Top5[i].u_id+"'>"+sido_Top5[i].u_name+"<span style='display:block; float:right;'>"+numberWithCommas(sido_Top5[i].price.toString()) +"</span></a> </div>");
 						}
 					}
 				},
@@ -1807,7 +1807,9 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			}
 		});
 	}
-	
+	 function numberWithCommas(x) {  
+	    	return x.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
 	
 // 	채팅
 	 var ws;
@@ -2062,19 +2064,19 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 <div id="top10_slide" style="width:33%; height:50%; border: 1px solid #dfbe6a; float: left; ">
 	<h3>전국 최저가 주유소 TOP10</h3>
 	&nbsp;&nbsp;<span>휘발유</span><br>
-	<div id="top10_o1" style="height: 41px; width:80%; overflow: hidden; ">
+	<div id="top10_o1">
 		<ul>
 		
 		</ul>
 	</div>
 	&nbsp;&nbsp;<span>경유</span><br>
-	<div id="top10_o2" style="height: 41px; width:80%; overflow: hidden; ">
+	<div id="top10_o2">
 		<ul>
 		
 		</ul>
 	</div>
 	&nbsp;&nbsp;<span>LPG</span><br>
-	<div id="top10_o3" style="height: 41px; width:80%; overflow: hidden; ">
+	<div id="top10_o3">
 		<ul>
 		
 		</ul>

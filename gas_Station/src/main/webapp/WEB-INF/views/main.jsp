@@ -308,6 +308,8 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	var roll_id;
 	var sel_prodcd="B027";
 	var my_focus="main";
+	var my_old_msg="";
+	var msg_count=0;
 	//휘발유 : B027  ,경유 :D047  , LPG : K015
 	
 	$(function(){
@@ -1833,11 +1835,35 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
      }
      
      function send(){
-         var text=document.getElementById("messageinput").value+","+document.getElementById("sender").value;
-         ws.send(text);
+    	 var my_msg=document.getElementById("messageinput").value;
+         var text=my_msg+","+document.getElementById("sender").value;
+         if(my_msg==""){
+        	 alert("내용을 입력해주세요");
+         }else{
+        	  if(my_old_msg==my_msg){
+        		  msg_count++;
+        	  }
+        	  if(msg_count>5){
+        		  alert("반복된 메세지를 보내어 30초간 사용이 금지됩니다.");
+        		  stop_chat("30");
+        		  msg_count=0;
+        	  }
+        	  ws.send(text);
+        	  my_old_msg=my_msg;
+         }
          text="";
          $("#messageinput").val("");
          
+     }
+     
+     function stop_chat(time){
+    	$("#messageinput").prop("disabled",true);
+    	$(".btn_chat").prop("disabled",true);
+    	var stop_time=time*1000;
+    	setTimeout(function() {
+    		$("#messageinput").prop("disabled",false);
+        	$(".btn_chat").prop("disabled",false);
+		}, stop_time);
      }
      
      function enter_chat(){

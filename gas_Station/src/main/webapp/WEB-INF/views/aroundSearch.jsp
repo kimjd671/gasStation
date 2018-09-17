@@ -239,7 +239,7 @@ transition:width 1.2s;
 
 
 		// 마커 이미지의 이미지 주소입니다
-		var imageSrc = "http://192.168.3.111:8090/gas/image/markerGas.png"; 
+		var imageSrc = "http://192.168.3.110:8090/gas/image/markerGas.png"; 
 		   function test(){
 			   for (var i = 0; i < positions.length; i ++) {
 				    

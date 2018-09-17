@@ -295,7 +295,7 @@ ul{list-style: none;}
 	}  
 	var marker=null;
 	function setMarker(x,y,id,name){
-		var imageSrc = "http://192.168.3.111:8090/gas/image/markerGas.png";
+		var imageSrc = "http://192.168.3.110:8090/gas/image/markerGas.png";
 		var imageSize = new daum.maps.Size(24, 35); 
 	    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
 		if(marker!=null){

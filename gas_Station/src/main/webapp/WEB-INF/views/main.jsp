@@ -63,7 +63,7 @@ ul.tabs {
     font-size: 20px;
 	
 }
-#regist_form{background-color:#F4F6FC; width: 40%; height: 85%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none; z-index: 5}
+#regist_form{background-color:#F4F6FC; width: 40%; height: 86%; position: absolute;top: 50%;left: 50%;  transform: translate(-50%, -50%); line-height: 45px; display: none; z-index: 5}
 #regist_form li{
 	float: left;
     color:gray;
@@ -310,6 +310,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 	var my_focus="main";
 	var my_old_msg="";
 	var msg_count=0;
+	var top10_view=true;
 	//휘발유 : B027  ,경유 :D047  , LPG : K015
 	
 	$(function(){
@@ -407,19 +408,21 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
 			});
 			 
 			 $("#top10_slide").children("div").children("ul").mouseover(function() {
-           	 clearInterval(roll_id);
-           	 var thisEle = event.target;
-           	 var count=1;
-           	 var did= thisEle.id;
-           	 if(thisEle=="[object HTMLSpanElement]"){
-           		 did=$(thisEle).parent().parent().parent().parent("div").prop("id");
-           	 }           	 
+				 
+	           	 clearInterval(roll_id);
+	           	if(top10_view){
+	           	 var thisEle = event.target;
+	           	 var count=1;
+	           	 var did= thisEle.id;
+	           	 if(thisEle=="[object HTMLSpanElement]"){
+	           		 did=$(thisEle).parent().parent().parent().parent("div").prop("id");
+	           	 }           	 
          
-           		if(did=="top10_o1"){
+          	 	if(did=="top10_o1"){
            			$("#show_all_top10").css("top","-170px");
            			$("#show_all_top10").css("display","block");
            			$("#show_all_top10").append("<h4>휘발유 리스트</h4><ul style='padding-top: 5px;'></ul>");
-           			
+           			top10_view=false;
            			for(var j=0;j<10;j++){
            				if(all_top10[0][j].price!=0){
            				
@@ -432,6 +435,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            			$("#show_all_top10").css("top","-100px");
            			$("#show_all_top10").css("display","block");
            			$("#show_all_top10").append("<h4>경유 리스트</h4><ul style='padding-top: 5px;'></ul>");
+           			top10_view=false;
            			for(var j=0;j<10;j++){
            				if(all_top10[1][j].price!=0){
                				
@@ -443,6 +447,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            			$("#show_all_top10").css("top","-40px");
            			$("#show_all_top10").css("display","block");
            			$("#show_all_top10").append("<h4>LPG 리스트</h4><ul style='padding-top: 5px;'></ul>");
+           			top10_view=false;
            			for(var j=0;j<10;j++){
            				if(all_top10[2][j].price!=0){
                				
@@ -458,6 +463,10 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
         			$("#show_all_top10").children("ul").append("<li><a href='#'><span>"+count+".</span><span> 조회된 정보가 없습니다.</span><span style='float:right;'>-</span></a></li>");
         			count++;
         		}
+	           		
+	           		
+	           	}
+	           
        
         		
            	 }
@@ -467,6 +476,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
            	$("#top10_slide").children("#show_all_top10").mouseleave(function(e) {
            		$("#show_all_top10").empty();
                	$("#show_all_top10").css("display","none");
+               	top10_view=true;
                	auto();
            	});
            	

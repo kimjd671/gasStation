@@ -1819,7 +1819,7 @@ input:placeholder{color:#CBCBCD; font-size: 20px;}
              return;
          }
          //웹소켓 객체 만드는 코드
-         ws=new WebSocket("ws://192.168.3.111:8090/gas/echo.do");
+         ws=new WebSocket("ws://192.168.3.110:8090/gas/echo.do");
          
          ws.onopen=function(event){
              if(event.data===undefined) return;

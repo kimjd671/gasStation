@@ -11,7 +11,7 @@
 <meta content="BlendTrans(Duration=0.2)" http-equiv="Page-Enter">
 <meta content="BlendTrans(Duration=0.2)" http-equiv="Page-exit">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>메인페이지</title>
+<title>주유를 어디서 하주유?</title>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
 *{box-sizing:border-box;}

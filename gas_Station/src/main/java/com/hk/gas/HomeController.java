@@ -127,10 +127,12 @@ public class HomeController {
 	public String bookmark(Locale locale, Model model,HttpServletRequest request) {
 		HttpSession session=request.getSession();
 		GasUserDto ldto= (GasUserDto)session.getAttribute("ldto");
-		String id=ldto.getId();
-		List<BookMarkDto> booklist= client.bookmark_List(id);
-		System.out.println("booklist="+booklist);
-		model.addAttribute("lists",booklist); 
+		if(ldto!=null) {
+			String id=ldto.getId();
+			List<BookMarkDto> booklist= client.bookmark_List(id);
+			System.out.println("booklist="+booklist);
+			model.addAttribute("lists",booklist); 
+		}
 		return "bookmark";
 	}
 
